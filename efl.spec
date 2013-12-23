@@ -62,7 +62,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.8.3
-Release:	1
+Release:	2
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -344,6 +344,7 @@ Requires:	%{libecore_input_evas} = %{EVRD}
 Requires:	%{libecore_ipc} = %{EVRD}
 Requires:	%{libecore_sdl} = %{EVRD}
 Requires:	%{libecore_x} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	ecore-devel = %{EVRD}
 
 %description -n %{devecore}
@@ -428,6 +429,7 @@ Summary:	Edje headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libedje} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	edje-devel = %{EVRD}
 
 %description -n %{devedje}
@@ -474,6 +476,7 @@ Summary:	Eet headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeet} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eet-devel = %{EVRD}
 
 %description -n %{deveet}
@@ -528,6 +531,7 @@ Summary:	Eeze headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeeze} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eeze-devel = %{EVRD}
 
 %description -n %{deveeze}
@@ -614,6 +618,7 @@ Group:		Development/Other
 Requires:	%{libefreet} = %{EVRD}
 Requires:	%{libefreet_mime} = %{EVRD}
 Requires:	%{libefreet_trash} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	efreet-devel = %{EVRD}
 
 %description -n %{devefreet}
@@ -666,6 +671,7 @@ Summary:	Eina headers and development libraries
 License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeina} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eina-devel = %{EVRD}
 
 %description -n %{deveina}
@@ -698,6 +704,7 @@ Summary:	Eio headers and development libraries
 License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeio} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eio-devel = %{EVRD}
 
 %description -n %{deveio}
@@ -743,6 +750,7 @@ Summary:	Eldbus headers and development libraries
 License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeldbus} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eldbus-devel = %{EVRD}
 
 %description -n %{develdbus}
@@ -793,6 +801,7 @@ Summary:	Embryo headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libembryo} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	embryo-devel = %{EVRD}
 
 %description -n %{devembryo}
@@ -844,6 +853,7 @@ Summary:	Emotion headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libemotion} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	emotion-devel = %{EVRD}
 
 %description -n %{devemotion}
@@ -875,6 +885,7 @@ Summary:	Eo headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeo} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eo-devel = %{EVRD}
 
 %description -n %{deveo}
@@ -911,6 +922,7 @@ Summary:	Ephysics headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libephysics} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	ephysics-devel = %{EVRD}
 
 %description -n %{devephysics}
@@ -983,6 +995,7 @@ License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libethumb} = %{EVRD}
 Requires:	%{libethumb_client} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	ethumb-devel = %{EVRD}
 
 %description -n %{devethumb}
@@ -1046,6 +1059,7 @@ Summary:	Evas headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libevas} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	evas-devel = %{EVRD}
 
 %description -n %{devevas}
@@ -1067,21 +1081,6 @@ Evas headers and development libraries.
 Summary:	EFL headers and development libraries
 License:	BSD
 Group:		Development/Other
-Requires:	%{devecore} = %{EVRD}
-Requires:	%{devedje} = %{EVRD}
-Requires:	%{deveet} = %{EVRD}
-Requires:	%{deveeze} = %{EVRD}
-Requires:	%{devefreet} = %{EVRD}
-Requires:	%{deveina} = %{EVRD}
-Requires:	%{deveio} = %{EVRD}
-Requires:	%{develdbus} = %{EVRD}
-Requires:	%{devembryo} = %{EVRD}
-Requires:	%{devemotion} = %{EVRD}
-Requires:	%{deveo} = %{EVRD}
-Requires:	%{devephysics} = %{EVRD}
-Requires:	%{devethumb} = %{EVRD}
-Requires:	%{devevas} = %{EVRD}
-Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{devname}
 EFL headers and development libraries.
