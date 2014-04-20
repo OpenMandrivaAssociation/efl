@@ -1,4 +1,4 @@
-%define gstapi 0.10
+%define gstapi 1.0
 %define major 1
 
 %define libecore %mklibname ecore %{major}
@@ -61,7 +61,7 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.8.5
+Version:	1.9.3
 Release:	1
 Epoch:		3
 License:	BSD
