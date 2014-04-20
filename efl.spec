@@ -1,3 +1,4 @@
+%define _disable_ld_no_undefined 1
 %define gstapi 1.0
 %define major 1
 
@@ -116,6 +117,7 @@ BuildRequires:	pkgconfig(xpm)
 BuildRequires:	pkgconfig(xscrnsaver)
 BuildRequires:	pkgconfig(xtst)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(luajit)
 
 %description
 The Enlightenment Foundation Libraries are a collection of libraries
@@ -561,8 +563,8 @@ Enlightenment freedesktop.org specifications implementation extra files.
 %{_bindir}/efreetd
 %{_datadir}/efreet/
 %{_datadir}/dbus-1/services/org.enlightenment.Efreet.service
-%{_libexecdir}/efreet/*/efreet_desktop_cache_create
-%{_libexecdir}/efreet/*/efreet_icon_cache_create
+%{_libdir}/efreet/*/efreet_desktop_cache_create
+%{_libdir}/efreet/*/efreet_icon_cache_create
 
 #----------------------------------------------------------------------------
 
@@ -860,6 +862,7 @@ Provides:	emotion-devel = %{EVRD}
 Emotion headers and development libraries.
 
 %files -n %{devemotion}
+%{_libdir}/cmake/Emotion/
 %{_libdir}/pkgconfig/emotion.pc
 %{_libdir}/libemotion.so
 %{_includedir}/emotion-1/
@@ -1096,7 +1099,7 @@ EFL headers and development libraries.
 %build
 %configure2_5x \
 	--enable-fontconfig \
-	--enable-gstreamer \
+	--enable-gstreamer-1.0 \
 	--enable-image-loader-bmp \
 	--enable-image-loader-eet \
 	--enable-image-loader-generic \
