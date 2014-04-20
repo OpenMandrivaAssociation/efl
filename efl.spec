@@ -4,6 +4,7 @@
 
 %define libecore %mklibname ecore %{major}
 %define libecore_audio %mklibname ecore_audio %{major}
+%define libecore_avahi %mklibname ecore_avahi %{major}
 %define libecore_con %mklibname ecore_con %{major}
 %define libecore_evas %mklibname ecore_evas %{major}
 %define libecore_file %mklibname ecore_file %{major}
@@ -74,6 +75,7 @@ BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
+BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(freetype2)
@@ -177,6 +179,20 @@ Enlightenment event/X abstraction layer library.
 
 %files -n %{libecore_audio}
 %{_libdir}/libecore_audio.so.%{major}*
+
+#----------------------------------------------------------------------------
+
+%package -n %{libecore_avahi}
+Summary:        Enlightenment event/X abstraction layer library
+License:        BSD
+Group:          System/Libraries
+Requires:       %{libecore} = %{EVRD}
+
+%description -n %{libecore_audio}
+Enlightenment avahi abstraction layer library.
+
+%files -n %{libecore_avahi}
+%{_libdir}/libecore_avahi.so.%{major}*
 
 #----------------------------------------------------------------------------
 
@@ -336,6 +352,7 @@ License:	BSD
 Group:		Development/Other
 Requires:	%{libecore} = %{EVRD}
 Requires:	%{libecore_audio} = %{EVRD}
+Requires:       %{libecore_avahi} = %{EVRD}
 Requires:	%{libecore_con} = %{EVRD}
 Requires:	%{libecore_evas} = %{EVRD}
 Requires:	%{libecore_file} = %{EVRD}
@@ -356,6 +373,7 @@ Ecore headers and development libraries.
 %{_libdir}/cmake/Ecore/
 %{_libdir}/pkgconfig/ecore.pc
 %{_libdir}/pkgconfig/ecore-audio.pc
+%{_libdir}/pkgconfig/ecore-avahi.pc
 %{_libdir}/pkgconfig/ecore-con.pc
 %{_libdir}/pkgconfig/ecore-evas.pc
 %{_libdir}/pkgconfig/ecore-file.pc
@@ -368,6 +386,7 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore-x.pc
 %{_libdir}/libecore.so
 %{_libdir}/libecore_audio.so
+%{_libdir}/libecore_avahi.so
 %{_libdir}/libecore_con.so
 %{_libdir}/libecore_evas.so
 %{_libdir}/libecore_file.so
@@ -380,6 +399,7 @@ Ecore headers and development libraries.
 %{_libdir}/libecore_x.so
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
+%{_includedir}/ecore-avahi-1/
 %{_includedir}/ecore-con-1/
 %{_includedir}/ecore-evas-1/
 %{_includedir}/ecore-file-1/
