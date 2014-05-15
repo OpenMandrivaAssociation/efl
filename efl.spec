@@ -128,6 +128,7 @@ BuildRequires:	pkgconfig(xrender)
 BuildRequires:	pkgconfig(xpm)
 BuildRequires:	pkgconfig(xscrnsaver)
 BuildRequires:	pkgconfig(xtst)
+BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(luajit)
 
