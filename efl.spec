@@ -103,7 +103,7 @@ BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
-BuildRequires:	pkgconfig(raw-tools)
+BuildRequires:	libraw-tools
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(libsystemd-daemon)
 BuildRequires:	pkgconfig(libsystemd-journal)
