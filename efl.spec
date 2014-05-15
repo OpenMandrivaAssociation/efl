@@ -87,8 +87,6 @@ BuildRequires:	pkgconfig(fribidi)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(glu)
-#########
-BuildRequires:  pkgconfig(ilmbase) >= 1.0.2
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(glesv2)
 BuildRequires:	pkgconfig(dri)
@@ -96,7 +94,6 @@ BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(xdmcp)
 BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(xproto)
-#########
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-video-%{gstapi})
