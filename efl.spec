@@ -88,7 +88,7 @@ BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(glu)
 #########
-BuildRequires:  pkgconfig(ilmbase) < 2.0.0
+BuildRequires:  pkgconfig(ilmbase) <= 2.0.0
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(glesv2)
 BuildRequires:	pkgconfig(dri)
