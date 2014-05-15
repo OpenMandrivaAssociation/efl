@@ -469,6 +469,7 @@ Edje headers and development libraries.
 %files -n %{devedje}
 %{_libdir}/cmake/Edje/
 %{_libdir}/pkgconfig/edje.pc
+%{_libdir}/pkgconfig/edje-cxx.pc
 %{_libdir}/libedje.so
 %{_includedir}/edje-1/
 %{_includedir}/edje-cxx-1/
@@ -995,6 +996,7 @@ Eo headers and development libraries.
 %{_libdir}/pkgconfig/eolian-cxx.pc
 %{_libdir}/libeolian.so
 %{_includedir}/eolian-cxx-1/
+%{_includedir}/eolian-1/
 
 #----------------------------------------------------------------------------
 
