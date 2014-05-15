@@ -63,13 +63,13 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.9.3
-Release:	1
+Version:	1.10.0
+Release:	2
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
-Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.bz2
+Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}-beta2.tar.gz
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
@@ -1114,7 +1114,7 @@ EFL headers and development libraries.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q
+%setup -qn %{name}-%{version}-beta2
 
 %build
 %configure2_5x \
