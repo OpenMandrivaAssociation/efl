@@ -49,6 +49,10 @@
 %define libeo %mklibname eo %{major}
 %define deveo %mklibname eo -d
 
+%define libeolian %mklibname eolian %{major}
+%define deveolian %mklibname eolian -d
+
+
 %define libephysics %mklibname ephysics %{major}
 %define devephysics %mklibname ephysics -d
 
@@ -144,6 +148,7 @@ Xdnd, general X stuff, event loops, timeouts and idle handlers fast,
 optimized, and convenient.
 
 %files -n ecore
+%files -n ecore_evas_convert
 %{_datadir}/ecore/
 %{_datadir}/ecore_imf/
 %{_libdir}/ecore/system/upower/*/module.so
@@ -371,8 +376,11 @@ Ecore headers and development libraries.
 
 %files -n %{devecore}
 %{_libdir}/cmake/Ecore/
+%{_libdir}/cmake/EcoreCxx/
 %{_libdir}/pkgconfig/ecore.pc
+%{_libdir}/pkgconfig/ecore-cxx.pc
 %{_libdir}/pkgconfig/ecore-audio.pc
+%{_libdir}/pkgconfig/ecore-audio-cxx.pc
 %{_libdir}/pkgconfig/ecore-avahi.pc
 %{_libdir}/pkgconfig/ecore-con.pc
 %{_libdir}/pkgconfig/ecore-evas.pc
@@ -410,6 +418,7 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-ipc-1/
 %{_includedir}/ecore-sdl-1/
 %{_includedir}/ecore-x-1/
+%{_includedir}/ecore-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -462,6 +471,7 @@ Edje headers and development libraries.
 %{_libdir}/pkgconfig/edje.pc
 %{_libdir}/libedje.so
 %{_includedir}/edje-1/
+%{_includedir}/edje-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -475,6 +485,19 @@ Enlightenment simple compression utility.
 
 %files -n eet
 %{_bindir}/eet
+
+#----------------------------------------------------------------------------
+
+%package -n vieet
+Summary:	Enlightenment simple compression utility
+License:	BSD
+Group:		Graphical desktop/Enlightenment
+
+%description -n vieet
+Enlightenment simple compression utility.
+
+%files -n vieet
+%{_bindir}/vieet
 
 #----------------------------------------------------------------------------
 
@@ -506,9 +529,12 @@ Eet headers and development libraries.
 
 %files -n %{deveet}
 %{_libdir}/cmake/Eet/
+%{_libdir}/cmake/EetCxx/
 %{_libdir}/pkgconfig/eet.pc
+%{_libdir}/pkgconfig/eet-cxx.pc
 %{_libdir}/libeet.so
 %{_includedir}/eet-1/
+%{_includedir}/eet-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -585,6 +611,7 @@ Enlightenment freedesktop.org specifications implementation extra files.
 %{_datadir}/dbus-1/services/org.enlightenment.Efreet.service
 %{_libdir}/efreet/*/efreet_desktop_cache_create
 %{_libdir}/efreet/*/efreet_icon_cache_create
+/usr/lib/systemd/user/efreet.service
 
 #----------------------------------------------------------------------------
 
@@ -701,9 +728,12 @@ Eina headers and development libraries.
 
 %files -n %{deveina}
 %{_libdir}/cmake/Eina/
+%{_libdir}/cmake/EinaCxx/
 %{_libdir}/pkgconfig/eina.pc
+%{_libdir}/pkgconfig/eina-cxx.pc
 %{_libdir}/libeina.so
 %{_includedir}/eina-1/
+%{_includedir}/eina-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -916,11 +946,55 @@ Eo headers and development libraries.
 
 %files -n %{deveo}
 %{_libdir}/cmake/Eo/
+%{_libdir}/cmake/EoCxx/
 %{_libdir}/pkgconfig/eo.pc
+%{_libdir}/pkgconfig/eo-cxx.pc
 %{_libdir}/libeo.so
 %{_includedir}/eo-1/
+%{_includedir}/eo-cxx-1/
 %{_datadir}/gdb/auto-load/%{_libdir}/libeo.so.*-gdb.py
 %{_datadir}/eo/gdb/eo_gdb.py
+
+#----------------------------------------------------------------------------
+
+%package -n %{libeolian}
+Summary:	Enlightenment generic object system library
+License:	BSD
+Group:		System/Libraries
+Requires:	%{name} = %{EVRD}
+
+%description -n %{libeolian}
+Enlightenment generic object system library.
+
+%files -n %{libeolian}
+%{_libdir}/libeolian.so.%{major}*
+%{_bindir}/eolian_cxx
+%{_bindir}/eolian_gen
+%{_datadir}/eolian/include/ecore-1/
+%{_datadir}/eolian/include/edje-1/
+%{_datadir}/eolian/include/eo-1/
+%{_datadir}/eolian/include/evas-1/
+
+#----------------------------------------------------------------------------
+
+%package -n %{deveolian}
+Summary:	Eo headers and development libraries
+License:	BSD
+Group:		Development/Other
+Requires:	%{libeolian} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
+Provides:	eolian-devel = %{EVRD}
+
+%description -n %{deveolian}
+Eo headers and development libraries.
+
+%files -n %{deveolian}
+%{_libdir}/cmake/Eolian/
+%{_libdir}/cmake/EolianCxx/
+%{_libdir}/pkgconfig/eolian.pc
+%{_libdir}/pkgconfig/eolian-cxx.pc
+%{_libdir}/libeolian.so
+%{_includedir}/eolian-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -979,6 +1053,7 @@ images, alpha-blend objects much and more.
 %{_datadir}/ethumb_client/
 %{_libdir}/ethumb/
 %{_libdir}/ethumb_client/
+/usr/lib/systemd/user/ethumb.service
 
 #----------------------------------------------------------------------------
 
@@ -1090,13 +1165,16 @@ Evas headers and development libraries.
 
 %files -n %{devevas}
 %{_libdir}/cmake/Evas/
+%{_libdir}/cmake/EvasCxx/
 %{_libdir}/pkgconfig/evas.pc
+%{_libdir}/pkgconfig/evas-cxx.pc
 %{_libdir}/pkgconfig/evas-opengl-sdl.pc
 %{_libdir}/pkgconfig/evas-opengl-x11.pc
 %{_libdir}/pkgconfig/evas-software-buffer.pc
 %{_libdir}/pkgconfig/evas-software-x11.pc
 %{_libdir}/libevas.so
 %{_includedir}/evas-1/
+%{_includedir}/evas-cxx-1/
 
 #----------------------------------------------------------------------------
 
