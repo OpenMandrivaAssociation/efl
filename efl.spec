@@ -148,7 +148,7 @@ Xdnd, general X stuff, event loops, timeouts and idle handlers fast,
 optimized, and convenient.
 
 %files -n ecore
-%files -n ecore_evas_convert
+%{_bindir}/ecore_evas_convert
 %{_datadir}/ecore/
 %{_datadir}/ecore_imf/
 %{_libdir}/ecore/system/upower/*/module.so
