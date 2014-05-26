@@ -68,7 +68,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.10.0
-Release:	3
+Release:	4
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
