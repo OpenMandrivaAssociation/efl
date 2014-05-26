@@ -73,7 +73,7 @@ Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
-Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}-beta2.tar.gz
+Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
 BuildRequires:	gettext-devel
 BuildRequires:	pkgconfig(avahi-client)
@@ -1213,7 +1213,7 @@ EFL headers and development libraries.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -qn %{name}-%{version}-beta2
+%setup -qn %{name}-%{version}
 
 %build
 %configure2_5x \
