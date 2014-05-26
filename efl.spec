@@ -1249,3 +1249,13 @@ EFL headers and development libraries.
 %makeinstall_std
 
 %find_lang %{name}
+
+%changelog
+* Mon May 26 2014 Symbiants OeAi <oeai@symbiants.com>
+- v 1.10.0 release
+== Huge Edje changes ==
+== Eo2 has landed ==
+== New EFL C++ bindings ==
+== Added support for ETC1 ==
+== Eolian ==
+- List of changes http://sourceforge.net/p/enlightenment/mailman/message/32381098/
