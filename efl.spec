@@ -65,6 +65,8 @@
 
 %define devname %mklibname %{name} -d
 
+%define ecoreaudio %mklibname ecore-audio-cxx -d
+
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.10.0
@@ -1211,6 +1213,20 @@ EFL headers and development libraries.
 %{_includedir}/efl-1/
 
 #----------------------------------------------------------------------------
+
+%package -n %{ecoreaudio}
+Summary:	EFL ecore audio
+License:	BSD
+Group:		Development/Other
+
+%description -n %{ecoreaudio}
+EFL ecore audio cxx libraries.
+
+%files -n %{ecoreaudio}
+%{_includedir}/ecore-audio-cxx-1/
+
+#----------------------------------------------------------------------------
+
 
 %prep
 %setup -qn %{name}-%{version}
