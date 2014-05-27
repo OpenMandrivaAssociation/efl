@@ -1,8 +1,10 @@
-%define gstapi 0.10
+%define _disable_ld_no_undefined 1
+%define gstapi 1.0
 %define major 1
 
 %define libecore %mklibname ecore %{major}
 %define libecore_audio %mklibname ecore_audio %{major}
+%define libecore_avahi %mklibname ecore_avahi %{major}
 %define libecore_con %mklibname ecore_con %{major}
 %define libecore_evas %mklibname ecore_evas %{major}
 %define libecore_file %mklibname ecore_file %{major}
@@ -47,6 +49,10 @@
 %define libeo %mklibname eo %{major}
 %define deveo %mklibname eo -d
 
+%define libeolian %mklibname eolian %{major}
+%define deveolian %mklibname eolian -d
+
+
 %define libephysics %mklibname ephysics %{major}
 %define devephysics %mklibname ephysics -d
 
@@ -59,35 +65,47 @@
 
 %define devname %mklibname %{name} -d
 
+%define ecoreaudio %mklibname ecore-audio-cxx -d
+
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.8.3
-Release:	1
+Version:	1.10.0
+Release:	4
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
-Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.bz2
+Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
-BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
-BuildRequires:	giflib-devel
-BuildRequires:	jpeg-devel
+BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(fribidi)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(glu)
+BuildRequires:	pkgconfig(egl)
+BuildRequires:	pkgconfig(glesv2)
+BuildRequires:	pkgconfig(dri)
+BuildRequires:	pkgconfig(xdmcp)
+BuildRequires:	pkgconfig(harfbuzz)
+BuildRequires:	pkgconfig(xproto)
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-video-%{gstapi})
+BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	pkgconfig(ibus-1.0)
 BuildRequires:	pkgconfig(ice)
 BuildRequires:	pkgconfig(libcares)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(librsvg-2.0)
+BuildRequires:	giflib-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	libraw-tools
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(libsystemd-daemon)
 BuildRequires:	pkgconfig(libsystemd-journal)
@@ -99,12 +117,21 @@ BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(sndfile)
+BuildRequires:	pkgconfig(libspectre)
+BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(poppler)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xcb)
 BuildRequires:	pkgconfig(xcb-util)
+BuildRequires:	pkgconfig(xcb-shape)
+BuildRequires:	pkgconfig(xcb-keysyms)
 BuildRequires:	pkgconfig(xcomposite)
 BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(xdamage)
+BuildRequires:	pkgconfig(xcb-dpms)
+BuildRequires:	pkgconfig(xcursor)
+BuildRequires:	pkgconfig(xcb-xprint)
+BuildRequires:	pkgconfig(xkbfile)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xfixes)
 BuildRequires:	pkgconfig(xi)
@@ -114,8 +141,10 @@ BuildRequires:	pkgconfig(xrandr)
 BuildRequires:	pkgconfig(xrender)
 BuildRequires:	pkgconfig(xpm)
 BuildRequires:	pkgconfig(xscrnsaver)
+#BuildRequires:	pkgconfig(libxss)
 BuildRequires:	pkgconfig(xtst)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(luajit)
 
 %description
 The Enlightenment Foundation Libraries are a collection of libraries
@@ -140,6 +169,7 @@ Xdnd, general X stuff, event loops, timeouts and idle handlers fast,
 optimized, and convenient.
 
 %files -n ecore
+%{_bindir}/ecore_evas_convert
 %{_datadir}/ecore/
 %{_datadir}/ecore_imf/
 %{_libdir}/ecore/system/upower/*/module.so
@@ -175,6 +205,20 @@ Enlightenment event/X abstraction layer library.
 
 %files -n %{libecore_audio}
 %{_libdir}/libecore_audio.so.%{major}*
+
+#----------------------------------------------------------------------------
+
+%package -n %{libecore_avahi}
+Summary:        Enlightenment event/X abstraction layer library
+License:        BSD
+Group:          System/Libraries
+Requires:       %{libecore} = %{EVRD}
+
+%description -n %{libecore_audio}
+Enlightenment avahi abstraction layer library.
+
+%files -n %{libecore_avahi}
+%{_libdir}/libecore_avahi.so.%{major}*
 
 #----------------------------------------------------------------------------
 
@@ -334,6 +378,7 @@ License:	BSD
 Group:		Development/Other
 Requires:	%{libecore} = %{EVRD}
 Requires:	%{libecore_audio} = %{EVRD}
+Requires:       %{libecore_avahi} = %{EVRD}
 Requires:	%{libecore_con} = %{EVRD}
 Requires:	%{libecore_evas} = %{EVRD}
 Requires:	%{libecore_file} = %{EVRD}
@@ -344,6 +389,7 @@ Requires:	%{libecore_input_evas} = %{EVRD}
 Requires:	%{libecore_ipc} = %{EVRD}
 Requires:	%{libecore_sdl} = %{EVRD}
 Requires:	%{libecore_x} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	ecore-devel = %{EVRD}
 
 %description -n %{devecore}
@@ -351,8 +397,12 @@ Ecore headers and development libraries.
 
 %files -n %{devecore}
 %{_libdir}/cmake/Ecore/
+%{_libdir}/cmake/EcoreCxx/
 %{_libdir}/pkgconfig/ecore.pc
+%{_libdir}/pkgconfig/ecore-cxx.pc
 %{_libdir}/pkgconfig/ecore-audio.pc
+%{_libdir}/pkgconfig/ecore-audio-cxx.pc
+%{_libdir}/pkgconfig/ecore-avahi.pc
 %{_libdir}/pkgconfig/ecore-con.pc
 %{_libdir}/pkgconfig/ecore-evas.pc
 %{_libdir}/pkgconfig/ecore-file.pc
@@ -365,6 +415,7 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore-x.pc
 %{_libdir}/libecore.so
 %{_libdir}/libecore_audio.so
+%{_libdir}/libecore_avahi.so
 %{_libdir}/libecore_con.so
 %{_libdir}/libecore_evas.so
 %{_libdir}/libecore_file.so
@@ -377,6 +428,7 @@ Ecore headers and development libraries.
 %{_libdir}/libecore_x.so
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
+%{_includedir}/ecore-avahi-1/
 %{_includedir}/ecore-con-1/
 %{_includedir}/ecore-evas-1/
 %{_includedir}/ecore-file-1/
@@ -387,6 +439,7 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-ipc-1/
 %{_includedir}/ecore-sdl-1/
 %{_includedir}/ecore-x-1/
+%{_includedir}/ecore-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -428,6 +481,7 @@ Summary:	Edje headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libedje} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	edje-devel = %{EVRD}
 
 %description -n %{devedje}
@@ -436,8 +490,10 @@ Edje headers and development libraries.
 %files -n %{devedje}
 %{_libdir}/cmake/Edje/
 %{_libdir}/pkgconfig/edje.pc
+%{_libdir}/pkgconfig/edje-cxx.pc
 %{_libdir}/libedje.so
 %{_includedir}/edje-1/
+%{_includedir}/edje-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -451,6 +507,19 @@ Enlightenment simple compression utility.
 
 %files -n eet
 %{_bindir}/eet
+
+#----------------------------------------------------------------------------
+
+%package -n vieet
+Summary:	Enlightenment simple compression utility
+License:	BSD
+Group:		Graphical desktop/Enlightenment
+
+%description -n vieet
+Enlightenment simple compression utility.
+
+%files -n vieet
+%{_bindir}/vieet
 
 #----------------------------------------------------------------------------
 
@@ -474,6 +543,7 @@ Summary:	Eet headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeet} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eet-devel = %{EVRD}
 
 %description -n %{deveet}
@@ -481,9 +551,12 @@ Eet headers and development libraries.
 
 %files -n %{deveet}
 %{_libdir}/cmake/Eet/
+%{_libdir}/cmake/EetCxx/
 %{_libdir}/pkgconfig/eet.pc
+%{_libdir}/pkgconfig/eet-cxx.pc
 %{_libdir}/libeet.so
 %{_includedir}/eet-1/
+%{_includedir}/eet-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -528,6 +601,7 @@ Summary:	Eeze headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeeze} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eeze-devel = %{EVRD}
 
 %description -n %{deveeze}
@@ -557,8 +631,9 @@ Enlightenment freedesktop.org specifications implementation extra files.
 %{_bindir}/efreetd
 %{_datadir}/efreet/
 %{_datadir}/dbus-1/services/org.enlightenment.Efreet.service
-%{_libexecdir}/efreet/*/efreet_desktop_cache_create
-%{_libexecdir}/efreet/*/efreet_icon_cache_create
+%{_libdir}/efreet/*/efreet_desktop_cache_create
+%{_libdir}/efreet/*/efreet_icon_cache_create
+/usr/lib/systemd/user/efreet.service
 
 #----------------------------------------------------------------------------
 
@@ -614,6 +689,7 @@ Group:		Development/Other
 Requires:	%{libefreet} = %{EVRD}
 Requires:	%{libefreet_mime} = %{EVRD}
 Requires:	%{libefreet_trash} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	efreet-devel = %{EVRD}
 
 %description -n %{devefreet}
@@ -666,6 +742,7 @@ Summary:	Eina headers and development libraries
 License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeina} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eina-devel = %{EVRD}
 
 %description -n %{deveina}
@@ -673,9 +750,12 @@ Eina headers and development libraries.
 
 %files -n %{deveina}
 %{_libdir}/cmake/Eina/
+%{_libdir}/cmake/EinaCxx/
 %{_libdir}/pkgconfig/eina.pc
+%{_libdir}/pkgconfig/eina-cxx.pc
 %{_libdir}/libeina.so
 %{_includedir}/eina-1/
+%{_includedir}/eina-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -698,6 +778,7 @@ Summary:	Eio headers and development libraries
 License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeio} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eio-devel = %{EVRD}
 
 %description -n %{deveio}
@@ -743,6 +824,7 @@ Summary:	Eldbus headers and development libraries
 License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeldbus} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eldbus-devel = %{EVRD}
 
 %description -n %{develdbus}
@@ -793,6 +875,7 @@ Summary:	Embryo headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libembryo} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	embryo-devel = %{EVRD}
 
 %description -n %{devembryo}
@@ -844,12 +927,14 @@ Summary:	Emotion headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libemotion} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	emotion-devel = %{EVRD}
 
 %description -n %{devemotion}
 Emotion headers and development libraries.
 
 %files -n %{devemotion}
+%{_libdir}/cmake/Emotion/
 %{_libdir}/pkgconfig/emotion.pc
 %{_libdir}/libemotion.so
 %{_includedir}/emotion-1/
@@ -875,6 +960,7 @@ Summary:	Eo headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeo} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	eo-devel = %{EVRD}
 
 %description -n %{deveo}
@@ -882,11 +968,56 @@ Eo headers and development libraries.
 
 %files -n %{deveo}
 %{_libdir}/cmake/Eo/
+%{_libdir}/cmake/EoCxx/
 %{_libdir}/pkgconfig/eo.pc
+%{_libdir}/pkgconfig/eo-cxx.pc
 %{_libdir}/libeo.so
 %{_includedir}/eo-1/
+%{_includedir}/eo-cxx-1/
 %{_datadir}/gdb/auto-load/%{_libdir}/libeo.so.*-gdb.py
 %{_datadir}/eo/gdb/eo_gdb.py
+
+#----------------------------------------------------------------------------
+
+%package -n %{libeolian}
+Summary:	Enlightenment generic object system library
+License:	BSD
+Group:		System/Libraries
+Requires:	%{name} = %{EVRD}
+
+%description -n %{libeolian}
+Enlightenment generic object system library.
+
+%files -n %{libeolian}
+%{_libdir}/libeolian.so.%{major}*
+%{_bindir}/eolian_cxx
+%{_bindir}/eolian_gen
+%{_datadir}/eolian/include/ecore-1/
+%{_datadir}/eolian/include/edje-1/
+%{_datadir}/eolian/include/eo-1/
+%{_datadir}/eolian/include/evas-1/
+
+#----------------------------------------------------------------------------
+
+%package -n %{deveolian}
+Summary:	Eo headers and development libraries
+License:	BSD
+Group:		Development/Other
+Requires:	%{libeolian} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
+Provides:	eolian-devel = %{EVRD}
+
+%description -n %{deveolian}
+Eo headers and development libraries.
+
+%files -n %{deveolian}
+%{_libdir}/cmake/Eolian/
+%{_libdir}/cmake/EolianCxx/
+%{_libdir}/pkgconfig/eolian.pc
+%{_libdir}/pkgconfig/eolian-cxx.pc
+%{_libdir}/libeolian.so
+%{_includedir}/eolian-cxx-1/
+%{_includedir}/eolian-1/
 
 #----------------------------------------------------------------------------
 
@@ -911,6 +1042,7 @@ Summary:	Ephysics headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libephysics} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	ephysics-devel = %{EVRD}
 
 %description -n %{devephysics}
@@ -944,6 +1076,7 @@ images, alpha-blend objects much and more.
 %{_datadir}/ethumb_client/
 %{_libdir}/ethumb/
 %{_libdir}/ethumb_client/
+/usr/lib/systemd/user/ethumb.service
 
 #----------------------------------------------------------------------------
 
@@ -983,6 +1116,7 @@ License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libethumb} = %{EVRD}
 Requires:	%{libethumb_client} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	ethumb-devel = %{EVRD}
 
 %description -n %{devethumb}
@@ -1046,6 +1180,7 @@ Summary:	Evas headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libevas} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	evas-devel = %{EVRD}
 
 %description -n %{devevas}
@@ -1053,13 +1188,16 @@ Evas headers and development libraries.
 
 %files -n %{devevas}
 %{_libdir}/cmake/Evas/
+%{_libdir}/cmake/EvasCxx/
 %{_libdir}/pkgconfig/evas.pc
+%{_libdir}/pkgconfig/evas-cxx.pc
 %{_libdir}/pkgconfig/evas-opengl-sdl.pc
 %{_libdir}/pkgconfig/evas-opengl-x11.pc
 %{_libdir}/pkgconfig/evas-software-buffer.pc
 %{_libdir}/pkgconfig/evas-software-x11.pc
 %{_libdir}/libevas.so
 %{_includedir}/evas-1/
+%{_includedir}/evas-cxx-1/
 
 #----------------------------------------------------------------------------
 
@@ -1067,21 +1205,6 @@ Evas headers and development libraries.
 Summary:	EFL headers and development libraries
 License:	BSD
 Group:		Development/Other
-Requires:	%{devecore} = %{EVRD}
-Requires:	%{devedje} = %{EVRD}
-Requires:	%{deveet} = %{EVRD}
-Requires:	%{deveeze} = %{EVRD}
-Requires:	%{devefreet} = %{EVRD}
-Requires:	%{deveina} = %{EVRD}
-Requires:	%{deveio} = %{EVRD}
-Requires:	%{develdbus} = %{EVRD}
-Requires:	%{devembryo} = %{EVRD}
-Requires:	%{devemotion} = %{EVRD}
-Requires:	%{deveo} = %{EVRD}
-Requires:	%{devephysics} = %{EVRD}
-Requires:	%{devethumb} = %{EVRD}
-Requires:	%{devevas} = %{EVRD}
-Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{devname}
 EFL headers and development libraries.
@@ -1091,13 +1214,27 @@ EFL headers and development libraries.
 
 #----------------------------------------------------------------------------
 
+%package -n %{ecoreaudio}
+Summary:	EFL ecore audio
+License:	BSD
+Group:		Development/Other
+
+%description -n %{ecoreaudio}
+EFL ecore audio cxx libraries.
+
+%files -n %{ecoreaudio}
+%{_includedir}/ecore-audio-cxx-1/
+
+#----------------------------------------------------------------------------
+
+
 %prep
-%setup -q
+%setup -qn %{name}-%{version}
 
 %build
 %configure2_5x \
 	--enable-fontconfig \
-	--enable-gstreamer \
+	--enable-gstreamer-1.0 \
 	--enable-image-loader-bmp \
 	--enable-image-loader-eet \
 	--enable-image-loader-generic \
@@ -1128,3 +1265,13 @@ EFL headers and development libraries.
 %makeinstall_std
 
 %find_lang %{name}
+
+%changelog
+* Mon May 26 2014 Symbiants OeAi <oeai@symbiants.com>
+- v 1.10.0 release
+== Huge Edje changes ==
+== Eo2 has landed ==
+== New EFL C++ bindings ==
+== Added support for ETC1 ==
+== Eolian ==
+- List of changes http://sourceforge.net/p/enlightenment/mailman/message/32381098/
