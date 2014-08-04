@@ -67,7 +67,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.10.2
-Release:	1
+Release:	2
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -420,6 +420,7 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-ipc-1/
 %{_includedir}/ecore-sdl-1/
 %{_includedir}/ecore-x-1/
+%{_datadir}/eolian/include/ecore-1/
 
 #----------------------------------------------------------------------------
 
@@ -474,6 +475,7 @@ Edje headers and development libraries.
 %{_libdir}/libedje.so
 %{_includedir}/edje-1/
 %{_includedir}/edje-cxx-1/
+%{_datadir}/eolian/include/edje-1/
 
 #----------------------------------------------------------------------------
 
@@ -954,6 +956,7 @@ Eo headers and development libraries.
 %{_includedir}/eo-cxx-1/
 %{_datadir}/gdb/auto-load/%{_libdir}/libeo.so.*-gdb.py
 %{_datadir}/eo/gdb/eo_gdb.py
+%{_datadir}/eolian/include/eo-1/
 
 #----------------------------------------------------------------------------
 
@@ -968,7 +971,6 @@ Enlightenment C++ bindings generator.
 %files -n eolian
 %{_bindir}/eolian_cxx
 %{_bindir}/eolian_gen
-%{_datadir}/eolian/
 
 #----------------------------------------------------------------------------
 
@@ -1195,6 +1197,7 @@ Evas headers and development libraries.
 %{_libdir}/libevas.so
 %{_includedir}/evas-1/
 %{_includedir}/evas-cxx-1/
+%{_datadir}/eolian/include/evas-1/
 
 #----------------------------------------------------------------------------
 
