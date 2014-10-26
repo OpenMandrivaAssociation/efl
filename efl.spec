@@ -66,7 +66,7 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.10.2
+Version:	1.11.4
 Release:	2
 Epoch:		3
 License:	BSD
@@ -103,7 +103,7 @@ BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libxine)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
-BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(systemd)
 BuildRequires:	pkgconfig(x11)
@@ -124,6 +124,7 @@ BuildRequires:	pkgconfig(xscrnsaver)
 BuildRequires:	pkgconfig(xtst)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(luajit)
+BuildRequires:	pkgconfig(harfbuzz)
 
 %description
 The Enlightenment Foundation Libraries are a collection of libraries
@@ -149,8 +150,10 @@ optimized, and convenient.
 
 %files -n ecore
 %{_bindir}/ecore_evas_convert
+%{_bindir}/elua
 %{_datadir}/ecore/
 %{_datadir}/ecore_imf/
+%{_datadir}/elua/
 %{_libdir}/ecore/system/upower/*/module.so
 %{_libdir}/ecore/system/systemd/*/module.so
 %{_libdir}/ecore_evas/engines/*/*/module.so
@@ -405,6 +408,7 @@ Ecore headers and development libraries.
 %{_libdir}/libecore_ipc.so
 %{_libdir}/libecore_sdl.so
 %{_libdir}/libecore_x.so
+%{_libdir}/ecore_x/bin/v-1.11/ecore_x_vsync
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
 %{_includedir}/ecore-audio-cxx-1/
@@ -421,6 +425,7 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-sdl-1/
 %{_includedir}/ecore-x-1/
 %{_datadir}/eolian/include/ecore-1/
+%{_datadir}/ecore_x/checkme
 
 #----------------------------------------------------------------------------
 
@@ -814,6 +819,7 @@ Eldbus headers and development libraries.
 %{_libdir}/cmake/Eldbus/
 %{_libdir}/pkgconfig/eldbus.pc
 %{_libdir}/libeldbus.so
+%{_includedir}/eldbus_cxx-1/
 %{_includedir}/eldbus-1/
 
 #----------------------------------------------------------------------------
@@ -1218,7 +1224,7 @@ EFL headers and development libraries.
 %setup -q
 
 %build
-%configure2_5x \
+%configure \
 	--enable-fontconfig \
 	--enable-gstreamer-1.0 \
 	--enable-image-loader-bmp \
@@ -1240,6 +1246,7 @@ EFL headers and development libraries.
 	--enable-systemd \
 	--enable-v4l2 \
 	--enable-xine \
+	--enable-harfbuzz \
 	--with-eject \
 	--with-mount \
 	--with-umount \
