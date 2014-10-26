@@ -1,0 +1,80 @@
+Index: efl-1.11.1/src/Makefile.in
+===================================================================
+--- efl-1.11.1.orig/src/Makefile.in
++++ efl-1.11.1/src/Makefile.in
+@@ -1041,6 +1041,7 @@ efreetinternal_bin_PROGRAMS =  \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@am__append_205 = \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@-I$(top_srcdir)/src/static_libs/lz4 \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@-I$(top_srcdir)/src/static_libs/rg_etc \
++@BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@@NEON_CFLAGS@ \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@@evas_image_loader_tgv_cflags@
+ 
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@am__append_206 = @evas_image_loader_tgv_libs@
+@@ -1057,6 +1058,7 @@ efreetinternal_bin_PROGRAMS =  \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_CSERVE2_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@-I$(top_srcdir)/src/static_libs/lz4 \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_CSERVE2_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@-I$(top_srcdir)/src/static_libs/rg_etc \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_CSERVE2_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@-I$(top_srcdir)/src/lib/evas/ \
++@BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_CSERVE2_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@@NEON_CFLAGS@ \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_CSERVE2_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@@evas_image_loader_tgv_cflags@
+ 
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_CSERVE2_TRUE@@EVAS_STATIC_BUILD_TGV_TRUE@am__append_209 = @evas_image_loader_tgv_libs@
+@@ -7689,7 +7691,8 @@ lib_eet_libeet_la_CPPFLAGS = -I$(top_bui
+ -DPACKAGE_BIN_DIR=\"$(bindir)\" \
+ -DPACKAGE_LIB_DIR=\"$(libdir)\" \
+ -DPACKAGE_DATA_DIR=\"$(datadir)/eet\" \
+-@EET_CFLAGS@
++@EET_CFLAGS@ \
++@NEON_CFLAGS@
+ 
+ lib_eet_libeet_la_LIBADD = @EET_LIBS@ @EVIL_LIBS@
+ lib_eet_libeet_la_DEPENDENCIES = @EET_INTERNAL_LIBS@
+@@ -9718,6 +9721,7 @@ bin_efreet_efreet_icon_cache_create_SOUR
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_FALSE@-I$(top_srcdir)/src/static_libs/rg_etc \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_FALSE@-I$(top_srcdir)/src/lib/evas/ \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_FALSE@@EVAS_CFLAGS@ \
++@BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_FALSE@@NEON_CFLAGS@ \
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_FALSE@@evas_image_loader_tgv_cflags@
+ 
+ @BUILD_GUI_TRUE@@BUILD_LOADER_TGV_TRUE@@EVAS_STATIC_BUILD_TGV_FALSE@modules_evas_loaders_tgv_module_la_LIBADD = \
+Index: efl-1.11.1/src/Makefile_Eet.am
+===================================================================
+--- efl-1.11.1.orig/src/Makefile_Eet.am
++++ efl-1.11.1/src/Makefile_Eet.am
+@@ -32,7 +32,8 @@ lib_eet_libeet_la_CPPFLAGS = -I$(top_bui
+ -DPACKAGE_BIN_DIR=\"$(bindir)\" \
+ -DPACKAGE_LIB_DIR=\"$(libdir)\" \
+ -DPACKAGE_DATA_DIR=\"$(datadir)/eet\" \
+-@EET_CFLAGS@
++@EET_CFLAGS@ \
++@NEON_CFLAGS@
+ lib_eet_libeet_la_LIBADD = @EET_LIBS@ @EVIL_LIBS@
+ lib_eet_libeet_la_DEPENDENCIES = @EET_INTERNAL_LIBS@
+ lib_eet_libeet_la_LDFLAGS = @EFL_LTLIBRARY_FLAGS@
+Index: efl-1.11.1/src/Makefile_Evas.am
+===================================================================
+--- efl-1.11.1.orig/src/Makefile_Evas.am
++++ efl-1.11.1/src/Makefile_Evas.am
+@@ -1876,6 +1876,7 @@ static_libs/lz4/lz4hc.h
+ lib_evas_libevas_la_CPPFLAGS += \
+ -I$(top_srcdir)/src/static_libs/lz4 \
+ -I$(top_srcdir)/src/static_libs/rg_etc \
++@NEON_CFLAGS@ \
+ @evas_image_loader_tgv_cflags@
+ lib_evas_libevas_la_LIBADD += @evas_image_loader_tgv_libs@
+ if EVAS_CSERVE2
+@@ -1891,6 +1892,7 @@ bin_evas_evas_cserve2_slave_CPPFLAGS +=
+ -I$(top_srcdir)/src/static_libs/lz4 \
+ -I$(top_srcdir)/src/static_libs/rg_etc \
+ -I$(top_srcdir)/src/lib/evas/ \
++@NEON_CFLAGS@ \
+ @evas_image_loader_tgv_cflags@
+ bin_evas_evas_cserve2_slave_LDADD += @evas_image_loader_tgv_libs@
+ endif
+@@ -1910,6 +1912,7 @@ modules_evas_loaders_tgv_module_la_CPPFL
+ -I$(top_srcdir)/src/static_libs/rg_etc \
+ -I$(top_srcdir)/src/lib/evas/ \
+ @EVAS_CFLAGS@ \
++@NEON_CFLAGS@ \
+ @evas_image_loader_tgv_cflags@
+ modules_evas_loaders_tgv_module_la_LIBADD = \
+ @USE_EVAS_LIBS@ \

@@ -73,6 +73,7 @@ License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.bz2
+Patch0:		neon-cflags.patch
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
@@ -1222,8 +1223,10 @@ EFL headers and development libraries.
 
 %prep
 %setup -q
+%apply_patches
 
 %build
+autoreconf -fiv
 %configure \
 	--enable-fontconfig \
 	--enable-gstreamer-1.0 \
