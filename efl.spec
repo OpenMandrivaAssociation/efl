@@ -1,3 +1,12 @@
+%ifarch %{armx}
+%bcond_without opengles
+%bcond_with sdl
+%else
+%bcond_with opengles
+%bcond_without sdl
+%endif
+%bcond_without wayland
+
 %define _disable_ld_no_undefined 1
 %define gstapi 1.0
 %define major 1
@@ -15,6 +24,7 @@
 %define libecore_ipc %mklibname ecore_ipc %{major}
 %define libecore_sdl %mklibname ecore_sdl %{major}
 %define libecore_x %mklibname ecore_x %{major}
+%define libecore_wayland %mklibname ecore_wayland %{major}
 %define devecore %mklibname ecore -d
 
 %define libedje %mklibname edje %{major}
@@ -62,6 +72,9 @@
 %define libevas %mklibname evas %{major}
 %define devevas %mklibname evas -d
 
+%define libefl %mklibname efl %{major}
+%define devefl %mklibname efl %{major}
+
 %define devname %mklibname %{name} -d
 
 Summary:	Enlightenment Foundation Libraries
@@ -103,7 +116,9 @@ BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libxine)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
+%if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
+%endif
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(systemd)
 BuildRequires:	pkgconfig(x11)
@@ -125,6 +140,13 @@ BuildRequires:	pkgconfig(xtst)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(luajit)
 BuildRequires:	pkgconfig(harfbuzz)
+%if %{with wayland}
+BuildRequires:	pkgconfig(wayland-server)
+BuildRequires:	pkgconfig(wayland-egl)
+BuildRequires:	pkgconfig(xkbcommon)
+BuildRequires:	pkgconfig(egl)
+BuildRequires:	pkgconfig(glesv2)
+%endif
 
 %description
 The Enlightenment Foundation Libraries are a collection of libraries
@@ -323,7 +345,7 @@ Enlightenment event/X abstraction layer library.
 %{_libdir}/libecore_ipc.so.%{major}*
 
 #----------------------------------------------------------------------------
-
+%if %{with sdl}
 %package -n %{libecore_sdl}
 Summary:	Enlightenment event/X abstraction layer library
 License:	BSD
@@ -336,7 +358,7 @@ Enlightenment event/X abstraction layer library.
 
 %files -n %{libecore_sdl}
 %{_libdir}/libecore_sdl.so.%{major}*
-
+%endif
 #----------------------------------------------------------------------------
 
 %package -n %{libecore_x}
@@ -351,6 +373,22 @@ Enlightenment event/X abstraction layer library.
 
 %files -n %{libecore_x}
 %{_libdir}/libecore_x.so.%{major}*
+
+#----------------------------------------------------------------------------
+%if %{with wayland}
+%package -n %{libecore_wayland}
+Summary:	Enlightenment event/X abstraction layer library
+License:	BSD
+Group:		System/Libraries
+Requires:	%{libecore} = %{EVRD}
+Conflicts:	%{_lib}ecore1 < 3:1.8.0
+
+%description -n %{libecore_wayland}
+Enlightenment event/X abstraction layer library.
+
+%files -n %{libecore_wayland}
+%{_libdir}/libecore_wayland.so.%{major}*
+%endif
 
 #----------------------------------------------------------------------------
 
@@ -369,7 +407,12 @@ Requires:	%{libecore_imf_evas} = %{EVRD}
 Requires:	%{libecore_input} = %{EVRD}
 Requires:	%{libecore_input_evas} = %{EVRD}
 Requires:	%{libecore_ipc} = %{EVRD}
+%if %{with sdl}
 Requires:	%{libecore_sdl} = %{EVRD}
+%endif
+%if %{with wayland}
+Requires:	%{libecore_wayland} = %{EVRD}
+%endif
 Requires:	%{libecore_x} = %{EVRD}
 Requires:	%{devname} = %{EVRD}
 Provides:	ecore-devel = %{EVRD}
@@ -393,8 +436,17 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore-input.pc
 %{_libdir}/pkgconfig/ecore-input-evas.pc
 %{_libdir}/pkgconfig/ecore-ipc.pc
+%if %{with sdl}
 %{_libdir}/pkgconfig/ecore-sdl.pc
+%endif
 %{_libdir}/pkgconfig/ecore-x.pc
+%if %{with wayland}
+%{_libdir}/pkgconfig/ecore-wayland.pc
+%{_libdir}/pkgconfig/evas-wayland-shm.pc
+%if %{with opengles}
+%{_libdir}/pkgconfig/evas-wayland-egl.pc
+%endif
+%endif
 %{_libdir}/libecore.so
 %{_libdir}/libecore_audio.so
 %{_libdir}/libecore_avahi.so
@@ -406,9 +458,14 @@ Ecore headers and development libraries.
 %{_libdir}/libecore_input.so
 %{_libdir}/libecore_input_evas.so
 %{_libdir}/libecore_ipc.so
+%if %{with sdl}
 %{_libdir}/libecore_sdl.so
+%endif
 %{_libdir}/libecore_x.so
-%{_libdir}/ecore_x/bin/v-1.11/ecore_x_vsync
+%if %{with wayland}
+%{_libdir}/libecore_wayland.so
+%endif
+%{_libdir}/ecore_x/bin/v-1.12/ecore_x_vsync
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
 %{_includedir}/ecore-audio-cxx-1/
@@ -422,8 +479,13 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-input-1/
 %{_includedir}/ecore-input-evas-1/
 %{_includedir}/ecore-ipc-1/
+%if %{with sdl}
 %{_includedir}/ecore-sdl-1/
+%endif
 %{_includedir}/ecore-x-1/
+%if %{with wayland}
+%{_includedir}/ecore-wayland-1/
+%endif
 %{_datadir}/eolian/include/ecore-1/
 %{_datadir}/ecore_x/checkme
 
@@ -924,6 +986,7 @@ Emotion headers and development libraries.
 %{_libdir}/pkgconfig/emotion.pc
 %{_libdir}/libemotion.so
 %{_includedir}/emotion-1/
+%{_datadir}/eolian/include/emotion-1/
 
 #----------------------------------------------------------------------------
 
@@ -1196,7 +1259,9 @@ Evas headers and development libraries.
 %{_libdir}/cmake/EvasCxx/
 %{_libdir}/pkgconfig/evas.pc
 %{_libdir}/pkgconfig/evas-cxx.pc
+%if %{with sdl}
 %{_libdir}/pkgconfig/evas-opengl-sdl.pc
+%endif
 %{_libdir}/pkgconfig/evas-opengl-x11.pc
 %{_libdir}/pkgconfig/evas-software-buffer.pc
 %{_libdir}/pkgconfig/evas-software-x11.pc
@@ -1204,6 +1269,41 @@ Evas headers and development libraries.
 %{_includedir}/evas-1/
 %{_includedir}/evas-cxx-1/
 %{_datadir}/eolian/include/evas-1/
+
+#----------------------------------------------------------------------------
+
+%package -n %{libefl}
+Summary:	Enlightenment canvas library
+License:	BSD
+Group:		System/Libraries
+Requires:	%{name} = %{EVRD}
+
+%description -n %{libefl}
+Enlightenment canvas library.
+
+%files -n %{libefl}
+%{_libdir}/libefl.so.%{major}*
+
+#----------------------------------------------------------------------------
+
+%package -n %{devefl}
+Summary:	EFL headers and development libraries
+License:	BSD
+Group:		Development/Other
+Requires:	%{libefl} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
+Provides:	efl-devel = %{EVRD}
+
+%description -n %{devevas}
+EFL headers and development libraries.
+
+%files -n %{devefl}
+%{_libdir}/pkgconfig/efl.pc
+%{_libdir}/pkgconfig/efl-cxx.pc
+%{_libdir}/libefl.so
+%{_datadir}/eolian/include/efl-1/
+%{_includedir}/%{name}-cxx-1/
+%{_libdir}/cmake/Efl/
 
 #----------------------------------------------------------------------------
 
@@ -1225,7 +1325,6 @@ EFL headers and development libraries.
 %apply_patches
 
 %build
-autoreconf -fiv
 %configure \
 	--enable-fontconfig \
 	--enable-gstreamer-1.0 \
@@ -1244,7 +1343,16 @@ autoreconf -fiv
 	--enable-image-loader-wbmp \
 	--enable-image-loader-webp \
 	--enable-image-loader-xpm \
+%if %{with sdl}
 	--enable-sdl \
+%endif
+%if %{with opengles}
+	--with-opengl=es \
+%endif
+%if %{with wayland}
+	--enable-wayland \
+	--enable-egl \
+%endif
 	--enable-systemd \
 	--enable-v4l2 \
 	--enable-xine \
