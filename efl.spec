@@ -66,14 +66,13 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.11.4
-Release:	2
+Version:	1.12.1
+Release:	1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.bz2
-Patch0:		neon-cflags.patch
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
