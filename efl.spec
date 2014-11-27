@@ -73,7 +73,7 @@
 %define devevas %mklibname evas -d
 
 %define libefl %mklibname efl %{major}
-%define devefl %mklibname efl %{major}
+%define devefl %mklibname efl  -d
 
 %define devname %mklibname %{name} -d
 
