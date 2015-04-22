@@ -88,7 +88,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.13.2
-Release:	2
+Release:	2.1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -1084,6 +1084,7 @@ License:	BSD
 Group:		Development/Other
 Requires:	%{libeolian} = %{EVRD}
 Requires:	%{devefl} = %{EVRD}
+Requires:	eolian = %{EVRD}
 Provides:	eolian-devel = %{EVRD}
 
 %description -n %{deveolian}
