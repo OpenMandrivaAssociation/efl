@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   efl-1.12.1.tar.bz2: b466b4df8f6cb4138f8f7032383e21d5a80c2556
+sources:
+  efl-1.13.2.tar.xz: 1d2ca6b0b208098a8c47b857acdda21a5204eda3

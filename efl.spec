@@ -11,6 +11,7 @@
 %define gstapi 1.0
 %define major 1
 
+
 %define libecore %mklibname ecore %{major}
 %define libecore_audio %mklibname ecore_audio %{major}
 %define libecore_avahi %mklibname ecore_avahi %{major}
@@ -75,17 +76,24 @@
 %define libefl %mklibname efl %{major}
 %define devefl %mklibname efl  -d
 
+%define libelua %mklibname elua %{major}
+%define develua %mklibname elua  -d
+
+%define libelocation %mklibname location %{major}
+%define develocation %mklibname location  -d
+
+
 %define devname %mklibname %{name} -d
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.12.1
+Version:	1.13.2
 Release:	3
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
-Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.bz2
+Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
@@ -414,7 +422,7 @@ Requires:	%{libecore_sdl} = %{EVRD}
 Requires:	%{libecore_wayland} = %{EVRD}
 %endif
 Requires:	%{libecore_x} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	ecore-devel = %{EVRD}
 
 %description -n %{devecore}
@@ -465,7 +473,7 @@ Ecore headers and development libraries.
 %if %{with wayland}
 %{_libdir}/libecore_wayland.so
 %endif
-%{_libdir}/ecore_x/bin/v-1.12/ecore_x_vsync
+%{_libdir}/ecore_x/bin/v-1.13/ecore_x_vsync
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
 %{_includedir}/ecore-audio-cxx-1/
@@ -529,7 +537,7 @@ Summary:	Edje headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libedje} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	edje-devel = %{EVRD}
 
 %description -n %{devedje}
@@ -556,6 +564,19 @@ Enlightenment simple compression utility.
 
 %files -n eet
 %{_bindir}/eet
+
+#----------------------------------------------------------------------------
+
+%package -n diffeet
+Summary:	Enlightenment simple compression utility
+License:	BSD
+Group:		Graphical desktop/Enlightenment
+
+%description -n diffeet
+Enlightenment simple compression utility.
+
+%files -n diffeet
+%{_bindir}/diffeet
 %{_bindir}/vieet
 
 #----------------------------------------------------------------------------
@@ -580,7 +601,7 @@ Summary:	Eet headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeet} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	eet-devel = %{EVRD}
 
 %description -n %{deveet}
@@ -638,7 +659,7 @@ Summary:	Eeze headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeeze} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	eeze-devel = %{EVRD}
 
 %description -n %{deveeze}
@@ -736,7 +757,7 @@ Group:		Development/Other
 Requires:	%{libefreet} = %{EVRD}
 Requires:	%{libefreet_mime} = %{EVRD}
 Requires:	%{libefreet_trash} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	efreet-devel = %{EVRD}
 
 %description -n %{devefreet}
@@ -789,7 +810,7 @@ Summary:	Eina headers and development libraries
 License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeina} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	eina-devel = %{EVRD}
 
 %description -n %{deveina}
@@ -825,7 +846,7 @@ Summary:	Eio headers and development libraries
 License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeio} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	eio-devel = %{EVRD}
 
 %description -n %{deveio}
@@ -871,7 +892,7 @@ Summary:	Eldbus headers and development libraries
 License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeldbus} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	eldbus-devel = %{EVRD}
 
 %description -n %{develdbus}
@@ -923,7 +944,7 @@ Summary:	Embryo headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libembryo} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	embryo-devel = %{EVRD}
 
 %description -n %{devembryo}
@@ -975,7 +996,7 @@ Summary:	Emotion headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libemotion} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	emotion-devel = %{EVRD}
 
 %description -n %{devemotion}
@@ -1009,7 +1030,7 @@ Summary:	Eo headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeo} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	eo-devel = %{EVRD}
 
 %description -n %{deveo}
@@ -1062,7 +1083,7 @@ Summary:	Eolian headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeolian} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Requires:	eolian = %{EVRD}
 Provides:	eolian-devel = %{EVRD}
 
@@ -1101,7 +1122,7 @@ Summary:	Ephysics headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libephysics} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	ephysics-devel = %{EVRD}
 
 %description -n %{devephysics}
@@ -1185,7 +1206,7 @@ License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libethumb} = %{EVRD}
 Requires:	%{libethumb_client} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	ethumb-devel = %{EVRD}
 
 %description -n %{devethumb}
@@ -1222,8 +1243,8 @@ images, alpha-blend objects much and more.
 %{_bindir}/evas_cserve2_usage
 %{_datadir}/evas/
 %{_libdir}/evas/modules/engines/*/*/*.so
-%{_libdir}/evas/modules/loaders/*/*/*.so
-%{_libdir}/evas/modules/savers/*/*/*.so
+%{_libdir}/evas/modules/image_loaders/*/*/*.so
+%{_libdir}/evas/modules/image_savers/*/*/*.so
 %{_libdir}/evas/cserve2/bin/*/evas_cserve2
 %{_libdir}/evas/cserve2/bin/*/evas_cserve2_slave
 
@@ -1249,7 +1270,7 @@ Summary:	Evas headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libevas} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+Requires:	%{devefl} = %{EVRD}
 Provides:	evas-devel = %{EVRD}
 
 %description -n %{devevas}
@@ -1292,10 +1313,10 @@ Summary:	EFL headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libefl} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
+#Requires:	%{devname} = %{EVRD}
 Provides:	efl-devel = %{EVRD}
 
-%description -n %{devevas}
+%description -n %{devefl}
 EFL headers and development libraries.
 
 %files -n %{devefl}
@@ -1304,22 +1325,80 @@ EFL headers and development libraries.
 %{_libdir}/libefl.so
 %{_datadir}/eolian/include/efl-1/
 %{_includedir}/%{name}-cxx-1/
+%{_includedir}/%{name}-1/
 %{_libdir}/cmake/Efl/
 
 #----------------------------------------------------------------------------
 
-%package -n %{devname}
-Summary:	EFL headers and development libraries
-License:	BSD
-Group:		Development/Other
+%package -n %{libelua}
+Summary:        Support Library for lua scripts
+License:        BSD
+Group:          System/Libraries
+Requires:       %{name} = %{EVRD}
 
-%description -n %{devname}
-EFL headers and development libraries.
+%description -n %{libelua}
+Lua support library
 
-%files -n %{devname}
-%{_includedir}/efl-1/
+%files -n %{libelua}
+%{_libdir}/libelua.so.%{major}*
 
 #----------------------------------------------------------------------------
+%package -n %{develua}
+Summary:	elua headers and development libraries
+License:	BSD
+Group:		Development/Other
+Requires:	%{libelua} = %{EVRD}
+Requires:	%{develua} = %{EVRD}
+
+%description -n %{develua}
+elua headers and development libraries.
+
+%files -n %{develua}
+%{_libdir}/libelua.so
+%{_libdir}/pkgconfig/elua.pc
+%{_includedir}/elua-1/
+%{_libdir}/cmake/Elua/
+
+#----------------------------------------------------------------------------
+%package -n %{libelocation}
+Summary:        Enlightenment geolocation libraries
+License:        BSD
+Group:          System/Libraries
+Requires:       %{name} = %{EVRD}
+
+%description -n %{libelocation}
+Enlightenment geolocation libraries
+
+%files -n %{libelocation}
+%{_libdir}/libelocation.so.%{major}*
+
+#----------------------------------------------------------------------------
+%package -n %{develocation}
+Summary:	Elocation headers and development libraries
+License:	BSD
+Group:		Development/Other
+Requires:	%{libelocation} = %{EVRD}
+Requires:	%{develocation} = %{EVRD}
+
+%description -n %{develocation}
+elocation headers and development libraries.
+
+%files -n %{develocation}
+%{_libdir}/libelocation.so
+%{_libdir}/pkgconfig/elocation.pc
+%{_includedir}/elocation-1/
+
+#%package -n %{devname}
+#Summary:	EFL headers and development libraries
+#License:	BSD
+#Group:		Development/Other
+
+#%description -n %{devname}
+#EFL headers and development libraries.
+
+#%files -n %{devname}
+#%{_includedir}/efl-1/
+
 
 %prep
 %setup -q
