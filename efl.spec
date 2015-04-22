@@ -1063,6 +1063,7 @@ License:	BSD
 Group:		Development/Other
 Requires:	%{libeolian} = %{EVRD}
 Requires:	%{devname} = %{EVRD}
+Requires:	eolian = %{EVRD}
 Provides:	eolian-devel = %{EVRD}
 
 %description -n %{deveolian}
