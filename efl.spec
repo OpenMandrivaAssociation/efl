@@ -1405,7 +1405,8 @@ elocation headers and development libraries.
 %apply_patches
 
 %build
-%configure \
+
+%configure BUILD_CC=%{__cc} TARGET_CC=%{__cc} \
 	--enable-fontconfig \
 	--enable-gstreamer-1.0 \
 	--enable-image-loader-bmp \
