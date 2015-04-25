@@ -811,6 +811,7 @@ License:	LGPLv2.1+
 Group:		Development/Other
 Requires:	%{libeina} = %{EVRD}
 Requires:	%{devefl} = %{EVRD}
+Requires:	%{_lib}systemd-journal-devel
 Provides:	eina-devel = %{EVRD}
 
 %description -n %{deveina}
@@ -1387,17 +1388,6 @@ elocation headers and development libraries.
 %{_libdir}/libelocation.so
 %{_libdir}/pkgconfig/elocation.pc
 %{_includedir}/elocation-1/
-
-#%package -n %{devname}
-#Summary:	EFL headers and development libraries
-#License:	BSD
-#Group:		Development/Other
-
-#%description -n %{devname}
-#EFL headers and development libraries.
-
-#%files -n %{devname}
-#%{_includedir}/efl-1/
 
 
 %prep
