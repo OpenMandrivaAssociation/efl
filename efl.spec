@@ -88,7 +88,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.13.2
-Release:	2.1
+Release:	3
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -1314,7 +1314,6 @@ Summary:	EFL headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libefl} = %{EVRD}
-#Requires:	%{devname} = %{EVRD}
 Provides:	efl-devel = %{EVRD}
 
 %description -n %{devefl}
@@ -1345,7 +1344,7 @@ Lua support library
 
 #----------------------------------------------------------------------------
 %package -n %{develua}
-Summary:	elua headers and development libraries
+Summary:	Elua headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libelua} = %{EVRD}
