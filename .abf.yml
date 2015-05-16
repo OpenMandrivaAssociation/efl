@@ -1,5 +1,6 @@
 removed_sources:
+  efl-1.13.2.tar.xz: 1d2ca6b0b208098a8c47b857acdda21a5204eda3
   efl-1.8.5.tar.bz2: 5cf1f0a5b426788958f9f87645811287d45b5f5d
   efl-1.9.3.tar.bz2: f7c72fa929bd65c13aeca363f8642d6e7bb0397b
 sources:
-  efl-1.13.2.tar.xz: 1d2ca6b0b208098a8c47b857acdda21a5204eda3
+  efl-1.14.0.tar.xz: 5c57a59890a6d20ad0800e80ab2a94509ea4c579

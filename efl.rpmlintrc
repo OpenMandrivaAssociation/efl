@@ -1,0 +1,13 @@
+#EVRD for devel should work , but just don't
+addFilter("E: no-dependency-on")
+addFilter("E: non-standard-executable-perm")
+addFilter("E: setuid-binary")
+addFilter("E: wrong-script-end-of-line-encoding")
+addFilter("E: no-binary")
+
+#Mostly spurious
+addFilter("W: spelling-error")
+#I don't do vanity
+addFilter("W: no-packager-tag")
+addFilter(" W: no-manual-page-for-binary")
+addFilter("W: no-documentation")

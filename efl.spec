@@ -82,18 +82,24 @@
 %define libelocation %mklibname location %{major}
 %define develocation %mklibname location  -d
 
+%define libector %mklibname ector %{major}
+%define devector %mklibname ector  -d
+
+%define libemile %mklibname emile %{major}
+%define devemile %mklibname emile  -d
 
 %define devname %mklibname %{name} -d
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.13.2
-Release:	3.1
+Version:	1.14.0
+Release:	0.1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
+Source100:      %{name}.rpmlintrc
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
@@ -473,7 +479,7 @@ Ecore headers and development libraries.
 %if %{without wayland}
 %{_libdir}/libecore_wayland.so
 %endif
-%{_libdir}/ecore_x/bin/v-1.13/ecore_x_vsync
+%{_libdir}/ecore_x/bin/v-1.14/ecore_x_vsync
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
 %{_includedir}/ecore-audio-cxx-1/
@@ -564,6 +570,7 @@ Enlightenment simple compression utility.
 
 %files -n eet
 %{_bindir}/eet
+%{_bindir}/eetpack
 
 #----------------------------------------------------------------------------
 
@@ -856,7 +863,12 @@ Eio headers and development libraries.
 %files -n %{deveio}
 %{_libdir}/pkgconfig/eio.pc
 %{_libdir}/libeio.so
+%{_libdir}/pkgconfig/eio-cxx.pc
+%{_libdir}/cmake/Eio/
+%{_includedir}/eio-cxx-1/
 %{_includedir}/eio-1/
+%{_datadir}/eolian/include/eio-1/
+
 
 #----------------------------------------------------------------------------
 
@@ -1387,6 +1399,73 @@ elocation headers and development libraries.
 %{_libdir}/libelocation.so
 %{_libdir}/pkgconfig/elocation.pc
 %{_includedir}/elocation-1/
+
+%package -n %{libector}
+Summary:        Enlightenment rendering libraries
+License:        BSD
+Group:          System/Libraries
+Requires:       %{name} = %{EVRD}
+
+%description -n %{libector}
+Enlightenment rendering libraries
+
+%files -n %{libector}
+%{_libdir}/libector.so.%{major}*
+
+#----------------------------------------------------------------------------
+%package -n %{devector}
+Summary:	Ector headers and development libraries
+License:	BSD
+Group:		Development/Other
+Requires:	%{libector} = %{EVRD}
+Requires:	%{devector} = %{EVRD}
+
+%description -n %{devector}
+ector headers and development libraries.
+
+%files -n %{devector}
+%{_libdir}/libector.so
+%{_libdir}/pkgconfig/ector.pc
+%{_includedir}/ector-1/
+%{_datadir}/eolian/include/ector-1/
+
+
+%package -n %{libemile}
+Summary:        Enlightenment encoding libraries
+License:        BSD
+Group:          System/Libraries
+Requires:       %{name} = %{EVRD}
+
+%description -n %{libemile}
+Enlightenment encoding libraries
+
+%files -n %{libemile}
+%{_libdir}/libemile.so.%{major}*
+
+#----------------------------------------------------------------------------
+%package -n %{devemile}
+Summary:	Emile headers and development libraries
+License:	BSD
+Group:		Development/Other
+Requires:	%{libemile} = %{EVRD}
+Requires:	%{devemile} = %{EVRD}
+
+%description -n %{devemile}
+emile headers and development libraries.
+
+%files -n %{devemile}
+%{_libdir}/libemile.so
+%{_libdir}/pkgconfig/emile.pc
+%{_libdir}/cmake/Emile/
+%{_includedir}/emile-1/
+
+
+
+
+
+
+
+
 
 %prep
 %setup -q
