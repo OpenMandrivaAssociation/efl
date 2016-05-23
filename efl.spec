@@ -81,8 +81,8 @@
 %define libemile %mklibname emile %{major}
 %define devemile %mklibname emile  -d
 
-%define libector %mklibname emile %{major}
-%define devector %mklibname emile  -d
+%define libector %mklibname ector %{major}
+%define devector %mklibname ector  -d
 
 %define libelua %mklibname elua %{major}
 %define develua %mklibname elua  -d
