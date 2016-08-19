@@ -1473,6 +1473,7 @@ emile headers and development libraries.
 %apply_patches
 
 %build
+autoreconf -vif 
 %configure2_5x \
 	--enable-fontconfig \
 	--enable-gstreamer-1.0 \
