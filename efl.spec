@@ -161,6 +161,7 @@ BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	pkgconfig(xkbcommon)
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(glesv2)
+BuildRequires:	pkgconfig(spectre)
 %endif
 
 %description
