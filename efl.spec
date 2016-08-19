@@ -155,6 +155,7 @@ BuildRequires:	pkgconfig(xtst)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(luajit)
 BuildRequires:	pkgconfig(harfbuzz)
+BuildRequires:  pkgconfig(poppler-cpp
 %if %{without wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-egl)
