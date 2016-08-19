@@ -155,13 +155,13 @@ BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(luajit)
 BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(poppler-cpp)
+BuildRequires:  pkgconfig(spectre)
 %if %{without wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	pkgconfig(xkbcommon)
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(glesv2)
-BuildRequires:	pkgconfig(spectre)
 %endif
 
 %description
