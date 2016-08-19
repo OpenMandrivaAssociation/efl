@@ -130,6 +130,7 @@ BuildRequires:	pkgconfig(libxine)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
 BuildRequires:	pkgconfig(check)
+BuildRequires:  pkgconfig(libspectre)
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
 %endif
@@ -155,7 +156,6 @@ BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(luajit)
 BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(poppler-cpp)
-BuildRequires:  pkgconfig(spectre)
 %if %{without wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-egl)
