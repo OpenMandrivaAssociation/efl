@@ -132,6 +132,7 @@ BuildRequires:	pkgconfig(mount)
 BuildRequires:	pkgconfig(check)
 BuildRequires:  pkgconfig(libspectre)
 BuildRequires:	pkgconfig(libraw)
+BuildRequires:	pkgconfig(librsvg)
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
 %endif
