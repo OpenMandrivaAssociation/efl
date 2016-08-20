@@ -131,6 +131,7 @@ BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
 BuildRequires:	pkgconfig(check)
 BuildRequires:  pkgconfig(libspectre)
+BuildRequires:	pkgconfig(libraw)
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
 %endif
