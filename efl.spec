@@ -88,6 +88,9 @@
 %define libemile %mklibname emile %{major}
 %define devemile %mklibname emile  -d
 
+%define libelementary %mklibname elementary %{major}
+%define develementary %mklibname elementary -d
+
 %define devname %mklibname %{name} -d
 
 Summary:	Enlightenment Foundation Libraries
@@ -100,11 +103,13 @@ Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
 Source100:      %{name}.rpmlintrc
+Patch001:	fix_edje_cc_compiler_failure.patch
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
-BuildRequires:	jpeg-devel
+#BuildRequires:	libjpeg-devel
+#BuildRequires:	pkgconfig(libopenjpeg1)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
@@ -1261,6 +1266,7 @@ images, alpha-blend objects much and more.
 %{_datadir}/evas/
 %{_libdir}/evas/modules/engines/*/*/*.so
 %{_libdir}/evas/modules/image_loaders/*/*/*.so
+%{_libdir}/evas/modules/utils/evas_image_loader.*
 %{_libdir}/evas/modules/image_savers/*/*/*.so
 %{_libdir}/evas/cserve2/bin/*/evas_cserve2
 %{_libdir}/evas/cserve2/bin/*/evas_cserve2_slave
@@ -1340,8 +1346,8 @@ EFL headers and development libraries.
 %{_libdir}/pkgconfig/efl-cxx.pc
 %{_libdir}/libefl.so
 %{_datadir}/eolian/include/efl-1/
-%{_includedir}/%{name}-cxx-1/
-%{_includedir}/%{name}-1/
+%{_includedir}/%{name}-cxx-1/*.hh
+%{_includedir}/%{name}-1/interfaces/*.h
 %{_libdir}/cmake/Efl/
 
 #----------------------------------------------------------------------------
@@ -1462,18 +1468,83 @@ emile headers and development libraries.
 %{_libdir}/pkgconfig/emile.pc
 %{_libdir}/cmake/Emile/
 %{_includedir}/emile-1/
+#----------------------------------------------------------------------------
+%package -n elementary 
+Summary:	Basic widget set based on EFL for mobile touch-screen devices
+#Name:		elementary
+#Version:	1.18.0
+#Release:	0
+License:	LGPLv2.1+
+Group:		Graphical desktop/Enlightenment
+#Url:		http://www.enlightenment.org/
 
+%description
+A basic widget set that is easy to use based on EFL for mobile
+touch-screen devices.
 
+This package is part of the Enlightenment DR18 desktop shell.
 
+%files -n elementary
+%doc AUTHORS COPYING README
+%{_bindir}/%{name}_run
+%{_bindir}/elementary_codegen
+%{_bindir}/elementary_config
+%{_bindir}/elementary_quicklaunch
+%{_bindir}/elm_prefs_cc
+%{_libdir}/edje/modules/elm/v*/module.so
+%{_libdir}/elementary/modules/access_output/v*
+%{_libdir}/elementary/modules/prefs/v*
+%{_datadir}/applications/%{name}_config.desktop
+%{_datadir}/%{name}/config/*
+%{_datadir}/%{name}/edje_externals/*
+%{_datadir}/%{name}/images/*
+%{_datadir}/%{name}/themes/default.edj
+%{_datadir}/%{name}/objects/*
+%{_iconsdir}/%{name}.png
 
+#----------------------------------------------------------------------------
 
+%package -n %{libelementary}
+Summary:	Libraries for the %{name} package
+Group:		System/Libraries
 
+%description -n %{libelementary}
+Libraries for %{libelementary}.
 
+%files -n %{libelementary}
+%{_libdir}/libelementary.so.%{major}*
+
+#----------------------------------------------------------------------------
+
+%package -n %{develementary}
+Summary:	Headers and development libraries from %{name}
+Group:		Development/Other
+Requires:	%{libname} = %{EVRD}
+Provides:	%{name}-devel = %{EVRD}
+
+%description -n %{develementary}
+elementary development headers and libraries.
+
+%files -n %{develementary}
+%{_bindir}/elementary_test
+%{_libdir}/cmake/Elementary/
+%{_libdir}/pkgconfig/elementary.pc
+%{_libdir}/pkgconfig/elementary-cxx.pc
+#%{_libdir}/*.so
+%{_libdir}/libelementary.so.%{major}*
+%{_libdir}/elementary/modules/test_entry/v*
+%{_libdir}/elementary/modules/test_map/v*
+%{_libdir}/elementary/modules/datetime_input_ctxpopup/v*
+%{_datadir}/applications/%{name}_test.desktop
+%{_datadir}/eolian/include/elementary-1/*.eo
+%{_includedir}/elementary-1/*
+%{_includedir}/elementary-cxx*
 
 
 %prep
 %setup -q
-%apply_patches
+#%apply_patches
+patch -p0 %{Patch001}
 
 %build
 autoreconf -vif 
@@ -1513,8 +1584,11 @@ autoreconf -vif
 	--with-mount \
 	--with-umount \
 	--disable-static \
+	--with-pic=evas \
+	--with-pic=eina \
+	--disable-poppler \
 
-%make
+%make 
 
 %install
 %makeinstall_std
