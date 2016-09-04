@@ -1544,7 +1544,7 @@ elementary development headers and libraries.
 %prep
 %setup -q
 #%apply_patches
-patch -p0 %{Patch001}
+patch -p0 < fix_edje_cc_compiler_failure.patch
 
 %build
 autoreconf -vif 
