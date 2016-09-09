@@ -103,7 +103,7 @@ Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
 Source100:      %{name}.rpmlintrc
-Patch001:	fix_edje_cc_compiler_failure.patch
+Patch001:	fix_edje_cc_compile_failure.patch
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
@@ -194,6 +194,8 @@ Xdnd, general X stuff, event loops, timeouts and idle handlers fast,
 optimized, and convenient.
 
 %files -n ecore
+%{_bindir}/efl_debug
+%{_bindir}/efl_debugd
 %{_bindir}/ecore_evas_convert
 %{_bindir}/elua
 %{_datadir}/ecore/
@@ -453,15 +455,15 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore-cxx.pc
 %{_libdir}/pkgconfig/ecore-con.pc
 %{_libdir}/pkgconfig/ecore-evas.pc
-%{_libdir}/pkgconfig/ecore-file.pc
+#%{_libdir}/pkgconfig/ecore-file.pc
 %{_libdir}/pkgconfig/ecore-imf.pc
 %{_libdir}/pkgconfig/ecore-imf-evas.pc
 %{_libdir}/pkgconfig/ecore-input.pc
 %{_libdir}/pkgconfig/ecore-input-evas.pc
 %{_libdir}/pkgconfig/ecore-ipc.pc
-%if %{with sdl}
-%{_libdir}/pkgconfig/ecore-sdl.pc
-%endif
+#%if %{with sdl}
+#%{_libdir}/pkgconfig/ecore-sdl.pc
+#%endif
 %{_libdir}/pkgconfig/ecore-x.pc
 %if %{without wayland}
 %{_libdir}/pkgconfig/ecore-wayland.pc
@@ -488,10 +490,10 @@ Ecore headers and development libraries.
 %if %{without wayland}
 %{_libdir}/libecore_wayland.so
 %endif
-%{_libdir}/ecore_x/bin/v-1.14/ecore_x_vsync
+%{_libdir}/ecore_x/bin/v-1.18/ecore_x_vsync
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
-%{_includedir}/ecore-audio-cxx-1/
+#%{_includedir}/ecore-audio-cxx-1/
 %{_includedir}/ecore-avahi-1/
 %{_includedir}/ecore-cxx-1/
 %{_includedir}/ecore-con-1/
@@ -502,6 +504,7 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-input-1/
 %{_includedir}/ecore-input-evas-1/
 %{_includedir}/ecore-ipc-1/
+%{_includedir}/efl-1/*.h
 %if %{with sdl}
 %{_includedir}/ecore-sdl-1/
 %endif
@@ -705,10 +708,10 @@ Enlightenment freedesktop.org specifications implementation extra files.
 %files -n efreet
 %{_bindir}/efreetd
 %{_datadir}/efreet/
-%{_datadir}/dbus-1/services/org.enlightenment.Efreet.service
+#%{_datadir}/dbus-1/services/org.enlightenment.Efreet.service
 %{_libdir}/efreet/*/efreet_desktop_cache_create
 %{_libdir}/efreet/*/efreet_icon_cache_create
-%{_userunitdir}/efreet.service
+#%{_userunitdir}/efreet.service
 
 %post -n efreet
 %systemd_post efreet.service
@@ -804,6 +807,7 @@ eina-bench-cmp:
 
 %files -n eina
 %{_bindir}/eina-bench-cmp
+%{_bindir}/eina_btlog
 
 #----------------------------------------------------------------------------
 
@@ -926,6 +930,7 @@ Eldbus headers and development libraries.
 %{_libdir}/libeldbus.so
 %{_includedir}/eldbus_cxx-1/
 %{_includedir}/eldbus-1/
+%{_datadir}/eolian/include/eldbus-1/*
 
 #----------------------------------------------------------------------------
 
@@ -992,6 +997,8 @@ and audio and can be controlled from a high-level control API allowing the
 programmer to quickly piece together a multi-media system with minimal work.
 
 %files -n emotion
+%{_bindir}/emotion_test
+%{_bindir}/emotion_test-eo
 %{_datadir}/emotion/
 %{_libdir}/emotion/
 %{_libdir}/edje/modules/emotion/
@@ -1266,7 +1273,7 @@ images, alpha-blend objects much and more.
 %{_datadir}/evas/
 %{_libdir}/evas/modules/engines/*/*/*.so
 %{_libdir}/evas/modules/image_loaders/*/*/*.so
-%{_libdir}/evas/modules/utils/evas_image_loader.*
+%{_libdir}/evas/utils/evas_image_loader.*
 %{_libdir}/evas/modules/image_savers/*/*/*.so
 %{_libdir}/evas/cserve2/bin/*/evas_cserve2
 %{_libdir}/evas/cserve2/bin/*/evas_cserve2_slave
@@ -1378,6 +1385,8 @@ elua headers and development libraries.
 %files -n %{develua}
 %{_libdir}/libelua.so
 %{_libdir}/pkgconfig/elua.pc
+%{_libdir}/pkgconfig/ecore-file.pc
+
 %{_includedir}/elua-1/
 %{_libdir}/cmake/Elua/
 
@@ -1436,7 +1445,7 @@ ector headers and development libraries.
 %files -n %{devector}
 %{_libdir}/libector.so
 %{_libdir}/pkgconfig/ector.pc
-%{_includedir}/ector-1/
+#%{_includedir}/ector-1/
 %{_datadir}/eolian/include/ector-1/
 
 
@@ -1486,21 +1495,36 @@ This package is part of the Enlightenment DR18 desktop shell.
 
 %files -n elementary
 %doc AUTHORS COPYING README
-%{_bindir}/%{name}_run
+%{_bindir}/elementary_run
 %{_bindir}/elementary_codegen
 %{_bindir}/elementary_config
 %{_bindir}/elementary_quicklaunch
 %{_bindir}/elm_prefs_cc
 %{_libdir}/edje/modules/elm/v*/module.so
 %{_libdir}/elementary/modules/access_output/v*
+%{_libdir}/elementary/modules/web/none/v-1.18/*.so
 %{_libdir}/elementary/modules/prefs/v*
-%{_datadir}/applications/%{name}_config.desktop
-%{_datadir}/%{name}/config/*
-%{_datadir}/%{name}/edje_externals/*
-%{_datadir}/%{name}/images/*
-%{_datadir}/%{name}/themes/default.edj
-%{_datadir}/%{name}/objects/*
-%{_iconsdir}/%{name}.png
+%{_datadir}/applications/elementary_config.desktop
+%{_datadir}/applications/elementary_test.desktop
+%{_datadir}/elementary/config/*
+%{_datadir}/elementary/edje_externals/*
+%{_datadir}/elementary/images/*
+%{_datadir}/elementary/themes/default.edj
+%{_datadir}/elementary/objects/*
+
+%{_iconsdir}/Enlightenment-X/status/128/*.png
+%{_iconsdir}/Enlightenment-X/places/128/*.png
+%{_iconsdir}/Enlightenment-X/intl/128/*.png
+%{_iconsdir}/Enlightenment-X/devices/128/*.png
+%{_iconsdir}/Enlightenment-X/categories/128/*.png
+%{_iconsdir}/Enlightenment-X/actions/128/*.png
+%{_iconsdir}/Enlightenment-X/emblems/96/*.png
+%{_iconsdir}/Enlightenment-X/apps/64/*.png
+%{_iconsdir}/Enlightenment-X/places/16/*.png
+%{_iconsdir}/Enlightenment-X/categories/16/*.png
+%{_iconsdir}/Enlightenment-X/README
+%{_iconsdir}/Enlightenment-X/index.theme
+%{_iconsdir}/elementary.png
 
 #----------------------------------------------------------------------------
 
@@ -1519,8 +1543,8 @@ Libraries for %{libelementary}.
 %package -n %{develementary}
 Summary:	Headers and development libraries from %{name}
 Group:		Development/Other
-Requires:	%{libname} = %{EVRD}
-Provides:	%{name}-devel = %{EVRD}
+Requires:	%{libelementary} = %{EVRD}
+Provides:	%{libelementary}-devel = %{EVRD}
 
 %description -n %{develementary}
 elementary development headers and libraries.
@@ -1530,12 +1554,14 @@ elementary development headers and libraries.
 %{_libdir}/cmake/Elementary/
 %{_libdir}/pkgconfig/elementary.pc
 %{_libdir}/pkgconfig/elementary-cxx.pc
-#%{_libdir}/*.so
-%{_libdir}/libelementary.so.%{major}*
+%if %{with sdl}
+%{_libdir}/pkgconfig/ecore-sdl.pc
+%endif
+%{_libdir}/libelementary.so
 %{_libdir}/elementary/modules/test_entry/v*
 %{_libdir}/elementary/modules/test_map/v*
 %{_libdir}/elementary/modules/datetime_input_ctxpopup/v*
-%{_datadir}/applications/%{name}_test.desktop
+%{_datadir}/eolian/include/elementary-1/*.eot
 %{_datadir}/eolian/include/elementary-1/*.eo
 %{_includedir}/elementary-1/*
 %{_includedir}/elementary-cxx*
@@ -1544,7 +1570,7 @@ elementary development headers and libraries.
 %prep
 %setup -q
 %apply_patches
-#patch -p0 < fix_edje_cc_compiler_failure.patch
+#patch -p0 < fix_edje_cc_compile_failure.patch
 
 %build
 autoreconf -vif 
@@ -1586,7 +1612,9 @@ autoreconf -vif
 	--disable-static \
 	--with-pic=evas \
 	--with-pic=eina \
-	--disable-poppler \
+    --with-pic=poppler \
+    
+#	--disable-poppler
 
 %make 
 

@@ -5,6 +5,8 @@ addFilter("E: setuid-binary")
 addFilter("E: wrong-script-end-of-line-encoding")
 addFilter("E: no-binary")
 
+addFilter("E: library-not-linked-against-libc")
+
 #Mostly spurious
 addFilter("W: spelling-error")
 #I don't do vanity
