@@ -124,8 +124,7 @@ BuildRequires:	pkgconfig(libcares)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libpulse)
-BuildRequires:	pkgconfig(libsystemd-daemon)
-BuildRequires:	pkgconfig(libsystemd-journal)
+BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(libtiff-4)
 BuildRequires:	pkgconfig(libudev)
 BuildRequires:	pkgconfig(libwebp)
@@ -1489,7 +1488,6 @@ ector headers and development libraries.
 	--enable-image-loader-gif \
 	--enable-image-loader-ico \
 	--enable-image-loader-jpeg \
-	--enable-image-loader-jp2k \
 	--enable-image-loader-pmaps \
 	--enable-image-loader-png \
 	--enable-image-loader-psd \
