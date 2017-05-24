@@ -168,6 +168,7 @@ BuildRequires:	pkgconfig(luajit)
 BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(poppler-cpp)
 BuildRequires:	pkgconfig(libspectre)
+BuildRequires:	pkgconfig(printproto)
 %if %{without wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-client)
