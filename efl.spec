@@ -171,9 +171,9 @@ BuildRequires:	pkgconfig(libspectre)
 BuildRequires:	pkgconfig(printproto)
 %if %{without wayland}
 BuildRequires:	pkgconfig(wayland-server)
-BuildRequires:	pkgconfig(wayland-client) >= 1.11.0
-BuildRequires:	pkgconfig(wayland-scanner) >= 1.11.0
-BuildRequires:	pkgconfig(wayland-protocols) >= 1.7
+BuildRequires:	pkgconfig(wayland-client)
+BuildRequires:	pkgconfig(wayland-scanner)
+BuildRequires:	pkgconfig(wayland-protocols)
 BuildRequires:	pkgconfig(wayland-cursor)
 BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	wayland-tools
