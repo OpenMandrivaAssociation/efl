@@ -1,5 +1,5 @@
---- data/elementary/themes/edc/transitions.edc	2016-09-02 16:47:01.214802435 +0100
-+++ data/elementary/themes/edc/transitions.edc~	2016-09-02 16:45:08.416360900 +0100
+--- ./data/elementary/themes/edc/transitions.edc	2016-09-02 16:47:01.214802435 +0100
++++ ./data/elementary/themes/edc/transitions.edc~	2016-09-02 16:45:08.416360900 +0100
 @@ -1,5 +1,5 @@
  group { name: "e/transpreview/0";
 -   images.image: "img_example_1.png" LOSSY 92;
