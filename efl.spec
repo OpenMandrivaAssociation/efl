@@ -8,6 +8,7 @@
 
 %bcond_without wayland
 
+
 %define _disable_ld_no_undefined 1
 %define gstapi 1.0
 %define major 1
@@ -61,6 +62,7 @@
 
 %define libeo %mklibname eo %{major}
 %define deveo %mklibname eo -d
+#%define deveo_dbg %mklibname deveo_dbg -d
 
 %define libeolian %mklibname eolian %{major}
 %define deveolian %mklibname eolian -d
@@ -76,32 +78,41 @@
 %define devevas %mklibname evas -d
 
 %define libefl %mklibname efl %{major}
-%define devefl %mklibname efl  -d
+%define devefl %mklibname efl -d
 
 %define libemile %mklibname emile %{major}
 %define devemile %mklibname emile  -d
 
 %define libector %mklibname ector %{major}
-%define devector %mklibname ector  -d
+%define devector %mklibname ector -d
 
 %define libelua %mklibname elua %{major}
-%define develua %mklibname elua  -d
+%define develua %mklibname elua -d
 
 %define libelocation %mklibname location %{major}
-%define develocation %mklibname location  -d
+%define develocation %mklibname location -d
 
+%define libelementary %mklibname elementary %{major}
+%define develementary %mklibname elementary -d
 
-%define devname %mklibname %{name} -d
+%define libel %mklibname el %{major}
+%define devel %mklibname el -d
+
+%define libelput %mklibname elput %{major}
+%define develput %mklibname elput -d
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.17.0
-Release:	2
+Version:	1.19.0
+Release:	1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
+Source1:	%{name}.rpmlintrc
+Patch0:		fix_edje_cc_compile_failure.patch
+Patch01:	fix-poppler-cpp-pic-level-failure.patch
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
@@ -124,8 +135,7 @@ BuildRequires:	pkgconfig(libcares)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libpulse)
-BuildRequires:	pkgconfig(libsystemd-daemon)
-BuildRequires:	pkgconfig(libsystemd-journal)
+BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(libtiff-4)
 BuildRequires:	pkgconfig(libudev)
 BuildRequires:	pkgconfig(libwebp)
@@ -156,8 +166,11 @@ BuildRequires:	pkgconfig(xtst)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(luajit)
 BuildRequires:	pkgconfig(harfbuzz)
-%if %{with wayland}
+BuildRequires:	pkgconfig(poppler-cpp)
+BuildRequires:	pkgconfig(libspectre)
+%if %{without wayland}
 BuildRequires:	pkgconfig(wayland-server)
+BuildRequires:	pkgconfig(wayland-client)
 BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	pkgconfig(xkbcommon)
 BuildRequires:	pkgconfig(egl)
@@ -174,8 +187,8 @@ and more.
 
 %files -f %{name}.lang
 %doc AUTHORS COPYING NEWS README
-/usr/bin/efl_debug
-/usr/bin/efl_debugd
+%{_bindir}/efl_debug
+%{_bindir}/efl_debugd
 
 #----------------------------------------------------------------------------
 
@@ -199,6 +212,7 @@ optimized, and convenient.
 %{_libdir}/ecore/system/systemd/*/module.so
 %{_libdir}/ecore_evas/engines/*/*/module.so
 %{_libdir}/ecore_imf/modules/*/*/module.so
+%{_libdir}/ecore_con/utils/*/efl_net_proxy_helper
 
 #----------------------------------------------------------------------------
 
@@ -394,7 +408,7 @@ Enlightenment event/X abstraction layer library.
 %{_libdir}/libecore_x.so.%{major}*
 
 #----------------------------------------------------------------------------
-%if %{with wayland}
+%if %{without wayland}
 %package -n %{libecore_wayland}
 Summary:	Enlightenment event/X abstraction layer library
 License:	BSD
@@ -432,7 +446,7 @@ License:	BSD
 Group:		Development/Other
 Requires:	%{libecore} = %{EVRD}
 Requires:	%{libecore_audio} = %{EVRD}
-Requires:       %{libecore_avahi} = %{EVRD}
+Requires:	%{libecore_avahi} = %{EVRD}
 Requires:	%{libecore_con} = %{EVRD}
 Requires:	%{libecore_evas} = %{EVRD}
 Requires:	%{libecore_file} = %{EVRD}
@@ -444,7 +458,7 @@ Requires:	%{libecore_ipc} = %{EVRD}
 %if %{with sdl}
 Requires:	%{libecore_sdl} = %{EVRD}
 %endif
-%if %{with wayland}
+%if %{without wayland}
 Requires:	%{libecore_wayland} = %{EVRD}
 %endif
 Requires:	%{libecore_x} = %{EVRD}
@@ -474,12 +488,11 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore-sdl.pc
 %endif
 %{_libdir}/pkgconfig/ecore-x.pc
-%if %{with wayland}
-%{_libdir}/pkgconfig/ecore-wayland.pc
+#%if %{without wayland}
 %{_libdir}/pkgconfig/evas-wayland-shm.pc
+#%endif
 %if %{with opengles}
 %{_libdir}/pkgconfig/evas-wayland-egl.pc
-%endif
 %endif
 %{_libdir}/pkgconfig/ecore-wl2.pc
 %{_libdir}/libecore.so
@@ -497,14 +510,12 @@ Ecore headers and development libraries.
 %{_libdir}/libecore_sdl.so
 %endif
 %{_libdir}/libecore_x.so
-%if %{with wayland}
+%if %{without wayland}
 %{_libdir}/libecore_wayland.so
 %endif
 %{_libdir}/libecore_wl2.so
-%{_libdir}/ecore_x/bin/v-1.17/ecore_x_vsync
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
-%{_includedir}/ecore-audio-cxx-1/
 %{_includedir}/ecore-avahi-1/
 %{_includedir}/ecore-cxx-1/
 %{_includedir}/ecore-con-1/
@@ -520,7 +531,7 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-sdl-1/
 %endif
 %{_includedir}/ecore-x-1/
-%if %{with wayland}
+%if %{without wayland}
 %{_includedir}/ecore-wayland-1/
 %endif
 %{_datadir}/eolian/include/ecore-1/
@@ -543,6 +554,7 @@ Enlightenment complex graphical design and layout library extra files.
 %{_datadir}/edje/
 %{_datadir}/mime/packages/edje.xml
 %{_libdir}/edje/utils/*/epp
+%{_libdir}/edje/modules/elm/v*/module.so
 
 #----------------------------------------------------------------------------
 
@@ -664,6 +676,7 @@ becomes known to the system.
 %{_bindir}/eeze_disk_ls
 %{_bindir}/eeze_mount
 %{_bindir}/eeze_scanner
+%{_bindir}/eeze_scanner_monitor
 %{_bindir}/eeze_umount
 %{_datadir}/eeze/
 %{_libdir}/eeze/modules/
@@ -722,6 +735,7 @@ Enlightenment freedesktop.org specifications implementation extra files.
 %{_datadir}/efreet/
 %{_libdir}/efreet/*/efreet_desktop_cache_create
 %{_libdir}/efreet/*/efreet_icon_cache_create
+%{_libdir}/efreet/*/efreet_mime_cache_create
 
 #----------------------------------------------------------------------------
 
@@ -809,6 +823,7 @@ eina-bench-cmp:
 %files -n eina
 %{_bindir}/eina-bench-cmp
 %{_bindir}/eina_btlog
+%{_bindir}/eina_modinfo
 
 #----------------------------------------------------------------------------
 
@@ -880,6 +895,7 @@ Eio headers and development libraries.
 %{_libdir}/cmake/Eio/
 %{_libdir}/libeio.so
 %{_datadir}/eolian/include/eio-1/eio_model.eo
+%{_datadir}/eolian/include/eio-1/eio_sentry.eo
 %{_includedir}/eio-1/
 %{_includedir}/eio-cxx-1/
 
@@ -1037,11 +1053,11 @@ Emotion headers and development libraries.
 
 #----------------------------------------------------------------------------
 
-%package -n %{libeo}
+%package -n 	%{libeo}
 Summary:	Enlightenment generic object system library
 License:	BSD
 Group:		System/Libraries
-Requires:	%{name} = %{EVRD}
+Requires:	%{libeo} = %{EVRD}
 
 %description -n %{libeo}
 Enlightenment generic object system library.
@@ -1051,29 +1067,46 @@ Enlightenment generic object system library.
 
 #----------------------------------------------------------------------------
 
-%package -n %{deveo}
+#%package -n     %{deveo_dbg}
+#Summary:        Eo debug libraries
+#License:        BSD
+#Group:          Development/Other
+#Requires:       %{deveo} = %{EVRD}
+#Provides:       %{deveo_dbg} = %{EVRD}
+
+#%description -n %{deveo_dbg}
+#Eo debug libraries.
+
+#%files -n %{deveo_dbg}
+#%{_libdir}/libeo_dbg.so.%{major}*
+#%{_libdir}/libeo_dbg.so
+
+#----------------------------------------------------------------------------
+
+%package -n 	%{deveo}
 Summary:	Eo headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libeo} = %{EVRD}
-Requires:	%{devefl} = %{EVRD}
-Provides:	eo-devel = %{EVRD}
+Provides:	%{deveo} = %{EVRD}
 
 %description -n %{deveo}
 Eo headers and development libraries.
 
 %files -n %{deveo}
+%{_bindir}/eo_debug
 %{_libdir}/cmake/Eo/
 %{_libdir}/cmake/EoCxx/
 %{_libdir}/pkgconfig/eo.pc
 %{_libdir}/pkgconfig/eo-cxx.pc
-%{_libdir}/libeo.so
 %{_includedir}/eo-1/
 %{_includedir}/eo-cxx-1/
 %{_datadir}/gdb/auto-load/%{_libdir}/libeo.so.*-gdb.py
 %{_datadir}/eo/gdb/eo_gdb.py
 %{_datadir}/eolian/include/eo-1/
-
+%{_libdir}/libeo.so
+%{_libdir}/libeo_dbg.so.%{major}*
+%{_libdir}/libeo_dbg.so
 #----------------------------------------------------------------------------
 
 %package -n eolian
@@ -1124,6 +1157,7 @@ Eolian headers and development libraries.
 %{_libdir}/libeolian.so
 %{_includedir}/eolian-1/
 %{_includedir}/eolian-cxx-1/
+%{_datadir}/eolian/include/eio-1/efl_io_manager.eo
 
 #----------------------------------------------------------------------------
 
@@ -1270,7 +1304,9 @@ images, alpha-blend objects much and more.
 %{_datadir}/evas/
 %{_libdir}/evas/modules/engines/*/*/*.so
 %{_libdir}/evas/modules/image_loaders/*/*/*.so
+%{_libdir}/evas/utils/evas_generic_pdf_loader.*
 %{_libdir}/evas/modules/image_savers/*/*/*.so
+%{_libdir}/evas/utils/evas_image_loader.*
 %{_libdir}/evas/cserve2/bin/*/evas_cserve2
 %{_libdir}/evas/cserve2/bin/*/evas_cserve2_slave
 
@@ -1339,7 +1375,6 @@ Summary:	EFL headers and development libraries
 License:	BSD
 Group:		Development/Other
 Requires:	%{libefl} = %{EVRD}
-#Requires:	%{devname} = %{EVRD}
 Provides:	efl-devel = %{EVRD}
 
 %description -n %{devefl}
@@ -1357,9 +1392,9 @@ EFL headers and development libraries.
 #----------------------------------------------------------------------------
 
 %package -n %{libelua}
-Summary:        Support Library for lua scripts
+Summary:	Support Library for lua scripts
 License:        BSD
-Group:          System/Libraries
+Group:		System/Libraries
 Requires:       %{name} = %{EVRD}
 
 %description -n %{libelua}
@@ -1449,7 +1484,7 @@ elocation headers and development libraries.
 Summary:        Enlightenment ector libraries
 License:        BSD
 Group:          System/Libraries
-Requires:       %{name} = %{EVRD}
+Requires:       %{libector} = %{EVRD}
 
 %description -n %{libector}
 Enlightenment geolocation libraries
@@ -1473,6 +1508,115 @@ ector headers and development libraries.
 %{_libdir}/pkgconfig/ector.pc
 %{_datadir}/eolian/include/ector-1/
 
+#----------------------------------------------------------------------------
+%package -n 	%{libelput}
+Summary:        Enlightenment mile libraries
+License:        BSD
+Group:          System/Libraries
+Requires:       %{libelput} = %{EVRD}
+
+%description -n %{libelput}
+Enlightenment libraries
+
+%files -n %{libelput}
+%{_libdir}/libelput.so.%{major}*
+
+#----------------------------------------------------------------------------
+%package -n 	%{develput}
+Summary:	elput headers and development libraries
+License:	BSD
+Group:		Development/Other
+Requires:	%{libelput} = %{EVRD}
+%description -n %{develput}
+elput headers and development libraries.
+
+%files -n %{develput}
+%{_libdir}/libelput.so
+%{_libdir}/pkgconfig/elput.pc
+%{_includedir}/elput-1/Elput.h
+
+#----------------------------------------------------------------------------
+
+%package -n	elementary
+Summary:        Basic widget set based on EFL for mobile touch-screen devices
+License:        LGPLv2.1+
+Group:          Graphical desktop/Enlightenment
+Requires:	%{libelementary} = %{EVRD}
+
+%description  -n elementary
+A basic widget set that is easy to use based on EFL for mobile
+touch-screen devices.
+
+This package is part of the Enlightenment DR19 desktop shell.
+
+%files -n elementary
+%doc AUTHORS COPYING README
+%{_bindir}/elementary_run
+%{_bindir}/elementary_codegen
+%{_bindir}/elementary_config
+%{_bindir}/elementary_quicklaunch
+%{_bindir}/elm_prefs_cc
+%{_libdir}/elementary/modules/access_output/v*
+%{_libdir}/elementary/modules/prefs/v*
+%{_datadir}/applications/elementary_config.desktop
+%{_datadir}/elementary/config/*
+%{_datadir}/elementary/edje_externals/*
+%{_datadir}/elementary/images/*
+%{_datadir}/elementary/themes/default.edj
+%{_datadir}/elementary/objects/*
+%{_datadir}/elementary/testdiff.diff
+%{_datadir}/elementary/testfile-windows.txt
+%{_datadir}/elementary/testfile-withblanks.txt
+%{_datadir}/elementary/testfile.txt
+%{_iconsdir}/Enlightenment-X/index.theme
+%{_iconsdir}/Enlightenment-X/README
+%{_iconsdir}/Enlightenment-X/*/*/*.png
+%{_iconsdir}/elementary.png
+
+
+
+#----------------------------------------------------------------------------
+
+%package -n	%{libelementary}
+Summary:        Libraries for the elementary package
+Group:          System/Libraries
+Requires:	%{libelementary} = %{EVRD}
+
+%description -n %{libelementary}
+Libraries for elementary
+
+%files -n %{libelementary}
+%doc AUTHORS COPYING README
+%{_libdir}/libelementary.so.%{major}*
+%{_libdir}/elementary/modules/clock_input_ctxpopup/v-1.19/module.so
+%{_libdir}/elementary/modules/web/none/*/module.so
+
+#----------------------------------------------------------------------------
+
+%package -n	%{develementary}
+Summary:        Headers and development libraries from elementary
+Group:          Development/Other
+Requires:       %{libelementary} = %{EVRD}
+Provides:       %{develementary} = %{EVRD}
+
+%description -n %{develementary}
+elementary development headers and libraries.
+
+%files -n %{develementary}
+%doc AUTHORS COPYING README
+%{_bindir}/elementary_test
+%{_libdir}/cmake/Elementary/
+%{_libdir}/elementary/modules/test_entry/v*
+%{_libdir}/elementary/modules/test_map/v*
+%{_libdir}/pkgconfig/elementary*.*
+%{_libdir}/libelementary.so
+%{_datadir}/applications/elementary_test.desktop
+%{_datadir}/eolian/include/elementary-1/*.eo*
+%{_includedir}/elementary-1/*
+%{_includedir}/elementary-cxx-1/*.hh
+
+
+#----------------------------------------------------------------------------
 
 %prep
 %setup -q
@@ -1480,16 +1624,15 @@ ector headers and development libraries.
 
 %build
 
-%configure BUILD_CC=%{__cc} TARGET_CC=%{__cc} \
+%configure \
+	BUILD_CC=%{__cc} TARGET_CC=%{__cc} \
 	--enable-fontconfig \
-	--enable-gstreamer-1.0 \
 	--enable-image-loader-bmp \
 	--enable-image-loader-eet \
 	--enable-image-loader-generic \
 	--enable-image-loader-gif \
 	--enable-image-loader-ico \
 	--enable-image-loader-jpeg \
-	--enable-image-loader-jp2k \
 	--enable-image-loader-pmaps \
 	--enable-image-loader-png \
 	--enable-image-loader-psd \
@@ -1503,11 +1646,10 @@ ector headers and development libraries.
 %endif
 %if %{with opengles}
 	--with-opengl=es \
-%endif
-%if %{with wayland}
-	--enable-wayland \
 	--enable-egl \
 %endif
+       	--enable-wayland \
+       	--enable-egl \
 	--enable-systemd \
 	--enable-v4l2 \
 	--enable-xine \
@@ -1517,9 +1659,10 @@ ector headers and development libraries.
 	--with-umount \
 	--disable-static \
 
-%make
+%make 
 
 %install
 %makeinstall_std
 
 %find_lang %{name}
+
