@@ -176,6 +176,7 @@ BuildRequires:	pkgconfig(wayland-scanner) >= 1.11.0
 BuildRequires:	pkgconfig(wayland-protocols) >= 1.7
 BuildRequires:	pkgconfig(wayland-cursor)
 BuildRequires:	pkgconfig(wayland-egl)
+BuildRequires:	wayland-tools
 BuildRequires:	pkgconfig(xkbcommon)
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(glesv2)
