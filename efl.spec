@@ -169,6 +169,7 @@ BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(poppler-cpp)
 BuildRequires:	pkgconfig(libspectre)
 BuildRequires:	pkgconfig(printproto)
+BuildRequires:	pkgconfig(libraw)
 %if %{with wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-client)
