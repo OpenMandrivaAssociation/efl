@@ -118,6 +118,7 @@ BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
+BuildRequires:	libraw-devel
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
@@ -169,7 +170,6 @@ BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(poppler-cpp)
 BuildRequires:	pkgconfig(libspectre)
 BuildRequires:	pkgconfig(printproto)
-BuildRequires:	pkgconfig(libraw)
 %if %{with wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-client)
