@@ -171,6 +171,8 @@ BuildRequires:	pkgconfig(poppler-cpp)
 BuildRequires:	pkgconfig(libspectre)
 BuildRequires:	pkgconfig(printproto)
 BuildRequires:	pkgconfig(librsvg-2.0)
+BuildRequires:	pkgconfig(libinput)
+Buildrequires:	pkgconfig(libudev)
 %if %{with wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-client)
