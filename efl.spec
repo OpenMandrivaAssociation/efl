@@ -173,7 +173,7 @@ BuildRequires:	pkgconfig(printproto)
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-client)
 BuildRequires:	pkgconfig(wayland-scanner)
-BuildRequires:	pkgconfig(wayland-protocols)
+BuildRequires:	wayland-protocols-devel
 BuildRequires:	pkgconfig(wayland-cursor)
 BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	wayland-tools
