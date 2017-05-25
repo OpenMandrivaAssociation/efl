@@ -169,7 +169,7 @@ BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(poppler-cpp)
 BuildRequires:	pkgconfig(libspectre)
 BuildRequires:	pkgconfig(printproto)
-%if %{without wayland}
+%if %{with wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-client)
 BuildRequires:	pkgconfig(wayland-scanner)
@@ -1664,7 +1664,7 @@ elementary development headers and libraries.
 	--with-umount \
 	--disable-static \
 
-%make 
+%make
 
 %install
 %makeinstall_std
