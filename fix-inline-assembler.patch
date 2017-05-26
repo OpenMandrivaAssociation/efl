@@ -1,5 +1,5 @@
---- src/lib/evas/common/evas_op_blend/op_blend_pixel_neon.c~	2017-04-12 09:30:19.000000000 +0100
-+++ src/lib/evas/common/evas_op_blend/op_blend_pixel_neon.c	2017-05-26 17:54:43.955180353 +0100
+--- ./src/lib/evas/common/evas_op_blend/op_blend_pixel_neon.c~	2017-04-12 09:30:19.000000000 +0100
++++ ./src/lib/evas/common/evas_op_blend/op_blend_pixel_neon.c	2017-05-26 17:54:43.955180353 +0100
 @@ -318,7 +318,7 @@
  		// Add to 's'
  		"vqadd.u8	d4,	d8,d0		\n\t"
@@ -9,8 +9,8 @@
  		"add		%[d],   #8		\n\t"
  
  		"cmp 		%[tmp], %[d]		\n\t"
---- src/lib/evas/common/evas_op_copy/op_copy_color_neon.c~	2017-04-12 09:30:19.000000000 +0100
-+++ src/lib/evas/common/evas_op_copy/op_copy_color_neon.c	2017-05-26 17:57:45.126405764 +0100
+--- ./src/lib/evas/common/evas_op_copy/op_copy_color_neon.c~	2017-04-12 09:30:19.000000000 +0100
++++ ./src/lib/evas/common/evas_op_copy/op_copy_color_neon.c	2017-05-26 17:57:45.126405764 +0100
 @@ -38,7 +38,7 @@
  		"blt		"AP"loopout		\n\t"
  
