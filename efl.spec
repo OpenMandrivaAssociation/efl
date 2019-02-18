@@ -62,7 +62,7 @@
 
 %define libeo %mklibname eo %{major}
 %define deveo %mklibname eo -d
-#%define deveo_dbg %mklibname deveo_dbg -d
+#%%define deveo_dbg %mklibname deveo_dbg -d
 
 %define libeolian %mklibname eolian %{major}
 %define deveolian %mklibname eolian -d
