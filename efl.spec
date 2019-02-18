@@ -1089,7 +1089,7 @@ Enlightenment generic object system library.
 
 #%%files -n %%{deveo_dbg}
 #%%{_libdir}/libeo_dbg.so.%%{major}*
-#%{_libdir}/libeo_dbg.so
+#%%{_libdir}/libeo_dbg.so
 
 #----------------------------------------------------------------------------
 
@@ -1466,7 +1466,7 @@ License:        BSD
 Group:          System/Libraries
 Requires:       %{name} = %{EVRD}
 
-%description -n %{libelocation}
+%description -n %{libemile}
 Enlightenment geolocation libraries
 
 %files -n %{libemile}
