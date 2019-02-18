@@ -62,7 +62,7 @@
 
 %define libeo %mklibname eo %{major}
 %define deveo %mklibname eo -d
-#%define deveo_dbg %mklibname deveo_dbg -d
+#%%define deveo_dbg %%mklibname deveo_dbg -d
 
 %define libeolian %mklibname eolian %{major}
 %define deveolian %mklibname eolian -d
@@ -261,7 +261,7 @@ License:	BSD
 Group:		System/Libraries
 Requires:	%{libecore} = %{EVRD}
 
-%description -n %{libecore_audio}
+%description -n %{libecore_avahi}
 Enlightenment avahi abstraction layer library.
 
 %files -n %{libecore_avahi}
@@ -498,9 +498,9 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore-sdl.pc
 %endif
 %{_libdir}/pkgconfig/ecore-x.pc
-#%if %{without wayland}
+#%%if %%{without wayland}
 %{_libdir}/pkgconfig/evas-wayland-shm.pc
-#%endif
+#%%endif
 %if %{with opengles}
 %{_libdir}/pkgconfig/evas-wayland-egl.pc
 %endif
@@ -1077,18 +1077,18 @@ Enlightenment generic object system library.
 
 #----------------------------------------------------------------------------
 
-#%package -n     %{deveo_dbg}
+#%%package -n     %{deveo_dbg}
 #Summary:        Eo debug libraries
 #License:        BSD
 #Group:          Development/Other
-#Requires:       %{deveo} = %{EVRD}
-#Provides:       %{deveo_dbg} = %{EVRD}
+#Requires:       %%{deveo} = %%{EVRD}
+#Provides:       %%{deveo_dbg} = %%{EVRD}
 
-#%description -n %{deveo_dbg}
+#%%description -n %%{deveo_dbg}
 #Eo debug libraries.
 
-#%files -n %{deveo_dbg}
-#%{_libdir}/libeo_dbg.so.%{major}*
+#%%files -n %%{deveo_dbg}
+#%%{_libdir}/libeo_dbg.so.%%{major}*
 #%{_libdir}/libeo_dbg.so
 
 #----------------------------------------------------------------------------
