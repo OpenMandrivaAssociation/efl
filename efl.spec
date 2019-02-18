@@ -144,6 +144,7 @@ BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libxine)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
+BuildRequires:  pkgconfig(openssl)
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
 %endif
