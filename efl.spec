@@ -175,6 +175,7 @@ BuildRequires:	pkgconfig(printproto)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(libinput)
 Buildrequires:	pkgconfig(libudev)
+BuildRequires:  pkgconfig(dbus-1)
 %if %{with wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-client)
