@@ -80,6 +80,9 @@
 %define libefl %mklibname efl %{major}
 %define devefl %mklibname efl -d
 
+%define libefl_wl %mklibname efl_wl %{major}
+%define devefl_wl %mklibname efl_wl -d
+
 %define libemile %mklibname emile %{major}
 %define devemile %mklibname emile  -d
 
@@ -101,19 +104,22 @@
 %define libelput %mklibname elput %{major}
 %define develput %mklibname elput -d
 
+%define shortver 1.21
+
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.19.1
-Release:	2
+Version:	1.21.1
+Release:	1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
-Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
+Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.gz
 Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
 Patch01:	fix-poppler-cpp-pic-level-failure.patch
 Patch02:	fix-inline-assembler.patch
+Patch03:        cmake-extra-else-fix.patch
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
@@ -145,6 +151,7 @@ BuildRequires:	pkgconfig(libxine)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
 BuildRequires:  pkgconfig(openssl)
+BuildRequires:  lib64lz4-devel
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
 %endif
@@ -176,6 +183,7 @@ BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(libinput)
 Buildrequires:	pkgconfig(libudev)
 BuildRequires:  pkgconfig(dbus-1)
+BuildRequires:  vlan-utils
 %if %{with wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-client)
@@ -188,6 +196,7 @@ BuildRequires:	pkgconfig(xkbcommon)
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(glesv2)
 BuildRequires:	glesv3-devel
+
 %endif
 
 %description
@@ -201,6 +210,9 @@ and more.
 %doc AUTHORS COPYING NEWS README
 %{_bindir}/efl_debug
 %{_bindir}/efl_debugd
+
+%{_bindir}/efl_wl_test
+%{_bindir}/efl_wl_test_stack
 
 #----------------------------------------------------------------------------
 
@@ -449,6 +461,7 @@ Enlightenment event/X abstraction layer library.
 
 %files -n %{libecore_wl2}
 %{_libdir}/libecore_wl2.so.%{major}*
+%{_libdir}/ecore_wl2/engines/dmabuf/v-%{shortver}/module.so
 
 #----------------------------------------------------------------------------
 
@@ -526,6 +539,7 @@ Ecore headers and development libraries.
 %{_libdir}/libecore_wayland.so
 %endif
 %{_libdir}/libecore_wl2.so
+#%%{_libdir}/ecore_wl2/engines/dmabuf/v-%%{shortver}/*.debug
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
 %{_includedir}/ecore-avahi-1/
@@ -1119,6 +1133,8 @@ Eo headers and development libraries.
 %{_libdir}/libeo.so
 %{_libdir}/libeo_dbg.so.%{major}*
 %{_libdir}/libeo_dbg.so
+%{_datadir}/eo/gdb/__pycache__/*.pyc
+%{_datadir}/gdb/auto-load/usr/lib64/__pycache__/*.pyc
 #----------------------------------------------------------------------------
 
 %package -n eolian
@@ -1395,6 +1411,9 @@ EFL headers and development libraries.
 %files -n %{devefl}
 %{_libdir}/pkgconfig/efl.pc
 %{_libdir}/pkgconfig/efl-cxx.pc
+%{_libdir}/pkgconfig/efl-core.pc
+%{_libdir}/pkgconfig/efl-net.pc
+%{_libdir}/pkgconfig/efl-ui.pc
 %{_libdir}/libefl.so
 %{_datadir}/eolian/include/efl-1/
 %{_includedir}/%{name}-cxx-1/
@@ -1402,7 +1421,40 @@ EFL headers and development libraries.
 %{_libdir}/cmake/Efl/
 
 #----------------------------------------------------------------------------
+%package -n %{libefl_wl}
+Summary:        Enlightenment canvas library Wayland
+License:        BSD
+Group:          System/Libraries
+Requires:       %{name} = %{EVRD}
 
+%description -n %{libefl_wl}
+Enlightenment canvas library for wayland.
+
+%files -n %{libefl_wl}
+%{_libdir}/libefl_wl.so.%{major}*
+
+#----------------------------------------------------------------------------
+
+%package -n %{devefl_wl}
+Summary:        EFL Wayland headers and development libraries
+License:        BSD
+Group:          Development/Other
+Requires:       %{libefl_wl} = %{EVRD}
+Provides:       efl_wl-devel = %{EVRD}
+
+%description -n %{devefl_wl}
+EFL Wayland headers and development libraries.
+
+%files -n %{devefl_wl}
+%{_bindir}/efl_wl_test
+%{_bindir}/efl_wl_test_stack
+%{_libdir}/pkgconfig/efl-wl.pc
+%{_libdir}/pkgconfig/efl-cxx.pc
+%{_libdir}/libefl_wl.so
+%{_datadir}/eolian/include/efl-1/
+%{_includedir}/%{name}-wl-1/Efl_Wl.h
+
+#----------------------------------------------------------------------------
 %package -n %{libelua}
 Summary:	Support Library for lua scripts
 License:        BSD
@@ -1583,7 +1635,7 @@ This package is part of the Enlightenment DR19 desktop shell.
 %{_iconsdir}/Enlightenment-X/index.theme
 %{_iconsdir}/Enlightenment-X/README
 %{_iconsdir}/Enlightenment-X/*/*/*.png
-%{_iconsdir}/elementary.png
+%{_iconsdir}/hicolor/128x128/apps/elementary.png
 
 
 
@@ -1598,9 +1650,9 @@ Requires:	%{libelementary} = %{EVRD}
 Libraries for elementary
 
 %files -n %{libelementary}
-%doc AUTHORS COPYING README
+#%%doc AUTHORS COPYING README
 %{_libdir}/libelementary.so.%{major}*
-%{_libdir}/elementary/modules/clock_input_ctxpopup/v-1.19/module.so
+%{_libdir}/elementary/modules/clock_input_ctxpopup/v-%{shortver}/module.so
 %{_libdir}/elementary/modules/web/none/*/module.so
 
 #----------------------------------------------------------------------------
@@ -1615,7 +1667,7 @@ Provides:       %{develementary} = %{EVRD}
 elementary development headers and libraries.
 
 %files -n %{develementary}
-%doc AUTHORS COPYING README
+#%%doc AUTHORS COPYING README
 %{_bindir}/elementary_test
 %{_libdir}/cmake/Elementary/
 %{_libdir}/elementary/modules/test_entry/v*
@@ -1634,47 +1686,50 @@ elementary development headers and libraries.
 %setup -q
 %apply_patches
 
+./autogen.sh
+
 %build
 
 %configure \
-	BUILD_CC=%{__cc} TARGET_CC=%{__cc} \
-	--enable-fontconfig \
-	--enable-image-loader-bmp \
-	--enable-image-loader-eet \
-	--enable-image-loader-generic \
-	--enable-image-loader-gif \
-	--enable-image-loader-ico \
-	--enable-image-loader-jpeg \
-	--enable-image-loader-pmaps \
-	--enable-image-loader-png \
-	--enable-image-loader-psd \
-	--enable-image-loader-tga \
-	--enable-image-loader-tiff \
-	--enable-image-loader-wbmp \
-	--enable-image-loader-webp \
-	--enable-image-loader-xpm \
+        BUILD_CC=%{__cc} TARGET_CC=%{__cc} \
+        --enable-fontconfig \
+        --enable-image-loader-bmp \
+        --enable-image-loader-eet \
+        --enable-image-loader-generic \
+        --enable-image-loader-gif \
+        --enable-image-loader-ico \
+        --enable-image-loader-jpeg \
+        --enable-image-loader-pmaps \
+        --enable-image-loader-png \
+        --enable-image-loader-psd \
+        --enable-image-loader-tga \
+        --enable-image-loader-tiff \
+        --enable-image-loader-wbmp \
+        --enable-image-loader-webp \
+        --enable-image-loader-xpm \
 %if %{with sdl}
-	--enable-sdl \
+        --enable-sdl \
 %endif
 %if %{with opengles}
-	--with-opengl=es \
-	--enable-egl \
+        --with-opengl=es \
+        --enable-egl \
 %endif
-       	--enable-wayland \
-       	--enable-egl \
-	--enable-systemd \
-	--enable-v4l2 \
-	--enable-xine \
-	--enable-harfbuzz \
-	--with-eject \
-	--with-mount \
-	--with-umount \
-	--disable-static \
+        --enable-wayland \
+        --enable-egl \
+        --enable-systemd \
+        --enable-v4l2 \
+        --enable-xine \
+        --enable-harfbuzz \
+        --with-eject \
+        --with-mount \
+        --with-umount \
+        --disable-static \
 
-%make
+%make_build 
 
 %install
-%makeinstall_std
+
+%make_install
 
 %find_lang %{name}
 
