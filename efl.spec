@@ -151,7 +151,7 @@ BuildRequires:	pkgconfig(libxine)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
 BuildRequires:  pkgconfig(openssl)
-BuildRequires:  lib64lz4-devel
+BuildRequires:  pkgconfig(liblz4)
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
 %endif
