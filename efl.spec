@@ -1135,7 +1135,7 @@ Eo headers and development libraries.
 %{_libdir}/libeo_dbg.so.%{major}*
 %{_libdir}/libeo_dbg.so
 %{_datadir}/eo/gdb/__pycache__/*.pyc
-%{_datadir}/gdb/auto-load/usr/lib64/__pycache__/*.pyc
+%{_datadir}/gdb/auto-load/usr/%{_libdir}/__pycache__/*.pyc
 #----------------------------------------------------------------------------
 
 %package -n eolian
