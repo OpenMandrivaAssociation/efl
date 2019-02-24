@@ -1128,7 +1128,7 @@ Eo headers and development libraries.
 %{_libdir}/pkgconfig/eo-cxx.pc
 %{_includedir}/eo-1/
 %{_includedir}/eo-cxx-1/
-#%%{_datadir}/gdb/auto-load/%%{_lib}/libeo.so.*-gdb.py
+%{_datadir}/gdb/auto-load/%{_libdir}/libeo.so.*-gdb.py
 %{_datadir}/eo/gdb/eo_gdb.py
 %{_datadir}/eolian/include/eo-1/
 %{_libdir}/libeo.so
