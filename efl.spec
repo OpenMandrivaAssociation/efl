@@ -120,6 +120,7 @@ Patch0:		fix_edje_cc_compile_failure.patch
 #Patch01:	fix-poppler-cpp-pic-level-failure.patch
 #Patch02:	fix-inline-assembler.patch
 #Patch03:        cmake-extra-else-fix.patch
+BuildRequires: meson
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
@@ -1681,46 +1682,28 @@ elementary development headers and libraries.
 
 %build
 
-%configure \
-        BUILD_CC=%{__cc} TARGET_CC=%{__cc} \
-        --enable-fontconfig \
-        --enable-image-loader-bmp \
-        --enable-image-loader-eet \
-        --enable-image-loader-generic \
-        --enable-image-loader-gif \
-        --enable-image-loader-ico \
-        --enable-image-loader-jpeg \
-        --enable-image-loader-pmaps \
-        --enable-image-loader-png \
-        --enable-image-loader-psd \
-        --enable-image-loader-tga \
-        --enable-image-loader-tiff \
-        --enable-image-loader-wbmp \
-        --enable-image-loader-webp \
-        --enable-image-loader-xpm \
-%if %{with sdl}
-        --enable-sdl \
-%endif
-%if %{with opengles}
-        --with-opengl=es \
-        --enable-egl \
-%endif
-        --enable-wayland \
-        --enable-egl \
-        --enable-systemd \
-        --enable-v4l2 \
-        --enable-xine \
-        --enable-harfbuzz \
-        --with-eject \
-        --with-mount \
-        --with-umount \
-        --disable-static \
+%meson \
+       -Dxinput22=true \
+       -Dsystemd=true \
+       -Devas-loaders-disabler=json \
+       -Dharfbuzz=true \
+       -Dsdl=true \
+       -Decore-imf-loaders-disabler= \
+       -Dfb=true \
+       -Dwl=true \
+       -Ddrm=true \
+       -Dopengl=full \
+       -Dinstall-eo-files=true \
+       -Dbindings=luajit,cxx \
+       -Dlua-interpreter=luajit \
+       -Dbindings=cxx \
+       -Dlua-interpreter=lua
 
-%make_build 
+%meson_build
 
 %install
 
-%make_install
+%meson_install
 
 %find_lang %{name}
 
