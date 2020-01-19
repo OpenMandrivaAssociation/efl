@@ -1677,9 +1677,6 @@ elementary development headers and libraries.
 %prep
 %setup -q
 %autopatch -p1
-
-./autogen.sh
-
 %build
 
 %meson \
