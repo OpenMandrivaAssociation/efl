@@ -104,11 +104,11 @@
 %define libelput %mklibname elput %{major}
 %define develput %mklibname elput -d
 
-%define shortver 1.21
+%define shortver 1.23
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.21.1
+Version:	1.23.3
 Release:	1
 Epoch:		3
 License:	BSD
