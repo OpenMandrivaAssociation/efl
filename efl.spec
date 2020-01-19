@@ -154,6 +154,7 @@ BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(liblz4)
+BuildRequires: pkgconfig(scim)
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
 %endif
