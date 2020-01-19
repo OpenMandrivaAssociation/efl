@@ -3,7 +3,7 @@
 %bcond_with sdl
 %else
 %bcond_without opengles
-%bcond_with sdl
+%bcond_without sdl
 %endif
 
 %bcond_without wayland
@@ -127,6 +127,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	libraw-devel
+BuildRequires: psiconv-devel
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
