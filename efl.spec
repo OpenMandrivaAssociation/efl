@@ -119,7 +119,7 @@ Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
 #Patch01:	fix-poppler-cpp-pic-level-failure.patch
 #Patch02:	fix-inline-assembler.patch
-Patch03:        cmake-extra-else-fix.patch
+#Patch03:        cmake-extra-else-fix.patch
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
