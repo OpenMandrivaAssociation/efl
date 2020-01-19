@@ -131,6 +131,7 @@ BuildRequires: psiconv-devel
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
+BuildRequires: pkgconfig(check)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(fribidi)
 BuildRequires:	pkgconfig(gl)
