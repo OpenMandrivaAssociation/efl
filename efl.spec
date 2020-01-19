@@ -196,8 +196,7 @@ BuildRequires:	wayland-tools
 BuildRequires:	pkgconfig(xkbcommon)
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(glesv2)
-BuildRequires:	glesv3-devel
-
+BuildRequires:	pkgconfig(libglvnd)
 %endif
 
 %description
@@ -1247,15 +1246,6 @@ images, alpha-blend objects much and more.
 %{_libdir}/ethumb/
 %{_libdir}/ethumb_client/
 %{_userunitdir}/ethumb.service
-
-%post -n ethumb
-%systemd_post ethumb.service
-
-%preun -n ethumb
-%systemd_preun ethumb.service
-
-%postun -n ethumb
-%systemd_postun
 
 #----------------------------------------------------------------------------
 
