@@ -261,6 +261,8 @@ Enlightenment event/X abstraction layer library.
 
 %files -n %{libecore}
 %{_libdir}/libecore.so.%{major}*
+%{_libdir}/libecore_drm2.so.%{major}*
+%{_libdir}/libecore_fb.so.%{major}*
 
 #----------------------------------------------------------------------------
 
@@ -548,6 +550,8 @@ Ecore headers and development libraries.
 %{_libdir}/libecore_wayland.so
 %endif
 %{_libdir}/libecore_wl2.so
+%{_libdir}/libecore_drm2.so
+%{_libdir}/libecore_fb.so
 #%%{_libdir}/ecore_wl2/engines/dmabuf/v-%%{shortver}/*.debug
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
@@ -562,6 +566,10 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-input-evas-1/
 %{_includedir}/ecore-ipc-1/
 %{_includedir}/ecore-wl2-1/
+%{_includedir}/ecore-drm2-1/Ecore_Drm2.h
+%{_includedir}/ecore-fb-1/Ecore_Fb.h
+%{_includedir}/ecore-drm2.pc
+%{_includedir}/ecore-fb.pc
 %if %{with sdl}
 %{_includedir}/ecore-sdl-1/
 %endif
@@ -978,8 +986,9 @@ Eldbus headers and development libraries.
 %files -n %{develdbus}
 %{_libdir}/cmake/Eldbus/
 %{_libdir}/pkgconfig/eldbus.pc
+%{_libdir}/pkgconfig/eldbus-cxx.pc
 %{_libdir}/libeldbus.so
-#{_includedir}/eldbus_cxx-1/
+%{_includedir}/eldbus-cxx-1/*
 %{_includedir}/eldbus-1/
 
 #----------------------------------------------------------------------------
@@ -1050,7 +1059,7 @@ programmer to quickly piece together a multi-media system with minimal work.
 %{_datadir}/emotion/
 %{_libdir}/emotion/
 %{_libdir}/edje/modules/emotion/
-
+%{_bindir}/emotion_test*
 #----------------------------------------------------------------------------
 
 %package -n %{libemotion}
@@ -1144,6 +1153,8 @@ Eo headers and development libraries.
 %{_libdir}/libeo_dbg.so
 %{_datadir}/eo/gdb/__pycache__/*.pyc
 #{_datadir}/gdb/auto-load/usr/%{_lib}/__pycache__/*.pyc
+%{_datadir}/gdb/auto-load/usr/lib/__pycache__/libeo.so*
+%{_datadir}/gdb/auto-load/usr/lib/libeo.so*
 #----------------------------------------------------------------------------
 
 %package -n eolian
@@ -1195,6 +1206,7 @@ Eolian headers and development libraries.
 %{_includedir}/eolian-1/
 %{_includedir}/eolian-cxx-1/
 %{_datadir}/eolian/include/eio-1/efl_io_manager.eo
+%{_datadir}/eolian/include/eio-1/efl_io_model.eo
 
 #----------------------------------------------------------------------------
 
@@ -1305,6 +1317,7 @@ Ethumb headers and development libraries.
 %{_libdir}/cmake/EthumbClient/
 %{_libdir}/pkgconfig/ethumb.pc
 %{_libdir}/pkgconfig/ethumb_client.pc
+%{_libdir}/pkgconfig/ethumb-client.pc
 %{_libdir}/libethumb.so
 %{_libdir}/libethumb_client.so
 %{_includedir}/ethumb-1/
@@ -1335,6 +1348,7 @@ images, alpha-blend objects much and more.
 #{_libdir}/evas/utils/evas_generic_pdf_loader.*
 #{_libdir}/evas/modules/image_savers/*/*/*.so
 %{_libdir}/evas/utils/evas_image_loader.*
+%{_libdir}/evas/utils/evas_generic_pdf_loader*
 #{_libdir}/evas/cserve2/bin/*/evas_cserve2
 #{_libdir}/evas/cserve2/bin/*/evas_cserve2_slave
 
@@ -1617,10 +1631,12 @@ This package is part of the Enlightenment DR19 desktop shell.
 %{_bindir}/elementary_codegen
 %{_bindir}/elementary_config
 %{_bindir}/elementary_quicklaunch
+%{_bindir}/elementary_perf
 %{_bindir}/elm_prefs_cc
 %{_libdir}/elementary/modules/access_output/v*
 %{_libdir}/elementary/modules/prefs/v*
 %{_datadir}/applications/elementary_config.desktop
+%{_datadir}/applications/elementary_perf.desktop
 %{_datadir}/elementary/config/*
 %{_datadir}/elementary/edje_externals/*
 %{_datadir}/elementary/images/*
@@ -1634,7 +1650,6 @@ This package is part of the Enlightenment DR19 desktop shell.
 %{_iconsdir}/Enlightenment-X/README
 %{_iconsdir}/Enlightenment-X/*/*/*.png
 %{_iconsdir}/hicolor/128x128/apps/elementary.png
-
 
 
 #----------------------------------------------------------------------------
