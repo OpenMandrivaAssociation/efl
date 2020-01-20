@@ -1371,12 +1371,10 @@ Evas headers and development libraries.
 %{_libdir}/cmake/EvasCxx/
 %{_libdir}/pkgconfig/evas.pc
 %{_libdir}/pkgconfig/evas-cxx.pc
-%if %{with sdl}
-%{_libdir}/pkgconfig/evas-opengl-sdl.pc
-%endif
-%{_libdir}/pkgconfig/evas-opengl-x11.pc
-%{_libdir}/pkgconfig/evas-software-buffer.pc
-%{_libdir}/pkgconfig/evas-software-x11.pc
+#{_libdir}/pkgconfig/evas-opengl-sdl.pc
+#{_libdir}/pkgconfig/evas-opengl-x11.pc
+#{_libdir}/pkgconfig/evas-software-buffer.pc
+#{_libdir}/pkgconfig/evas-software-x11.pc
 %{_libdir}/libevas.so
 %{_includedir}/evas-1/
 %{_includedir}/evas-cxx-1/
