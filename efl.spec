@@ -507,7 +507,7 @@ Ecore headers and development libraries.
 %{_libdir}/cmake/EcoreCxx/
 %{_libdir}/pkgconfig/ecore.pc
 %{_libdir}/pkgconfig/ecore-audio.pc
-%{_libdir}/pkgconfig/ecore-audio-cxx.pc
+#{_libdir}/pkgconfig/ecore-audio-cxx.pc
 %{_libdir}/pkgconfig/ecore-avahi.pc
 %{_libdir}/pkgconfig/ecore-cxx.pc
 %{_libdir}/pkgconfig/ecore-con.pc
@@ -523,11 +523,11 @@ Ecore headers and development libraries.
 %endif
 %{_libdir}/pkgconfig/ecore-x.pc
 #%%if %%{without wayland}
-%{_libdir}/pkgconfig/evas-wayland-shm.pc
+#{_libdir}/pkgconfig/evas-wayland-shm.pc
 #%%endif
-%if %{with opengles}
-%{_libdir}/pkgconfig/evas-wayland-egl.pc
-%endif
+#%if %{with opengles}
+#{_libdir}/pkgconfig/evas-wayland-egl.pc
+#endif
 %{_libdir}/pkgconfig/ecore-wl2.pc
 %{_libdir}/libecore.so
 %{_libdir}/libecore_audio.so
