@@ -929,7 +929,7 @@ Eio headers and development libraries.
 %{_libdir}/pkgconfig/eio-cxx.pc
 %{_libdir}/cmake/Eio/
 %{_libdir}/libeio.so
-%{_datadir}/eolian/include/eio-1/eio_model.eo
+#{_datadir}/eolian/include/eio-1/eio_model.eo
 %{_datadir}/eolian/include/eio-1/eio_sentry.eo
 %{_includedir}/eio-1/
 %{_includedir}/eio-cxx-1/
