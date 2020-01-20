@@ -856,7 +856,7 @@ eina-bench-cmp:
 - generate reports comparing two or more outputs of expedite
 
 %files -n eina
-%{_bindir}/eina-bench-cmp
+#{_bindir}/eina-bench-cmp
 %{_bindir}/eina_btlog
 %{_bindir}/eina_modinfo
 
