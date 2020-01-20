@@ -979,7 +979,7 @@ Eldbus headers and development libraries.
 %{_libdir}/cmake/Eldbus/
 %{_libdir}/pkgconfig/eldbus.pc
 %{_libdir}/libeldbus.so
-%{_includedir}/eldbus_cxx-1/
+#{_includedir}/eldbus_cxx-1/
 %{_includedir}/eldbus-1/
 
 #----------------------------------------------------------------------------
