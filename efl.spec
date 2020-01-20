@@ -128,6 +128,7 @@ BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	libraw-devel
 BuildRequires: psiconv-devel
+BuildRequires: egl-devel
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
