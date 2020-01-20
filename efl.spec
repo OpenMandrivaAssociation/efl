@@ -1700,9 +1700,8 @@ elementary development headers and libraries.
        -Dopengl=full \
        -Dinstall-eo-files=true \
        -Dbindings=luajit,cxx \
-       -Dlua-interpreter=luajit \
-       -Dbindings=cxx \
-       -Dlua-interpreter=lua
+       -Dlua-interpreter=luajit
+#       -Dbindings=cxx
 
 %meson_build
 
