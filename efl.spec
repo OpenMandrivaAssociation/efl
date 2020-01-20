@@ -423,7 +423,7 @@ Conflicts:	%{_lib}ecore1 < 3:1.8.0
 Enlightenment event/X abstraction layer library.
 
 %files -n %{libecore_sdl}
-%{_libdir}/libecore_sdl.so.%{major}*
+%{_libdir}/libecore_sdl.so*
 %endif
 #----------------------------------------------------------------------------
 
