@@ -1325,18 +1325,18 @@ that can draw anti-aliased text, smooth super and sub-sampled scaled
 images, alpha-blend objects much and more.
 
 %files -n evas
-%{_bindir}/evas_cserve2_client
-%{_bindir}/evas_cserve2_debug
-%{_bindir}/evas_cserve2_shm_debug
-%{_bindir}/evas_cserve2_usage
+#{_bindir}/evas_cserve2_client
+#{_bindir}/evas_cserve2_debug
+#{_bindir}/evas_cserve2_shm_debug
+#{_bindir}/evas_cserve2_usage
 %{_datadir}/evas/
 %{_libdir}/evas/modules/engines/*/*/*.so
-%{_libdir}/evas/modules/image_loaders/*/*/*.so
-%{_libdir}/evas/utils/evas_generic_pdf_loader.*
+#{_libdir}/evas/modules/image_loaders/*/*/*.so
+#{_libdir}/evas/utils/evas_generic_pdf_loader.*
 %{_libdir}/evas/modules/image_savers/*/*/*.so
 %{_libdir}/evas/utils/evas_image_loader.*
-%{_libdir}/evas/cserve2/bin/*/evas_cserve2
-%{_libdir}/evas/cserve2/bin/*/evas_cserve2_slave
+#{_libdir}/evas/cserve2/bin/*/evas_cserve2
+#{_libdir}/evas/cserve2/bin/*/evas_cserve2_slave
 
 #----------------------------------------------------------------------------
 
