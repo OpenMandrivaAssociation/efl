@@ -1650,7 +1650,7 @@ Libraries for elementary
 %files -n %{libelementary}
 #%%doc AUTHORS COPYING README
 %{_libdir}/libelementary.so.%{major}*
-%{_libdir}/elementary/modules/clock_input_ctxpopup/v-%{shortver}/module.so
+#{_libdir}/elementary/modules/clock_input_ctxpopup/v-%{shortver}/module.so
 %{_libdir}/elementary/modules/web/none/*/module.so
 
 #----------------------------------------------------------------------------
