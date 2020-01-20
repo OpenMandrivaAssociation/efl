@@ -568,8 +568,8 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-wl2-1/
 %{_includedir}/ecore-drm2-1/Ecore_Drm2.h
 %{_includedir}/ecore-fb-1/Ecore_Fb.h
-#{_includedir}/ecore-drm2.pc
-#{_includedir}/ecore-fb.pc
+%{_libdir}/pkgconfig/ecore-drm2.pc
+%{_libdir}/pkgconfig/ecore-fb.pc
 %if %{with sdl}
 %{_includedir}/ecore-sdl-1/
 %endif
