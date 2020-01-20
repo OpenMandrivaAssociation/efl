@@ -3,7 +3,7 @@
 %bcond_with sdl
 %else
 %bcond_without opengles
-%bcond_with sdl
+%bcond_without sdl
 %endif
 
 %bcond_without wayland
@@ -104,11 +104,11 @@
 %define libelput %mklibname elput %{major}
 %define develput %mklibname elput -d
 
-%define shortver 1.21
+%define shortver 1.23
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.21.1
+Version:	1.23.3
 Release:	1
 Epoch:		3
 License:	BSD
@@ -117,18 +117,23 @@ Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.gz
 Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
-Patch01:	fix-poppler-cpp-pic-level-failure.patch
-Patch02:	fix-inline-assembler.patch
-Patch03:        cmake-extra-else-fix.patch
+#Patch01:	fix-poppler-cpp-pic-level-failure.patch
+#Patch02:	fix-inline-assembler.patch
+#Patch03:        cmake-extra-else-fix.patch
+Patch04:  efl-1.23.1-luajitfix.patch
+BuildRequires: meson
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	libraw-devel
+BuildRequires: psiconv-devel
+BuildRequires: egl-devel
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
+BuildRequires: pkgconfig(check)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(fribidi)
 BuildRequires:	pkgconfig(gl)
@@ -152,6 +157,7 @@ BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(liblz4)
+BuildRequires: pkgconfig(scim)
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
 %endif
@@ -176,6 +182,9 @@ BuildRequires:	pkgconfig(xtst)
 BuildRequires:  pkgconfig(xkbcommon-x11)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(luajit)
+BuildRequires: pkgconfig(lua)
+BuildRequires: pkgconfig(rlottie)
+BuildRequires: pkgconfig(gbm)
 BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(poppler-cpp)
 BuildRequires:	pkgconfig(libspectre)
@@ -252,6 +261,8 @@ Enlightenment event/X abstraction layer library.
 
 %files -n %{libecore}
 %{_libdir}/libecore.so.%{major}*
+%{_libdir}/libecore_drm2.so.%{major}*
+%{_libdir}/libecore_fb.so.%{major}*
 
 #----------------------------------------------------------------------------
 
@@ -414,7 +425,7 @@ Conflicts:	%{_lib}ecore1 < 3:1.8.0
 Enlightenment event/X abstraction layer library.
 
 %files -n %{libecore_sdl}
-%{_libdir}/libecore_sdl.so.%{major}*
+%{_libdir}/libecore_sdl.so*
 %endif
 #----------------------------------------------------------------------------
 
@@ -498,7 +509,7 @@ Ecore headers and development libraries.
 %{_libdir}/cmake/EcoreCxx/
 %{_libdir}/pkgconfig/ecore.pc
 %{_libdir}/pkgconfig/ecore-audio.pc
-%{_libdir}/pkgconfig/ecore-audio-cxx.pc
+#{_libdir}/pkgconfig/ecore-audio-cxx.pc
 %{_libdir}/pkgconfig/ecore-avahi.pc
 %{_libdir}/pkgconfig/ecore-cxx.pc
 %{_libdir}/pkgconfig/ecore-con.pc
@@ -514,11 +525,11 @@ Ecore headers and development libraries.
 %endif
 %{_libdir}/pkgconfig/ecore-x.pc
 #%%if %%{without wayland}
-%{_libdir}/pkgconfig/evas-wayland-shm.pc
+#{_libdir}/pkgconfig/evas-wayland-shm.pc
 #%%endif
-%if %{with opengles}
-%{_libdir}/pkgconfig/evas-wayland-egl.pc
-%endif
+#%if %{with opengles}
+#{_libdir}/pkgconfig/evas-wayland-egl.pc
+#endif
 %{_libdir}/pkgconfig/ecore-wl2.pc
 %{_libdir}/libecore.so
 %{_libdir}/libecore_audio.so
@@ -539,6 +550,8 @@ Ecore headers and development libraries.
 %{_libdir}/libecore_wayland.so
 %endif
 %{_libdir}/libecore_wl2.so
+%{_libdir}/libecore_drm2.so
+%{_libdir}/libecore_fb.so
 #%%{_libdir}/ecore_wl2/engines/dmabuf/v-%%{shortver}/*.debug
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
@@ -553,6 +566,10 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-input-evas-1/
 %{_includedir}/ecore-ipc-1/
 %{_includedir}/ecore-wl2-1/
+%{_includedir}/ecore-drm2-1/Ecore_Drm2.h
+%{_includedir}/ecore-fb-1/Ecore_Fb.h
+%{_libdir}/pkgconfig/ecore-drm2.pc
+%{_libdir}/pkgconfig/ecore-fb.pc
 %if %{with sdl}
 %{_includedir}/ecore-sdl-1/
 %endif
@@ -847,7 +864,7 @@ eina-bench-cmp:
 - generate reports comparing two or more outputs of expedite
 
 %files -n eina
-%{_bindir}/eina-bench-cmp
+#{_bindir}/eina-bench-cmp
 %{_bindir}/eina_btlog
 %{_bindir}/eina_modinfo
 
@@ -920,7 +937,7 @@ Eio headers and development libraries.
 %{_libdir}/pkgconfig/eio-cxx.pc
 %{_libdir}/cmake/Eio/
 %{_libdir}/libeio.so
-%{_datadir}/eolian/include/eio-1/eio_model.eo
+#{_datadir}/eolian/include/eio-1/eio_model.eo
 %{_datadir}/eolian/include/eio-1/eio_sentry.eo
 %{_includedir}/eio-1/
 %{_includedir}/eio-cxx-1/
@@ -969,8 +986,9 @@ Eldbus headers and development libraries.
 %files -n %{develdbus}
 %{_libdir}/cmake/Eldbus/
 %{_libdir}/pkgconfig/eldbus.pc
+%{_libdir}/pkgconfig/eldbus-cxx.pc
 %{_libdir}/libeldbus.so
-%{_includedir}/eldbus_cxx-1/
+%{_includedir}/eldbus-cxx-1/*
 %{_includedir}/eldbus-1/
 
 #----------------------------------------------------------------------------
@@ -1041,7 +1059,7 @@ programmer to quickly piece together a multi-media system with minimal work.
 %{_datadir}/emotion/
 %{_libdir}/emotion/
 %{_libdir}/edje/modules/emotion/
-
+%{_bindir}/emotion_test*
 #----------------------------------------------------------------------------
 
 %package -n %{libemotion}
@@ -1127,14 +1145,16 @@ Eo headers and development libraries.
 %{_libdir}/pkgconfig/eo-cxx.pc
 %{_includedir}/eo-1/
 %{_includedir}/eo-cxx-1/
-%{_datadir}/gdb/auto-load/%{_libdir}/libeo.so.*-gdb.py
+#{_datadir}/gdb/auto-load/%{_libdir}/libeo.so.*-gdb.py
 %{_datadir}/eo/gdb/eo_gdb.py
 %{_datadir}/eolian/include/eo-1/
 %{_libdir}/libeo.so
 %{_libdir}/libeo_dbg.so.%{major}*
 %{_libdir}/libeo_dbg.so
 %{_datadir}/eo/gdb/__pycache__/*.pyc
-%{_datadir}/gdb/auto-load/usr/%{_lib}/__pycache__/*.pyc
+#{_datadir}/gdb/auto-load/usr/%{_lib}/__pycache__/*.pyc
+%{_datadir}/gdb/auto-load/usr/lib/__pycache__/libeo.so*
+%{_datadir}/gdb/auto-load/usr/lib/libeo.so*
 #----------------------------------------------------------------------------
 
 %package -n eolian
@@ -1186,6 +1206,7 @@ Eolian headers and development libraries.
 %{_includedir}/eolian-1/
 %{_includedir}/eolian-cxx-1/
 %{_datadir}/eolian/include/eio-1/efl_io_manager.eo
+%{_datadir}/eolian/include/eio-1/efl_io_model.eo
 
 #----------------------------------------------------------------------------
 
@@ -1296,6 +1317,7 @@ Ethumb headers and development libraries.
 %{_libdir}/cmake/EthumbClient/
 %{_libdir}/pkgconfig/ethumb.pc
 %{_libdir}/pkgconfig/ethumb_client.pc
+%{_libdir}/pkgconfig/ethumb-client.pc
 %{_libdir}/libethumb.so
 %{_libdir}/libethumb_client.so
 %{_includedir}/ethumb-1/
@@ -1316,18 +1338,19 @@ that can draw anti-aliased text, smooth super and sub-sampled scaled
 images, alpha-blend objects much and more.
 
 %files -n evas
-%{_bindir}/evas_cserve2_client
-%{_bindir}/evas_cserve2_debug
-%{_bindir}/evas_cserve2_shm_debug
-%{_bindir}/evas_cserve2_usage
+#{_bindir}/evas_cserve2_client
+#{_bindir}/evas_cserve2_debug
+#{_bindir}/evas_cserve2_shm_debug
+#{_bindir}/evas_cserve2_usage
 %{_datadir}/evas/
 %{_libdir}/evas/modules/engines/*/*/*.so
-%{_libdir}/evas/modules/image_loaders/*/*/*.so
-%{_libdir}/evas/utils/evas_generic_pdf_loader.*
-%{_libdir}/evas/modules/image_savers/*/*/*.so
+#{_libdir}/evas/modules/image_loaders/*/*/*.so
+#{_libdir}/evas/utils/evas_generic_pdf_loader.*
+#{_libdir}/evas/modules/image_savers/*/*/*.so
 %{_libdir}/evas/utils/evas_image_loader.*
-%{_libdir}/evas/cserve2/bin/*/evas_cserve2
-%{_libdir}/evas/cserve2/bin/*/evas_cserve2_slave
+%{_libdir}/evas/utils/evas_generic_pdf_loader*
+#{_libdir}/evas/cserve2/bin/*/evas_cserve2
+#{_libdir}/evas/cserve2/bin/*/evas_cserve2_slave
 
 #----------------------------------------------------------------------------
 
@@ -1362,12 +1385,10 @@ Evas headers and development libraries.
 %{_libdir}/cmake/EvasCxx/
 %{_libdir}/pkgconfig/evas.pc
 %{_libdir}/pkgconfig/evas-cxx.pc
-%if %{with sdl}
-%{_libdir}/pkgconfig/evas-opengl-sdl.pc
-%endif
-%{_libdir}/pkgconfig/evas-opengl-x11.pc
-%{_libdir}/pkgconfig/evas-software-buffer.pc
-%{_libdir}/pkgconfig/evas-software-x11.pc
+#{_libdir}/pkgconfig/evas-opengl-sdl.pc
+#{_libdir}/pkgconfig/evas-opengl-x11.pc
+#{_libdir}/pkgconfig/evas-software-buffer.pc
+#{_libdir}/pkgconfig/evas-software-x11.pc
 %{_libdir}/libevas.so
 %{_includedir}/evas-1/
 %{_includedir}/evas-cxx-1/
@@ -1610,10 +1631,12 @@ This package is part of the Enlightenment DR19 desktop shell.
 %{_bindir}/elementary_codegen
 %{_bindir}/elementary_config
 %{_bindir}/elementary_quicklaunch
+%{_bindir}/elementary_perf
 %{_bindir}/elm_prefs_cc
 %{_libdir}/elementary/modules/access_output/v*
 %{_libdir}/elementary/modules/prefs/v*
 %{_datadir}/applications/elementary_config.desktop
+%{_datadir}/applications/elementary_perf.desktop
 %{_datadir}/elementary/config/*
 %{_datadir}/elementary/edje_externals/*
 %{_datadir}/elementary/images/*
@@ -1629,7 +1652,6 @@ This package is part of the Enlightenment DR19 desktop shell.
 %{_iconsdir}/hicolor/128x128/apps/elementary.png
 
 
-
 #----------------------------------------------------------------------------
 
 %package -n	%{libelementary}
@@ -1643,7 +1665,7 @@ Libraries for elementary
 %files -n %{libelementary}
 #%%doc AUTHORS COPYING README
 %{_libdir}/libelementary.so.%{major}*
-%{_libdir}/elementary/modules/clock_input_ctxpopup/v-%{shortver}/module.so
+#{_libdir}/elementary/modules/clock_input_ctxpopup/v-%{shortver}/module.so
 %{_libdir}/elementary/modules/web/none/*/module.so
 
 #----------------------------------------------------------------------------
@@ -1676,51 +1698,29 @@ elementary development headers and libraries.
 %prep
 %setup -q
 %autopatch -p1
-
-./autogen.sh
-
 %build
 
-%configure \
-        BUILD_CC=%{__cc} TARGET_CC=%{__cc} \
-        --enable-fontconfig \
-        --enable-image-loader-bmp \
-        --enable-image-loader-eet \
-        --enable-image-loader-generic \
-        --enable-image-loader-gif \
-        --enable-image-loader-ico \
-        --enable-image-loader-jpeg \
-        --enable-image-loader-pmaps \
-        --enable-image-loader-png \
-        --enable-image-loader-psd \
-        --enable-image-loader-tga \
-        --enable-image-loader-tiff \
-        --enable-image-loader-wbmp \
-        --enable-image-loader-webp \
-        --enable-image-loader-xpm \
-%if %{with sdl}
-        --enable-sdl \
-%endif
-%if %{with opengles}
-        --with-opengl=es \
-        --enable-egl \
-%endif
-        --enable-wayland \
-        --enable-egl \
-        --enable-systemd \
-        --enable-v4l2 \
-        --enable-xine \
-        --enable-harfbuzz \
-        --with-eject \
-        --with-mount \
-        --with-umount \
-        --disable-static \
+%meson \
+       -Dxinput22=true \
+       -Dsystemd=true \
+       -Devas-loaders-disabler=json \
+       -Dharfbuzz=true \
+       -Dsdl=true \
+       -Decore-imf-loaders-disabler= \
+       -Dfb=true \
+       -Dwl=true \
+       -Ddrm=true \
+       -Dopengl=full \
+       -Dinstall-eo-files=true \
+       -Dbindings=luajit,cxx \
+       -Dlua-interpreter=luajit
+#       -Dbindings=cxx
 
-%make_build 
+%meson_build
 
 %install
 
-%make_install
+%meson_install
 
 %find_lang %{name}
 
