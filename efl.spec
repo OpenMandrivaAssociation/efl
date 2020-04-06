@@ -1,6 +1,6 @@
 %ifarch %{armx}
 %bcond_without opengles
-%bcond_with sdl
+%bcond_without sdl
 %else
 %bcond_without opengles
 %bcond_without sdl
