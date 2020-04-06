@@ -1151,10 +1151,10 @@ Eo headers and development libraries.
 %{_libdir}/libeo.so
 %{_libdir}/libeo_dbg.so.%{major}*
 %{_libdir}/libeo_dbg.so
+%{_datadir}/gdb/auto-load/usr/lib/libeo.so*
 %ifnarch %{arm} %{armx}
 %{_datadir}/eo/gdb/__pycache__/*.pyc
 %{_datadir}/gdb/auto-load/usr/lib/__pycache__/libeo.so*
-%{_datadir}/gdb/auto-load/usr/lib/libeo.so*
 %endif
 #----------------------------------------------------------------------------
 
