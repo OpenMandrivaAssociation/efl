@@ -1240,9 +1240,9 @@ Provides:	ephysics-devel = %{EVRD}
 Ephysics headers and development libraries.
 
 %files -n %{devephysics}
-%{_libdir}/pkgconfig/ephysics.pc
-%{_libdir}/libephysics.so
-%{_includedir}/ephysics-1/
+#%{_libdir}/pkgconfig/ephysics.pc
+#%{_libdir}/libephysics.so
+#%{_includedir}/ephysics-1/
 
 #----------------------------------------------------------------------------
 
