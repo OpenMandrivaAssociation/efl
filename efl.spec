@@ -1709,7 +1709,6 @@ elementary development headers and libraries.
        -Dharfbuzz=true \
        -Dsdl=true \
        -Decore-imf-loaders-disabler='ibus,scim'
-       -Dwl=true \
        -Ddrm=true \
        -Dopengl=full \
        -Dinstall-eo-files=true \
