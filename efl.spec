@@ -1460,13 +1460,13 @@ Provides:       efl_wl-devel = %{EVRD}
 EFL Wayland headers and development libraries.
 
 %files -n %{devefl_wl}
-%{_bindir}/efl_wl_test
-%{_bindir}/efl_wl_test_stack
-%{_libdir}/pkgconfig/efl-wl.pc
+#%{_bindir}/efl_wl_test
+#%{_bindir}/efl_wl_test_stack
+#%{_libdir}/pkgconfig/efl-wl.pc
 %{_libdir}/pkgconfig/efl-cxx.pc
-%{_libdir}/libefl_wl.so
+#%{_libdir}/libefl_wl.so
 %{_datadir}/eolian/include/efl-1/
-%{_includedir}/%{name}-wl-1/Efl_Wl.h
+#%{_includedir}/%{name}-wl-1/Efl_Wl.h
 
 #----------------------------------------------------------------------------
 %package -n %{libelua}
