@@ -534,7 +534,7 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore-wl2.pc
 %{_libdir}/libecore.so
 %{_libdir}/libecore_audio.so
-%{_libdir}/libecore_avahi.so
+#%{_libdir}/libecore_avahi.so
 %{_libdir}/libecore_con.so
 %{_libdir}/libecore_evas.so
 %{_libdir}/libecore_file.so
