@@ -1708,7 +1708,7 @@ elementary development headers and libraries.
        -Devas-loaders-disabler=json \
        -Dharfbuzz=true \
        -Dsdl=true \
-       -Decore-imf-loaders-disabler= \
+       -Decore-imf-loaders-disabler='ibus,scim'
        -Dfb=true \
        -Dwl=true \
        -Ddrm=true \
