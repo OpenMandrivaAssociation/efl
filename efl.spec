@@ -108,7 +108,7 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.23.3
+Version:	1.24.1
 Release:	1
 Epoch:		3
 License:	BSD
