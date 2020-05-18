@@ -511,7 +511,7 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore.pc
 %{_libdir}/pkgconfig/ecore-audio.pc
 #{_libdir}/pkgconfig/ecore-audio-cxx.pc
-%{_libdir}/pkgconfig/ecore-avahi.pc
+#%{_libdir}/pkgconfig/ecore-avahi.pc
 %{_libdir}/pkgconfig/ecore-cxx.pc
 %{_libdir}/pkgconfig/ecore-con.pc
 %{_libdir}/pkgconfig/ecore-evas.pc
