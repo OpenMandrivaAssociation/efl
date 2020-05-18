@@ -221,8 +221,8 @@ and more.
 %{_bindir}/efl_debug
 %{_bindir}/efl_debugd
 
-%{_bindir}/efl_wl_test
-%{_bindir}/efl_wl_test_stack
+#%{_bindir}/efl_wl_test
+#%{_bindir}/efl_wl_test_stack
 
 #----------------------------------------------------------------------------
 
