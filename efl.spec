@@ -291,7 +291,7 @@ Requires:	%{libecore} = %{EVRD}
 Enlightenment avahi abstraction layer library.
 
 %files -n %{libecore_avahi}
-%{_libdir}/libecore_avahi.so.%{major}*
+#%{_libdir}/libecore_avahi.so.%{major}*
 
 #----------------------------------------------------------------------------
 
