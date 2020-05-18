@@ -1445,7 +1445,7 @@ Requires:       %{name} = %{EVRD}
 Enlightenment canvas library for wayland.
 
 %files -n %{libefl_wl}
-%{_libdir}/libefl_wl.so.%{major}*
+#%{_libdir}/libefl_wl.so.%{major}*
 
 #----------------------------------------------------------------------------
 
