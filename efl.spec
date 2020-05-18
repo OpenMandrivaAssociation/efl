@@ -556,7 +556,7 @@ Ecore headers and development libraries.
 #%%{_libdir}/ecore_wl2/engines/dmabuf/v-%%{shortver}/*.debug
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
-%{_includedir}/ecore-avahi-1/
+#%{_includedir}/ecore-avahi-1/
 %{_includedir}/ecore-cxx-1/
 %{_includedir}/ecore-con-1/
 %{_includedir}/ecore-evas-1/
@@ -579,7 +579,7 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-wayland-1/
 %endif
 %{_datadir}/eolian/include/ecore-1/
-%{_datadir}/eolian/include/eldbus-1/
+#{_datadir}/eolian/include/eldbus-1/
 %{_datadir}/ecore_x/checkme
 
 #----------------------------------------------------------------------------
