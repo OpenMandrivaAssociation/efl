@@ -1523,9 +1523,9 @@ Requires:	%{develocation} = %{EVRD}
 elocation headers and development libraries.
 
 %files -n %{develocation}
-%{_libdir}/libelocation.so
-%{_libdir}/pkgconfig/elocation.pc
-%{_includedir}/elocation-1/
+#%{_libdir}/libelocation.so
+#%{_libdir}/pkgconfig/elocation.pc
+#%{_includedir}/elocation-1/
 
 #----------------------------------------------------------------------------
 %package -n %{libemile}
