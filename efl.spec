@@ -1709,6 +1709,11 @@ elementary development headers and libraries.
        -Dharfbuzz=true \
        -Dsdl=true \
        -Decore-imf-loaders-disabler='ibus,scim'
+       -Dfb=true \
+       -Dwl=true \
+       -Ddrm=true \
+       -Dopengl=full \
+       -Dinstall-eo-files=true \
        -Dbindings=luajit,cxx \
        -Dlua-interpreter=luajit
 #       -Dbindings=cxx
