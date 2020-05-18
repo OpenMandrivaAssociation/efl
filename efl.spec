@@ -1584,7 +1584,7 @@ ector headers and development libraries.
 %files -n %{devector}
 %{_libdir}/libector.so
 %{_libdir}/pkgconfig/ector.pc
-%{_datadir}/eolian/include/ector-1/
+#%{_datadir}/eolian/include/ector-1/
 
 #----------------------------------------------------------------------------
 %package -n 	%{libelput}
