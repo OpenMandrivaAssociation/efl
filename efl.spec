@@ -1509,7 +1509,7 @@ Requires:       %{name} = %{EVRD}
 Enlightenment geolocation libraries
 
 %files -n %{libelocation}
-%{_libdir}/libelocation.so.%{major}*
+#%{_libdir}/libelocation.so.%{major}*
 
 #----------------------------------------------------------------------------
 %package -n %{develocation}
