@@ -1224,7 +1224,7 @@ an easy to use way. It's a kind of wrapper, a glue, between these libraries.
 It's not intended to be a physics library (we already have many out there).
 
 %files -n %{libephysics}
-%{_libdir}/libephysics.so.%{major}*
+#%{_libdir}/libephysics.so.%{major}*
 
 #----------------------------------------------------------------------------
 
