@@ -1754,6 +1754,9 @@ elementary development headers and libraries.
 %files -n %{devefl_canvas_wl}
 %{_libdir}/libefl_canvas_wl.so
 %{_libdir}/pkgconfig/efl-canvas-wl.pc
+%{_includedir}/efl-canvas-wl-1/Efl_Canvas_Wl.h
+%{_includedir}/efl-canvas-wl-1/efl_canvas_wl.eo.h
+%{_includedir}/efl-canvas-wl-1/efl_canvas_wl_surface.eo.h
 
 #----------------------------------------------------------------------------
 
