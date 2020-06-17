@@ -1832,11 +1832,13 @@ elementary development headers and libraries.
        -Dfb=true \
        -Dwl=true \
        -Ddrm=true \
-       -Dopengl=full \
+       -Dopengl=es-egl \
        -Dinstall-eo-files=true \
        -Dbindings=luajit,cxx \
        -Dlua-interpreter=luajit
 #       -Dbindings=cxx
+#If we want wayland support then OpenGL full need to be disabled, we need to use gles.
+#       -Dopengl=full
 
 %meson_build
 
