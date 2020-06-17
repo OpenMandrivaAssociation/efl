@@ -104,11 +104,17 @@
 %define libelput %mklibname elput %{major}
 %define develput %mklibname elput -d
 
-%define shortver 1.23
+%define libefl_canvas_wl %mklibname efl_canvas_wl %{major}
+%define devefl_canvas_wl %mklibname efl_canvas_wl -d
+
+%define libexactness %mklibname exactness %{major}
+%define devexactness %mklibname exactness -d
+
+%define shortver 1.24
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.23.3
+Version:	1.24.3
 Release:	1
 Epoch:		3
 License:	BSD
@@ -155,8 +161,9 @@ BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libxine)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
-BuildRequires:  pkgconfig(openssl)
-BuildRequires:  pkgconfig(liblz4)
+BuildRequires: pkgconfig(openssl)
+BuildRequires: pkgconfig(libopenjp2)
+BuildRequires: pkgconfig(liblz4)
 BuildRequires: pkgconfig(scim)
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
@@ -220,8 +227,8 @@ and more.
 %{_bindir}/efl_debug
 %{_bindir}/efl_debugd
 
-%{_bindir}/efl_wl_test
-%{_bindir}/efl_wl_test_stack
+#%{_bindir}/efl_wl_test
+#%{_bindir}/efl_wl_test_stack
 
 #----------------------------------------------------------------------------
 
@@ -290,7 +297,7 @@ Requires:	%{libecore} = %{EVRD}
 Enlightenment avahi abstraction layer library.
 
 %files -n %{libecore_avahi}
-%{_libdir}/libecore_avahi.so.%{major}*
+#%{_libdir}/libecore_avahi.so.%{major}*
 
 #----------------------------------------------------------------------------
 
@@ -499,6 +506,7 @@ Requires:	%{libecore_wayland} = %{EVRD}
 %endif
 Requires:	%{libecore_x} = %{EVRD}
 Requires:	%{devefl} = %{EVRD}
+
 Provides:	ecore-devel = %{EVRD}
 
 %description -n %{devecore}
@@ -510,7 +518,7 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore.pc
 %{_libdir}/pkgconfig/ecore-audio.pc
 #{_libdir}/pkgconfig/ecore-audio-cxx.pc
-%{_libdir}/pkgconfig/ecore-avahi.pc
+#%{_libdir}/pkgconfig/ecore-avahi.pc
 %{_libdir}/pkgconfig/ecore-cxx.pc
 %{_libdir}/pkgconfig/ecore-con.pc
 %{_libdir}/pkgconfig/ecore-evas.pc
@@ -533,7 +541,7 @@ Ecore headers and development libraries.
 %{_libdir}/pkgconfig/ecore-wl2.pc
 %{_libdir}/libecore.so
 %{_libdir}/libecore_audio.so
-%{_libdir}/libecore_avahi.so
+#%{_libdir}/libecore_avahi.so
 %{_libdir}/libecore_con.so
 %{_libdir}/libecore_evas.so
 %{_libdir}/libecore_file.so
@@ -555,7 +563,7 @@ Ecore headers and development libraries.
 #%%{_libdir}/ecore_wl2/engines/dmabuf/v-%%{shortver}/*.debug
 %{_includedir}/ecore-1/
 %{_includedir}/ecore-audio-1/
-%{_includedir}/ecore-avahi-1/
+#%{_includedir}/ecore-avahi-1/
 %{_includedir}/ecore-cxx-1/
 %{_includedir}/ecore-con-1/
 %{_includedir}/ecore-evas-1/
@@ -578,7 +586,7 @@ Ecore headers and development libraries.
 %{_includedir}/ecore-wayland-1/
 %endif
 %{_datadir}/eolian/include/ecore-1/
-%{_datadir}/eolian/include/eldbus-1/
+#{_datadir}/eolian/include/eldbus-1/
 %{_datadir}/ecore_x/checkme
 
 #----------------------------------------------------------------------------
@@ -1153,8 +1161,8 @@ Eo headers and development libraries.
 %{_libdir}/libeo_dbg.so
 %{_datadir}/gdb/auto-load/usr/lib/libeo.so*
 %ifnarch %{arm} %{armx}
-%{_datadir}/eo/gdb/__pycache__/*.pyc
-%{_datadir}/gdb/auto-load/usr/lib/__pycache__/libeo.so*
+#%{_datadir}/eo/gdb/__pycache__/*.pyc
+#%{_datadir}/gdb/auto-load/usr/lib/__pycache__/libeo.so*
 %endif
 #----------------------------------------------------------------------------
 
@@ -1211,37 +1219,37 @@ Eolian headers and development libraries.
 
 #----------------------------------------------------------------------------
 
-%package -n %{libephysics}
-Summary:	Enlightenment physics library
-License:	BSD
-Group:		System/Libraries
-Requires:	%{name} = %{EVRD}
-
-%description -n %{libephysics}
-Ephysics is a library that manages Ecore, Evas and Bullet Physics into
-an easy to use way. It's a kind of wrapper, a glue, between these libraries.
-It's not intended to be a physics library (we already have many out there).
-
-%files -n %{libephysics}
-%{_libdir}/libephysics.so.%{major}*
+#package -n %{libephysics}
+#Summary:	Enlightenment physics library
+#License:	BSD
+#Group:		System/Libraries
+#Requires:	%{name} = %{EVRD}
+#
+#description -n %{libephysics}
+#Ephysics is a library that manages Ecore, Evas and Bullet Physics into
+#an easy to use way. It's a kind of wrapper, a glue, between these libraries.
+#It's not intended to be a physics library (we already have many out there).
+#
+#files -n %{libephysics}
+#{_libdir}/libephysics.so.%{major}*
 
 #----------------------------------------------------------------------------
 
-%package -n %{devephysics}
-Summary:	Ephysics headers and development libraries
-License:	BSD
-Group:		Development/Other
-Requires:	%{libephysics} = %{EVRD}
-Requires:	%{devefl} = %{EVRD}
-Provides:	ephysics-devel = %{EVRD}
-
-%description -n %{devephysics}
-Ephysics headers and development libraries.
-
-%files -n %{devephysics}
-%{_libdir}/pkgconfig/ephysics.pc
-%{_libdir}/libephysics.so
-%{_includedir}/ephysics-1/
+#package -n %{devephysics}
+#Summary:	Ephysics headers and development libraries
+#License:	BSD
+#Group:		Development/Other
+#Requires:	%{libephysics} = %{EVRD}
+#Requires:	%{devefl} = %{EVRD}
+#Provides:	ephysics-devel = %{EVRD}
+#
+#description -n %{devephysics}
+#Ephysics headers and development libraries.
+#
+#files -n %{devephysics}
+#{_libdir}/pkgconfig/ephysics.pc
+#{_libdir}/libephysics.so
+#{_includedir}/ephysics-1/
 
 #----------------------------------------------------------------------------
 
@@ -1347,6 +1355,8 @@ images, alpha-blend objects much and more.
 %{_libdir}/evas/modules/engines/*/*/*.so
 #{_libdir}/evas/modules/image_loaders/*/*/*.so
 #{_libdir}/evas/utils/evas_generic_pdf_loader.*
+%{_libdir}/evas/modules/image_loaders/*/v-%{shortver}/module.so
+%{_libdir}/evas/modules/image_savers/*/v-%{shortver}/module.so
 #{_libdir}/evas/modules/image_savers/*/*/*.so
 %{_libdir}/evas/utils/evas_image_loader.*
 %{_libdir}/evas/utils/evas_generic_pdf_loader*
@@ -1444,7 +1454,7 @@ Requires:       %{name} = %{EVRD}
 Enlightenment canvas library for wayland.
 
 %files -n %{libefl_wl}
-%{_libdir}/libefl_wl.so.%{major}*
+#%{_libdir}/libefl_wl.so.%{major}*
 
 #----------------------------------------------------------------------------
 
@@ -1459,13 +1469,13 @@ Provides:       efl_wl-devel = %{EVRD}
 EFL Wayland headers and development libraries.
 
 %files -n %{devefl_wl}
-%{_bindir}/efl_wl_test
-%{_bindir}/efl_wl_test_stack
-%{_libdir}/pkgconfig/efl-wl.pc
+#%{_bindir}/efl_wl_test
+#%{_bindir}/efl_wl_test_stack
+#%{_libdir}/pkgconfig/efl-wl.pc
 %{_libdir}/pkgconfig/efl-cxx.pc
-%{_libdir}/libefl_wl.so
+#%{_libdir}/libefl_wl.so
 %{_datadir}/eolian/include/efl-1/
-%{_includedir}/%{name}-wl-1/Efl_Wl.h
+#%{_includedir}/%{name}-wl-1/Efl_Wl.h
 
 #----------------------------------------------------------------------------
 %package -n %{libelua}
@@ -1498,33 +1508,33 @@ elua headers and development libraries.
 %{_libdir}/cmake/Elua/
 
 #----------------------------------------------------------------------------
-%package -n %{libelocation}
-Summary:        Enlightenment geolocation libraries
-License:        BSD
-Group:          System/Libraries
-Requires:       %{name} = %{EVRD}
-
-%description -n %{libelocation}
-Enlightenment geolocation libraries
-
-%files -n %{libelocation}
-%{_libdir}/libelocation.so.%{major}*
+#package -n %{libelocation}
+#Summary:        Enlightenment geolocation libraries
+#License:        BSD
+#Group:          System/Libraries
+#Requires:       %{name} = %{EVRD}
+#
+#description -n %{libelocation}
+#Enlightenment geolocation libraries
+#
+#files -n %{libelocation}
+#{_libdir}/libelocation.so.%{major}*
 
 #----------------------------------------------------------------------------
-%package -n %{develocation}
-Summary:	Elocation headers and development libraries
-License:	BSD
-Group:		Development/Other
-Requires:	%{libelocation} = %{EVRD}
-Requires:	%{develocation} = %{EVRD}
-
-%description -n %{develocation}
-elocation headers and development libraries.
-
-%files -n %{develocation}
-%{_libdir}/libelocation.so
-%{_libdir}/pkgconfig/elocation.pc
-%{_includedir}/elocation-1/
+#package -n %{develocation}
+#Summary:	Elocation headers and development libraries
+#License:	BSD
+#Group:		Development/Other
+#Requires:	%{libelocation} = %{EVRD}
+#Requires:	%{develocation} = %{EVRD}
+#
+#description -n %{develocation}
+#elocation headers and development libraries.
+#
+#files -n %{develocation}
+#{_libdir}/libelocation.so
+#{_libdir}/pkgconfig/elocation.pc
+#{_includedir}/elocation-1/
 
 #----------------------------------------------------------------------------
 %package -n %{libemile}
@@ -1583,7 +1593,7 @@ ector headers and development libraries.
 %files -n %{devector}
 %{_libdir}/libector.so
 %{_libdir}/pkgconfig/ector.pc
-%{_datadir}/eolian/include/ector-1/
+#%{_datadir}/eolian/include/ector-1/
 
 #----------------------------------------------------------------------------
 %package -n 	%{libelput}
@@ -1693,6 +1703,117 @@ elementary development headers and libraries.
 %{_includedir}/elementary-1/*
 %{_includedir}/elementary-cxx-1/*.hh
 
+#----------------------------------------------------------------------------
+
+%package -n efl_canvas_wl
+Summary:	Enlightenment canvas library extra files
+License:	BSD
+Group:		Graphical desktop/Enlightenment
+
+%description -n efl_canvas_wl
+Enlightenment canvas library extra files.
+
+Evas is a clean display canvas API for several target display systems
+that can draw anti-aliased text, smooth super and sub-sampled scaled
+images, alpha-blend objects much and more.
+
+%files -n efl_canvas_wl
+%{_bindir}/efl_canvas_wl_test*
+%{_libdir}/libefl_canvas_wl.so.%{version}
+%{_datadir}/eolian/include/efl-canvas-wl-1/efl_canvas_wl.eo
+%{_datadir}/eolian/include/efl-canvas-wl-1/efl_canvas_wl_surface.eo
+
+#----------------------------------------------------------------------------
+%package -n 	%{libefl_canvas_wl}
+Summary:        Enlightenment efl_canvas_wl libraries
+License:        BSD
+Group:          System/Libraries
+Requires:       %{libefl_canvas_wl} = %{EVRD}
+Requires:	      efl_canvas_wl = %{EVRD}
+
+%description -n %{libefl_canvas_wl}
+Enlightenment libraries
+
+%files -n %{libefl_canvas_wl}
+%{_libdir}/libefl_canvas_wl.so.%{major}*
+
+#----------------------------------------------------------------------------
+
+%package -n	%{devefl_canvas_wl}
+Summary:        Headers and development libraries from efl_canvas_wl
+Group:          Development/Other
+Requires:       %{libefl_canvas_wl} = %{EVRD}
+Requires:	      %{devefl} = %{EVRD}
+Requires:       efl_canvas_wl = %{EVRD}
+#Provides:       %{devefl_canvas_wl} = %{EVRD}
+Provides:	      efl_canvas_wl-devel = %{EVRD}
+
+%description -n %{devefl_canvas_wl}
+elementary development headers and libraries.
+
+%files -n %{devefl_canvas_wl}
+%{_libdir}/libefl_canvas_wl.so
+%{_libdir}/pkgconfig/efl-canvas-wl.pc
+%{_includedir}/efl-canvas-wl-1/Efl_Canvas_Wl.h
+%{_includedir}/efl-canvas-wl-1/efl_canvas_wl.eo.h
+%{_includedir}/efl-canvas-wl-1/efl_canvas_wl_surface.eo.h
+
+#----------------------------------------------------------------------------
+
+%package -n exactness
+Summary:	Enlightenment canvas library extra files
+License:	BSD
+Group:		Graphical desktop/Enlightenment
+
+%description -n exactness
+Enlightenment canvas library extra files.
+
+Evas is a clean display canvas API for several target display systems
+that can draw anti-aliased text, smooth super and sub-sampled scaled
+images, alpha-blend objects much and more.
+
+%files -n exactness
+%{_bindir}/exactness*
+%{_libdir}/libexactness_play.so.%{version}
+%{_libdir}/libexactness_record.so.%{version}
+%{_datadir}/exactness/player_entry.edj
+
+#----------------------------------------------------------------------------
+%package -n 	%{libexactness}
+Summary:        Enlightenment exactness libraries
+License:        BSD
+Group:          System/Libraries
+Requires:       %{libexactness} = %{EVRD}
+Requires:	      %{name} = %{EVRD}
+Requires:	      exactness = %{EVRD}
+
+%description -n %{libexactness}
+Enlightenment libraries
+
+%files -n %{libexactness}
+%{_libdir}/libexactness_play.so.%{major}*
+%{_libdir}/libexactness_record.so.%{major}*
+
+#----------------------------------------------------------------------------
+
+%package -n	%{devexactness}
+Summary:        Headers and development libraries from exactness
+Group:          Development/Other
+Requires:       %{libexactness} = %{EVRD}
+Requires:	      %{devefl} = %{EVRD}
+Requires:       exactness = %{EVRD}
+#Provides:       %{devexactness} = %{EVRD}
+Provides:	      exactness-devel = %{EVRD}
+
+%description -n %{devexactness}
+elementary development headers and libraries.
+
+%files -n %{devexactness}
+%{_libdir}/libexactness_play.so
+%{_libdir}/libexactness_record.so
+
+
+
 
 #----------------------------------------------------------------------------
 
@@ -1707,15 +1828,17 @@ elementary development headers and libraries.
        -Devas-loaders-disabler=json \
        -Dharfbuzz=true \
        -Dsdl=true \
-       -Decore-imf-loaders-disabler= \
+       -Decore-imf-loaders-disabler='ibus,scim' \
        -Dfb=true \
        -Dwl=true \
        -Ddrm=true \
-       -Dopengl=full \
+       -Dopengl=es-egl \
        -Dinstall-eo-files=true \
        -Dbindings=luajit,cxx \
        -Dlua-interpreter=luajit
 #       -Dbindings=cxx
+#If we want wayland support then OpenGL full need to be disabled, we need to use gles.
+#       -Dopengl=full
 
 %meson_build
 
