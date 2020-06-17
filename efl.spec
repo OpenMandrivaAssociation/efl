@@ -1799,7 +1799,7 @@ Group:          Development/Other
 Requires:       %{libexactness} = %{EVRD}
 Requires:	      %{devefl} = %{EVRD}
 Requires:       exactness = %{EVRD}
-Provides:       %{devexactness} = %{EVRD}
+#Provides:       %{devexactness} = %{EVRD}
 Provides:	      exactness-devel = %{EVRD}
 
 %description -n %{devexactness}
