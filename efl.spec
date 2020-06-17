@@ -105,10 +105,10 @@
 %define develput %mklibname elput -d
 
 %define libefl_canvas_wl %mklibname efl_canvas_wl %{major}
-%define libefl_canvas_wl %mklibname efl_canvas_wl -d
+%define devefl_canvas_wl %mklibname efl_canvas_wl -d
 
 %define libexactness %mklibname exactness %{major}
-%define libexactness %mklibname exactness -d
+%define devexactness %mklibname exactness -d
 
 %define shortver 1.24
 
