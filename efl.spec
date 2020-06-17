@@ -1745,7 +1745,7 @@ Group:          Development/Other
 Requires:       %{libefl_canvas_wl} = %{EVRD}
 Requires:	      %{devefl} = %{EVRD}
 Requires:       efl_canvas_wl = %{EVRD}
-Provides:       %{devefl_canvas_wl} = %{EVRD}
+#Provides:       %{devefl_canvas_wl} = %{EVRD}
 Provides:	      efl_canvas_wl-devel = %{EVRD}
 
 %description -n %{devefl_canvas_wl}
