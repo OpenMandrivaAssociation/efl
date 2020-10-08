@@ -1834,9 +1834,7 @@ elementary development headers and libraries.
        -Ddrm=true \
        -Dopengl=es-egl \
        -Dinstall-eo-files=true \
-       -Dbindings=luajit,cxx \
-       -Dlua-interpreter=luajit
-#       -Dbindings=cxx
+       -Dbindings=cxx \
 #If we want wayland support then OpenGL full need to be disabled, we need to use gles.
 #       -Dopengl=full
 
