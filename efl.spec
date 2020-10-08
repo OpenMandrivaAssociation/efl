@@ -136,6 +136,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	libraw-devel
 BuildRequires: psiconv-devel
 BuildRequires: egl-devel
+BuildRequires: pkgconfig(libavif)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
@@ -1834,7 +1835,7 @@ elementary development headers and libraries.
        -Ddrm=true \
        -Dopengl=es-egl \
        -Dinstall-eo-files=true \
-       -Dbindings=cxx \
+       -Dbindings=cxx
 #If we want wayland support then OpenGL full need to be disabled, we need to use gles.
 #       -Dopengl=full
 
