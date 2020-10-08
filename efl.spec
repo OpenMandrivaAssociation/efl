@@ -1489,7 +1489,7 @@ Requires:       %{name} = %{EVRD}
 Lua support library
 
 %files -n %{libelua}
-%{_libdir}/libelua.so.%{major}*
+#{_libdir}/libelua.so.%{major}*
 
 #----------------------------------------------------------------------------
 %package -n %{develua}
