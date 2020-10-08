@@ -110,12 +110,12 @@
 %define libexactness %mklibname exactness %{major}
 %define devexactness %mklibname exactness -d
 
-%define shortver 1.24
+%define shortver 1.25
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.24.3
-Release:	3
+Version:	1.25.1
+Release:	1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
