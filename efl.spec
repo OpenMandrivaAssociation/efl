@@ -126,7 +126,7 @@ Patch0:		fix_edje_cc_compile_failure.patch
 #Patch01:	fix-poppler-cpp-pic-level-failure.patch
 #Patch02:	fix-inline-assembler.patch
 #Patch03:        cmake-extra-else-fix.patch
-Patch04:  efl-1.23.1-luajitfix.patch
+#Patch04:  efl-1.23.1-luajitfix.patch
 BuildRequires: meson
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
@@ -188,7 +188,7 @@ BuildRequires:	pkgconfig(xscrnsaver)
 BuildRequires:	pkgconfig(xtst)
 BuildRequires:  pkgconfig(xkbcommon-x11)
 BuildRequires:	pkgconfig(zlib)
-BuildRequires:	pkgconfig(luajit)
+#BuildRequires:	pkgconfig(luajit)
 BuildRequires: pkgconfig(lua)
 BuildRequires: pkgconfig(rlottie)
 BuildRequires: pkgconfig(gbm)
