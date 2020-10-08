@@ -1443,6 +1443,7 @@ EFL headers and development libraries.
 %{_includedir}/%{name}-cxx-1/
 %{_includedir}/%{name}-1/
 %{_libdir}/cmake/Efl/
+%{_libdir}/cmake/Elua/
 
 #----------------------------------------------------------------------------
 %package -n %{libefl_wl}
@@ -1477,36 +1478,6 @@ EFL Wayland headers and development libraries.
 #%{_libdir}/libefl_wl.so
 %{_datadir}/eolian/include/efl-1/
 #%{_includedir}/%{name}-wl-1/Efl_Wl.h
-
-#----------------------------------------------------------------------------
-%package -n %{libelua}
-Summary:	Support Library for lua scripts
-License:        BSD
-Group:		System/Libraries
-Requires:       %{name} = %{EVRD}
-
-%description -n %{libelua}
-Lua support library
-
-%files -n %{libelua}
-#{_libdir}/libelua.so.%{major}*
-
-#----------------------------------------------------------------------------
-%package -n %{develua}
-Summary:	elua headers and development libraries
-License:	BSD
-Group:		Development/Other
-Requires:	%{libelua} = %{EVRD}
-Requires:	%{develua} = %{EVRD}
-
-%description -n %{develua}
-elua headers and development libraries.
-
-%files -n %{develua}
-%{_libdir}/libelua.so
-%{_libdir}/pkgconfig/elua.pc
-%{_includedir}/elua-1/
-%{_libdir}/cmake/Elua/
 
 #----------------------------------------------------------------------------
 #package -n %{libelocation}
@@ -1812,8 +1783,6 @@ elementary development headers and libraries.
 %files -n %{devexactness}
 %{_libdir}/libexactness_play.so
 %{_libdir}/libexactness_record.so
-
-
 
 
 #----------------------------------------------------------------------------
