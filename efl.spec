@@ -245,7 +245,7 @@ optimized, and convenient.
 
 %files -n ecore
 %{_bindir}/ecore_evas_convert
-%{_bindir}/elua
+#{_bindir}/elua
 %{_datadir}/ecore/
 %{_datadir}/ecore_imf/
 %{_datadir}/elua/
