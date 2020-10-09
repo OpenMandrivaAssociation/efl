@@ -110,12 +110,12 @@
 %define libexactness %mklibname exactness %{major}
 %define devexactness %mklibname exactness -d
 
-%define shortver 1.24
+%define shortver 1.25
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.24.3
-Release:	3
+Version:	1.25.1
+Release:	1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -126,7 +126,7 @@ Patch0:		fix_edje_cc_compile_failure.patch
 #Patch01:	fix-poppler-cpp-pic-level-failure.patch
 #Patch02:	fix-inline-assembler.patch
 #Patch03:        cmake-extra-else-fix.patch
-Patch04:  efl-1.23.1-luajitfix.patch
+#Patch04:  efl-1.23.1-luajitfix.patch
 BuildRequires: meson
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
@@ -136,6 +136,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	libraw-devel
 BuildRequires: psiconv-devel
 BuildRequires: egl-devel
+BuildRequires: pkgconfig(libavif)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
@@ -244,7 +245,7 @@ optimized, and convenient.
 
 %files -n ecore
 %{_bindir}/ecore_evas_convert
-%{_bindir}/elua
+#{_bindir}/elua
 %{_datadir}/ecore/
 %{_datadir}/ecore_imf/
 %{_datadir}/elua/
@@ -1442,6 +1443,7 @@ EFL headers and development libraries.
 %{_includedir}/%{name}-cxx-1/
 %{_includedir}/%{name}-1/
 %{_libdir}/cmake/Efl/
+%{_libdir}/cmake/Elua/
 
 #----------------------------------------------------------------------------
 %package -n %{libefl_wl}
@@ -1476,36 +1478,6 @@ EFL Wayland headers and development libraries.
 #%{_libdir}/libefl_wl.so
 %{_datadir}/eolian/include/efl-1/
 #%{_includedir}/%{name}-wl-1/Efl_Wl.h
-
-#----------------------------------------------------------------------------
-%package -n %{libelua}
-Summary:	Support Library for lua scripts
-License:        BSD
-Group:		System/Libraries
-Requires:       %{name} = %{EVRD}
-
-%description -n %{libelua}
-Lua support library
-
-%files -n %{libelua}
-%{_libdir}/libelua.so.%{major}*
-
-#----------------------------------------------------------------------------
-%package -n %{develua}
-Summary:	elua headers and development libraries
-License:	BSD
-Group:		Development/Other
-Requires:	%{libelua} = %{EVRD}
-Requires:	%{develua} = %{EVRD}
-
-%description -n %{develua}
-elua headers and development libraries.
-
-%files -n %{develua}
-%{_libdir}/libelua.so
-%{_libdir}/pkgconfig/elua.pc
-%{_includedir}/elua-1/
-%{_libdir}/cmake/Elua/
 
 #----------------------------------------------------------------------------
 #package -n %{libelocation}
@@ -1813,8 +1785,6 @@ elementary development headers and libraries.
 %{_libdir}/libexactness_record.so
 
 
-
-
 #----------------------------------------------------------------------------
 
 %prep
@@ -1834,9 +1804,7 @@ elementary development headers and libraries.
        -Ddrm=true \
        -Dopengl=es-egl \
        -Dinstall-eo-files=true \
-       -Dbindings=luajit,cxx \
-       -Dlua-interpreter=luajit
-#       -Dbindings=cxx
+       -Dbindings=cxx
 #If we want wayland support then OpenGL full need to be disabled, we need to use gles.
 #       -Dopengl=full
 
