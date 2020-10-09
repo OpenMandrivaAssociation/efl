@@ -1801,6 +1801,9 @@ elementary development headers and libraries.
        -Dharfbuzz=true \
        -Dsdl=true \
        -Decore-imf-loaders-disabler='ibus,scim' \
+%ifarch %aarch64
+       -Devas-loaders-disabler='avif' \
+%endif
        -Dfb=true \
        -Dwl=true \
        -Ddrm=true \
