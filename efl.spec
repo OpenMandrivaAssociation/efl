@@ -136,7 +136,9 @@ BuildRequires:	jpeg-devel
 BuildRequires:	libraw-devel
 BuildRequires: psiconv-devel
 BuildRequires: egl-devel
+%ifnarch %aarch64
 BuildRequires: pkgconfig(libavif)
+%endif
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
