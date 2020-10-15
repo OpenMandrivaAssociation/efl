@@ -115,7 +115,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.25.1
-Release:	1
+Release:	2
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -136,9 +136,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	libraw-devel
 BuildRequires: psiconv-devel
 BuildRequires: egl-devel
-%ifnarch %aarch64
 BuildRequires: pkgconfig(libavif)
-%endif
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
@@ -1801,9 +1799,6 @@ elementary development headers and libraries.
        -Dharfbuzz=true \
        -Dsdl=true \
        -Decore-imf-loaders-disabler='ibus,scim' \
-%ifarch %aarch64
-       -Devas-loaders-disabler='avif' \
-%endif
        -Dfb=true \
        -Dwl=true \
        -Ddrm=true \
@@ -1820,4 +1815,3 @@ elementary development headers and libraries.
 %meson_install
 
 %find_lang %{name}
-
