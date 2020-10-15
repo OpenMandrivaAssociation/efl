@@ -115,7 +115,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.25.1
-Release:	2
+Release:	3
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -123,10 +123,7 @@ Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.gz
 Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
-#Patch01:	fix-poppler-cpp-pic-level-failure.patch
-#Patch02:	fix-inline-assembler.patch
-#Patch03:        cmake-extra-else-fix.patch
-#Patch04:  efl-1.23.1-luajitfix.patch
+
 BuildRequires: meson
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
@@ -1797,7 +1794,7 @@ elementary development headers and libraries.
        -Dsystemd=true \
        -Dharfbuzz=true \
        -Dsdl=true \
-       -Decore-imf-loaders-disabler='ibus,scim' \
+       -Decore-imf-loaders-disabler='ibus' \
        -Dfb=true \
        -Dwl=true \
        -Ddrm=true \
