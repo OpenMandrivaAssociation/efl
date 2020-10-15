@@ -136,7 +136,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	libraw-devel
 BuildRequires: psiconv-devel
 BuildRequires: egl-devel
-BuildRequires: pkgconfig(libavif)
+#BuildRequires: pkgconfig(libavif)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
@@ -1795,7 +1795,6 @@ elementary development headers and libraries.
 %meson \
        -Dxinput22=true \
        -Dsystemd=true \
-       -Devas-loaders-disabler=json \
        -Dharfbuzz=true \
        -Dsdl=true \
        -Decore-imf-loaders-disabler='ibus,scim' \
