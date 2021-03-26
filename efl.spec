@@ -115,7 +115,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.25.1
-Release:	2
+Release:	3
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -1802,6 +1802,9 @@ elementary development headers and libraries.
        -Dwl=true \
        -Ddrm=true \
        -Dopengl=es-egl \
+       --enable-egl \
+       --enable-wayland \
+       --enable-systemd \
        -Dinstall-eo-files=true \
        -Dbindings=cxx
 #If we want wayland support then OpenGL full need to be disabled, we need to use gles.
