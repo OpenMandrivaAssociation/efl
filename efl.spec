@@ -1,3 +1,5 @@
+%global optflags %{optflags} -O2
+
 %ifarch %{armx}
 %bcond_without opengles
 %bcond_without sdl
