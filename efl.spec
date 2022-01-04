@@ -18,102 +18,6 @@
 %define libname %mklibname %{name} %major
 %define devname %mklibname %{name} -d
 
-%define libecore %mklibname ecore %{major}
-%define libecore_audio %mklibname ecore_audio %{major}
-%define libecore_avahi %mklibname ecore_avahi %{major}
-%define libecore_con %mklibname ecore_con %{major}
-%define libecore_evas %mklibname ecore_evas %{major}
-%define libecore_file %mklibname ecore_file %{major}
-%define libecore_imf %mklibname ecore_imf %{major}
-%define libecore_imf_evas %mklibname ecore_imf_evas %{major}
-%define libecore_input %mklibname ecore_input %{major}
-%define libecore_input_evas %mklibname ecore_input_evas %{major}
-%define libecore_ipc %mklibname ecore_ipc %{major}
-%define libecore_sdl %mklibname ecore_sdl %{major}
-%define libecore_x %mklibname ecore_x %{major}
-%define libecore_wayland %mklibname ecore_wayland %{major}
-%define libecore_wl2 %mklibname ecore_wl2 %{major}
-%define devecore %mklibname ecore -d
-
-%define libedje %mklibname edje %{major}
-%define devedje %mklibname edje -d
-
-%define libeet %mklibname eet %{major}
-%define deveet %mklibname eet -d
-
-%define libeeze %mklibname eeze %{major}
-%define deveeze %mklibname eeze -d
-
-%define libefreet %mklibname efreet %{major}
-%define libefreet_mime %mklibname efreet_mime %{major}
-%define libefreet_trash %mklibname efreet_trash %{major}
-%define devefreet %mklibname efreet -d
-
-%define libeina %mklibname eina %{major}
-%define deveina %mklibname eina -d
-
-%define libeio %mklibname eio %{major}
-%define deveio %mklibname eio -d
-
-%define libeldbus %mklibname eldbus %{major}
-%define develdbus %mklibname eldbus -d
-
-%define libembryo %mklibname embryo %{major}
-%define devembryo %mklibname embryo -d
-
-%define libemotion %mklibname emotion %{major}
-%define devemotion %mklibname emotion -d
-
-%define libeo %mklibname eo %{major}
-%define deveo %mklibname eo -d
-#%%define deveo_dbg %%mklibname deveo_dbg -d
-
-%define libeolian %mklibname eolian %{major}
-%define deveolian %mklibname eolian -d
-
-%define libephysics %mklibname ephysics %{major}
-%define devephysics %mklibname ephysics -d
-
-%define libethumb %mklibname ethumb %{major}
-%define libethumb_client %mklibname ethumb_client %{major}
-%define devethumb %mklibname ethumb -d
-
-%define libevas %mklibname evas %{major}
-%define devevas %mklibname evas -d
-
-%define libefl %mklibname efl %{major}
-%define devefl %mklibname efl -d
-
-%define libefl_wl %mklibname efl_wl %{major}
-%define devefl_wl %mklibname efl_wl -d
-
-%define libemile %mklibname emile %{major}
-%define devemile %mklibname emile  -d
-
-%define libector %mklibname ector %{major}
-%define devector %mklibname ector -d
-
-%define libelua %mklibname elua %{major}
-%define develua %mklibname elua -d
-
-%define libelocation %mklibname location %{major}
-%define develocation %mklibname location -d
-
-%define libelementary %mklibname elementary %{major}
-%define develementary %mklibname elementary -d
-
-%define libel %mklibname el %{major}
-%define devel %mklibname el -d
-
-%define libelput %mklibname elput %{major}
-%define develput %mklibname elput -d
-
-%define libefl_canvas_wl %mklibname efl_canvas_wl %{major}
-%define devefl_canvas_wl %mklibname efl_canvas_wl -d
-
-%define libexactness %mklibname exactness %{major}
-%define devexactness %mklibname exactness -d
-
 %define shortver 1.25
 
 Summary:	Enlightenment Foundation Libraries
@@ -217,6 +121,80 @@ BuildRequires:	pkgconfig(libglvnd)
 %endif
 
 Requires:  %{libname} = %{EVRD}
+
+%define        obsversion       1.25.1
+%define        obsrelease       3
+
+Obsoletes: libecore                < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_audio          < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_avahi          < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_con            < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_evas           < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_file           < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_imf            < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_imf_evas       < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_input          < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_input_evas     < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_ipc            < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_sdl < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_x < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_wayland < %{obsversion}-%{obsrelease}
+Obsoletes: libecore_wl2 < %{obsversion}-%{obsrelease}
+Obsoletes: devecore < %{obsversion}-%{obsrelease}
+Obsoletes: libedje < %{obsversion}-%{obsrelease}
+Obsoletes: devedje < %{obsversion}-%{obsrelease}
+Obsoletes: libeet < %{obsversion}-%{obsrelease}
+Obsoletes: deveet < %{obsversion}-%{obsrelease}
+Obsoletes: libeeze < %{obsversion}-%{obsrelease}
+Obsoletes: deveeze < %{obsversion}-%{obsrelease}
+Obsoletes: libefreet < %{obsversion}-%{obsrelease}
+Obsoletes: libefreet_mime < %{obsversion}-%{obsrelease}
+Obsoletes: libefreet_trash < %{obsversion}-%{obsrelease}
+Obsoletes: devefreet < %{obsversion}-%{obsrelease}
+Obsoletes: libeina < %{obsversion}-%{obsrelease}
+Obsoletes: deveina < %{obsversion}-%{obsrelease}
+Obsoletes: libeio < %{obsversion}-%{obsrelease}
+Obsoletes: deveio < %{obsversion}-%{obsrelease}
+Obsoletes: libeldbus < %{obsversion}-%{obsrelease}
+Obsoletes: develdbus < %{obsversion}-%{obsrelease}
+Obsoletes: libembryo < %{obsversion}-%{obsrelease}
+Obsoletes: devembryo < %{obsversion}-%{obsrelease}
+Obsoletes: libemotion < %{obsversion}-%{obsrelease}
+Obsoletes: devemotion < %{obsversion}-%{obsrelease}
+Obsoletes: libeo < %{obsversion}-%{obsrelease}
+Obsoletes: deveo < %{obsversion}-%{obsrelease}
+Obsoletes: deveo_dbg < %{obsversion}-%{obsrelease}
+Obsoletes: libeolian < %{obsversion}-%{obsrelease}
+Obsoletes: deveolian < %{obsversion}-%{obsrelease}
+Obsoletes: libephysics < %{obsversion}-%{obsrelease}
+Obsoletes: devephysics < %{obsversion}-%{obsrelease}
+Obsoletes: libethumb < %{obsversion}-%{obsrelease}
+Obsoletes: libethumb_client < %{obsversion}-%{obsrelease}
+Obsoletes: devethumb < %{obsversion}-%{obsrelease}
+Obsoletes: libevas < %{obsversion}-%{obsrelease}
+Obsoletes: devevas < %{obsversion}-%{obsrelease}
+Obsoletes: libefl < %{obsversion}-%{obsrelease}
+Obsoletes: devefl < %{obsversion}-%{obsrelease}
+Obsoletes: libefl_wl < %{obsversion}-%{obsrelease}
+Obsoletes: devefl_wl < %{obsversion}-%{obsrelease}
+Obsoletes: libemile < %{obsversion}-%{obsrelease}
+Obsoletes: devemile < %{obsversion}-%{obsrelease}
+Obsoletes: libector < %{obsversion}-%{obsrelease}
+Obsoletes: devector < %{obsversion}-%{obsrelease}
+Obsoletes: libelua < %{obsversion}-%{obsrelease}
+Obsoletes: develua < %{obsversion}-%{obsrelease}
+Obsoletes: libelocation < %{obsversion}-%{obsrelease}
+Obsoletes: develocation < %{obsversion}-%{obsrelease}
+Obsoletes: libelementary < %{obsversion}-%{obsrelease}
+Obsoletes: develementary < %{obsversion}-%{obsrelease}
+Obsoletes: libel < %{obsversion}-%{obsrelease}
+Obsoletes: devel < %{obsversion}-%{obsrelease}
+Obsoletes: libelput < %{obsversion}-%{obsrelease}
+Obsoletes: develput < %{obsversion}-%{obsrelease}
+Obsoletes: libefl_canvas_wl < %{obsversion}-%{obsrelease}
+Obsoletes: devefl_canvas_wl < %{obsversion}-%{obsrelease}
+Obsoletes: libexactness < %{obsversion}-%{obsrelease}
+Obsoletes: devexactness < %{obsversion}-%{obsrelease}
 
 %description
 The Enlightenment Foundation Libraries are a collection of libraries
