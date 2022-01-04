@@ -127,20 +127,20 @@ Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.gz
 Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
-BuildRequires: meson
+BuildRequires:       meson
 BuildRequires:	doxygen
 BuildRequires:	gstreamer%{gstapi}-tools
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	libraw-devel
-BuildRequires: psiconv-devel
-BuildRequires: egl-devel
-#BuildRequires: pkgconfig(libavif)
+BuildRequires:       psiconv-devel
+BuildRequires:       egl-devel
+BuildRequires:       pkgconfig(libavif)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bullet)
 BuildRequires:	pkgconfig(cairo)
-BuildRequires: pkgconfig(check)
+BuildRequires:       pkgconfig(check)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(fribidi)
 BuildRequires:	pkgconfig(gl)
@@ -162,10 +162,10 @@ BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libxine)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(mount)
-BuildRequires: pkgconfig(openssl)
-BuildRequires: pkgconfig(libopenjp2)
-BuildRequires: pkgconfig(liblz4)
-BuildRequires: pkgconfig(scim)
+BuildRequires:       pkgconfig(openssl)
+BuildRequires:       pkgconfig(libopenjp2)
+BuildRequires:       pkgconfig(liblz4)
+BuildRequires:       pkgconfig(scim)
 %if %{with sdl}
 BuildRequires:	pkgconfig(sdl2)
 %endif
@@ -187,12 +187,12 @@ BuildRequires:	pkgconfig(xrender)
 BuildRequires:	pkgconfig(xpm)
 BuildRequires:	pkgconfig(xscrnsaver)
 BuildRequires:	pkgconfig(xtst)
-BuildRequires:  pkgconfig(xkbcommon-x11)
+BuildRequires:       pkgconfig(xkbcommon-x11)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(luajit)
-BuildRequires: pkgconfig(lua)
-BuildRequires: pkgconfig(rlottie)
-BuildRequires: pkgconfig(gbm)
+BuildRequires:       pkgconfig(lua)
+BuildRequires:       pkgconfig(rlottie)
+BuildRequires:       pkgconfig(gbm)
 BuildRequires:	pkgconfig(harfbuzz)
 BuildRequires:	pkgconfig(poppler-cpp)
 BuildRequires:	pkgconfig(libspectre)
@@ -200,8 +200,8 @@ BuildRequires:	pkgconfig(printproto)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(libinput)
 Buildrequires:	pkgconfig(libudev)
-BuildRequires:  pkgconfig(dbus-1)
-BuildRequires:  vlan-utils
+BuildRequires:       pkgconfig(dbus-1)
+BuildRequires:       vlan-utils
 %if %{with wayland}
 BuildRequires:	pkgconfig(wayland-server)
 BuildRequires:	pkgconfig(wayland-client)
@@ -216,7 +216,7 @@ BuildRequires:	pkgconfig(glesv2)
 BuildRequires:	pkgconfig(libglvnd)
 %endif
 
-Requires:  %{libname} = %{version}-%{release}
+Requires:  %{libname} = %{EVRD}
 
 %description
 The Enlightenment Foundation Libraries are a collection of libraries
@@ -290,8 +290,8 @@ Libraries for %{name}.
 %package -n %{devname}
 Summary: Headers and development libraries from %{name}
 Group: Development/Other
-Requires:  %{libname} = %{version}-%{release}
-Provides:  %{name}-devel = %{version}-%{release}
+Requires:  %{libname} = %{EVRD}
+Provides:  %{name}-devel = %{EVRD}
 
 %description -n %{devname}
 %{name} development headers and libraries.
