@@ -276,6 +276,9 @@ and more.
 Summary: Libraries for the %{name} package
 Group: System/Libraries
 
+%description -n %{libname}
+Libraries for %{name}.
+
 %files -n %{libname}
 %doc AUTHORS README
 %{_libdir}/*.so.%{major}
@@ -287,6 +290,9 @@ Summary: Headers and development libraries from %{name}
 Group: Development/Other
 Requires:  %{libname} = %{version}-%{release}
 Provides:  %{name}-devel = %{version}-%{release}
+
+%description -n %{devname}
+%{name} development headers and libraries.
 
 %files -n %{devname}
 %{_libdir}/pkgconfig/*
