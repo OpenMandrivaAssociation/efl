@@ -255,7 +255,6 @@ and more.
 %{_datadir}/elementary/objects
 %{_datadir}/elementary/test*
 %dir %{_datadir}/elementary/themes
-%{_datadir}/elementary/themes/E-default.edj
 %{_datadir}/applications
 %{_iconsdir}/Enlightenment-X
 %{_iconsdir}/hicolor/128x128/apps/elementary.png
