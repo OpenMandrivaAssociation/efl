@@ -216,6 +216,8 @@ BuildRequires:	pkgconfig(glesv2)
 BuildRequires:	pkgconfig(libglvnd)
 %endif
 
+Requires:  %{libname} = %{version}-%{release}
+
 %description
 The Enlightenment Foundation Libraries are a collection of libraries
 and tools upon which sophisticated graphical applications can be
@@ -270,12 +272,21 @@ and more.
 
 #----------------------------------------------------------------------------
 
+%package -n %{libname}
+Summary: Libraries for the %{name} package
+Group: System/Libraries
+
 %files -n %{libname}
 %doc AUTHORS README
 %{_libdir}/*.so.%{major}
 %{_libdir}/*.so.%{major}.*
 
 #----------------------------------------------------------------------------
+%package -n %{devname}
+Summary: Headers and development libraries from %{name}
+Group: Development/Other
+Requires:  %{libname} = %{version}-%{release}
+Provides:  %{name}-devel = %{version}-%{release}
 
 %files -n %{devname}
 %{_libdir}/pkgconfig/*
