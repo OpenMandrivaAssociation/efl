@@ -22,7 +22,7 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.26.1
+Version:	1.26.2
 Release:	1
 Epoch:		3
 License:	BSD
@@ -30,7 +30,7 @@ Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.gz
 Source1:	%{name}.rpmlintrc
-Patch0:		fix_edje_cc_compile_failure.patch
+Patch0:       fix_edje_cc_compile_failure.patch
 BuildRequires: meson
 BuildRequires: doxygen
 BuildRequires: gstreamer%{gstapi}-tools
@@ -123,79 +123,6 @@ BuildRequires: pkgconfig(libglvnd)
 
 Requires:  %{libname} = %{EVRD}
 
-%define        obsversion       1.25.1
-%define        obsrelease       3
-
-Obsoletes: libecore                < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_audio          < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_avahi          < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_con            < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_evas           < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_file           < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_imf            < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_imf_evas       < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_input          < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_input_evas     < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_ipc            < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_sdl < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_x < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_wayland < %{obsversion}-%{obsrelease}
-Obsoletes: libecore_wl2 < %{obsversion}-%{obsrelease}
-Obsoletes: devecore < %{obsversion}-%{obsrelease}
-Obsoletes: libedje < %{obsversion}-%{obsrelease}
-Obsoletes: devedje < %{obsversion}-%{obsrelease}
-Obsoletes: libeet < %{obsversion}-%{obsrelease}
-Obsoletes: deveet < %{obsversion}-%{obsrelease}
-Obsoletes: libeeze < %{obsversion}-%{obsrelease}
-Obsoletes: deveeze < %{obsversion}-%{obsrelease}
-Obsoletes: libefreet < %{obsversion}-%{obsrelease}
-Obsoletes: libefreet_mime < %{obsversion}-%{obsrelease}
-Obsoletes: libefreet_trash < %{obsversion}-%{obsrelease}
-Obsoletes: devefreet < %{obsversion}-%{obsrelease}
-Obsoletes: libeina < %{obsversion}-%{obsrelease}
-Obsoletes: deveina < %{obsversion}-%{obsrelease}
-Obsoletes: libeio < %{obsversion}-%{obsrelease}
-Obsoletes: deveio < %{obsversion}-%{obsrelease}
-Obsoletes: libeldbus < %{obsversion}-%{obsrelease}
-Obsoletes: develdbus < %{obsversion}-%{obsrelease}
-Obsoletes: libembryo < %{obsversion}-%{obsrelease}
-Obsoletes: devembryo < %{obsversion}-%{obsrelease}
-Obsoletes: libemotion < %{obsversion}-%{obsrelease}
-Obsoletes: devemotion < %{obsversion}-%{obsrelease}
-Obsoletes: libeo < %{obsversion}-%{obsrelease}
-Obsoletes: deveo < %{obsversion}-%{obsrelease}
-Obsoletes: deveo_dbg < %{obsversion}-%{obsrelease}
-Obsoletes: libeolian < %{obsversion}-%{obsrelease}
-Obsoletes: deveolian < %{obsversion}-%{obsrelease}
-Obsoletes: libephysics < %{obsversion}-%{obsrelease}
-Obsoletes: devephysics < %{obsversion}-%{obsrelease}
-Obsoletes: libethumb < %{obsversion}-%{obsrelease}
-Obsoletes: libethumb_client < %{obsversion}-%{obsrelease}
-Obsoletes: devethumb < %{obsversion}-%{obsrelease}
-Obsoletes: libevas < %{obsversion}-%{obsrelease}
-Obsoletes: devevas < %{obsversion}-%{obsrelease}
-Obsoletes: libefl < %{obsversion}-%{obsrelease}
-Obsoletes: devefl < %{obsversion}-%{obsrelease}
-Obsoletes: libefl_wl < %{obsversion}-%{obsrelease}
-Obsoletes: devefl_wl < %{obsversion}-%{obsrelease}
-Obsoletes: libemile < %{obsversion}-%{obsrelease}
-Obsoletes: devemile < %{obsversion}-%{obsrelease}
-Obsoletes: libector < %{obsversion}-%{obsrelease}
-Obsoletes: devector < %{obsversion}-%{obsrelease}
-Obsoletes: libelua < %{obsversion}-%{obsrelease}
-Obsoletes: develua < %{obsversion}-%{obsrelease}
-Obsoletes: libelocation < %{obsversion}-%{obsrelease}
-Obsoletes: develocation < %{obsversion}-%{obsrelease}
-Obsoletes: libelementary < %{obsversion}-%{obsrelease}
-Obsoletes: develementary < %{obsversion}-%{obsrelease}
-Obsoletes: libel < %{obsversion}-%{obsrelease}
-Obsoletes: devel < %{obsversion}-%{obsrelease}
-Obsoletes: libelput < %{obsversion}-%{obsrelease}
-Obsoletes: develput < %{obsversion}-%{obsrelease}
-Obsoletes: libefl_canvas_wl < %{obsversion}-%{obsrelease}
-Obsoletes: devefl_canvas_wl < %{obsversion}-%{obsrelease}
-Obsoletes: libexactness < %{obsversion}-%{obsrelease}
-Obsoletes: devexactness < %{obsversion}-%{obsrelease}
 
 %description
 The Enlightenment Foundation Libraries are a collection of libraries
