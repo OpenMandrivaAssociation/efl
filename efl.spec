@@ -23,7 +23,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.26.2
-Release:	1
+Release:	2
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -197,6 +197,7 @@ Libraries for %{name}.
 Summary: Headers and development libraries from %{name}
 Group: Development/Other
 Requires:  %{libname} = %{EVRD}
+Requires:  %{name} = %{EVRD}
 Provides:  %{name}-devel = %{EVRD}
 
 %description -n %{devname}
