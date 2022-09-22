@@ -22,13 +22,13 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.26.2
-Release:	2
+Version:	1.26.3
+Release:	1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
-Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.gz
+Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch0:       fix_edje_cc_compile_failure.patch
 BuildRequires: meson
