@@ -216,7 +216,8 @@ Provides:  %{name}-devel = %{EVRD}
 %autosetup -p1
 
 %build
-
+# FIXME using native-arch-optimization on aarch64 seems to generate
+# broken intrinsics, causing an error at link time
 %meson \
        -Dxinput22=true \
        -Dsystemd=true \
@@ -229,7 +230,10 @@ Provides:  %{name}-devel = %{EVRD}
        -Ddrm=true \
        -Dopengl=es-egl \
        -Dinstall-eo-files=true \
-       -Dbindings=cxx
+       -Dbindings=cxx \
+%ifarch %{aarch64}
+	-Dnative-arch-optimization=false
+%endif
 #If we want wayland support then OpenGL full need to be disabled, we need to use gles.
 #       -Dopengl=full
 
