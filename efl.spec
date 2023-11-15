@@ -30,9 +30,9 @@ Group:		Graphical desktop/Enlightenment
 Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
-Patch0:       fix_edje_cc_compile_failure.patch
+Patch0:		fix_edje_cc_compile_failure.patch
+Patch1:		efl-1.26.3-fix-build-with-current-gettext.patch
 BuildRequires: meson
-BuildRequires: locales-extra-charsets
 BuildRequires: doxygen
 BuildRequires: gstreamer%{gstapi}-tools
 BuildRequires: gettext-devel
@@ -213,8 +213,8 @@ Provides:  %{name}-devel = %{EVRD}
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
+
 %build
 
 %meson \
