@@ -135,7 +135,7 @@ and more.
 #----------------------------------------------------------------------------
 
 %files -f %{name}.lang
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS COPYING README*
 %{_bindir}/*
 %{_datadir}/dbus-1
 %{_datadir}/ecore
@@ -222,6 +222,7 @@ Provides:  %{name}-devel = %{EVRD}
        -Dxinput22=true \
        -Dsystemd=true \
        -Dharfbuzz=true \
+       -Dglib=true \
        -Dsdl=true \
        -Decore-imf-loaders-disabler='ibus,scim' \
        -Devas-loaders-disabler='json,heif' \
