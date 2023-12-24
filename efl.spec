@@ -22,8 +22,8 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.26.3
-Release:	5
+Version:	1.27.0
+Release:	1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -31,7 +31,6 @@ Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
-Patch1:		efl-1.26.3-fix-build-with-current-gettext.patch
 BuildRequires: meson
 BuildRequires: doxygen
 BuildRequires: gstreamer%{gstapi}-tools
@@ -66,6 +65,7 @@ BuildRequires: pkgconfig(libtiff-4)
 BuildRequires: pkgconfig(libudev)
 BuildRequires: pkgconfig(libwebp)
 BuildRequires: pkgconfig(libxine)
+BuildRequires: pkgconfig(libjxl)
 BuildRequires: pkgconfig(lua)
 BuildRequires: pkgconfig(mount)
 BuildRequires: pkgconfig(openssl)
@@ -135,7 +135,7 @@ and more.
 #----------------------------------------------------------------------------
 
 %files -f %{name}.lang
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS COPYING
 %{_bindir}/*
 %{_datadir}/dbus-1
 %{_datadir}/ecore
@@ -189,7 +189,7 @@ Group: System/Libraries
 Libraries for %{name}.
 
 %files -n %{libname}
-%doc AUTHORS README
+%doc AUTHORS
 %{_libdir}/*.so.%{major}
 %{_libdir}/*.so.%{major}.*
 
@@ -222,6 +222,7 @@ Provides:  %{name}-devel = %{EVRD}
        -Dxinput22=true \
        -Dsystemd=true \
        -Dharfbuzz=true \
+       -Dglib=true \
        -Dsdl=true \
        -Decore-imf-loaders-disabler='ibus,scim' \
        -Devas-loaders-disabler='json,heif' \
@@ -230,6 +231,7 @@ Provides:  %{name}-devel = %{EVRD}
        -Ddrm=true \
        -Dopengl=es-egl \
        -Dinstall-eo-files=true \
+       -Dx11=true \
        -Dbindings=cxx \
 %ifarch %{aarch64}
 	-Dnative-arch-optimization=false
