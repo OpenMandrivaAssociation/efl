@@ -135,7 +135,7 @@ and more.
 #----------------------------------------------------------------------------
 
 %files -f %{name}.lang
-%doc AUTHORS COPYING README*
+%doc AUTHORS COPYING
 %{_bindir}/*
 %{_datadir}/dbus-1
 %{_datadir}/ecore
