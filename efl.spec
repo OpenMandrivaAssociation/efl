@@ -31,7 +31,6 @@ Url:		http://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
-Patch1:		efl-1.26.3-fix-build-with-current-gettext.patch
 BuildRequires: meson
 BuildRequires: doxygen
 BuildRequires: gstreamer%{gstapi}-tools
