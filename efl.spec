@@ -22,8 +22,8 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.26.3
-Release:	5
+Version:	1.27.0
+Release:	1
 Epoch:		3
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -230,6 +230,7 @@ Provides:  %{name}-devel = %{EVRD}
        -Ddrm=true \
        -Dopengl=es-egl \
        -Dinstall-eo-files=true \
+       -Dx11=true \
        -Dbindings=cxx \
 %ifarch %{aarch64}
 	-Dnative-arch-optimization=false
