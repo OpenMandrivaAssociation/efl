@@ -189,7 +189,7 @@ Group: System/Libraries
 Libraries for %{name}.
 
 %files -n %{libname}
-%doc AUTHORS README
+%doc AUTHORS
 %{_libdir}/*.so.%{major}
 %{_libdir}/*.so.%{major}.*
 
