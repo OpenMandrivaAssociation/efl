@@ -27,7 +27,7 @@ Release:	3
 Epoch:		4
 License:	BSD
 Group:		Graphical desktop/Enlightenment
-Url:		http://www.enlightenment.org/
+Url:		https://www.enlightenment.org/
 Source0:	http://download.enlightenment.org/rel/libs/efl/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
