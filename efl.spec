@@ -23,7 +23,7 @@
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
 Version:	1.27.0
-Release:	4
+Release:	5
 Epoch:		4
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -33,6 +33,7 @@ Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
 # From Fedora # Build ecore_sdl versioned so. So efl no longer requires efl-devel
 Patch1:		efl-1.27.0-sdl-version-build.patch
+Patch2:		efl-1.27.0-compile.patch
 BuildRequires: meson
 BuildRequires: doxygen
 BuildRequires: gstreamer%{gstapi}-tools
