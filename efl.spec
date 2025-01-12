@@ -22,8 +22,8 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.27.0
-Release:	5
+Version:	1.28.0
+Release:	1
 Epoch:		4
 License:	BSD
 Group:		Graphical desktop/Enlightenment
@@ -33,7 +33,7 @@ Source1:	%{name}.rpmlintrc
 Patch0:		fix_edje_cc_compile_failure.patch
 # From Fedora # Build ecore_sdl versioned so. So efl no longer requires efl-devel
 Patch1:		efl-1.27.0-sdl-version-build.patch
-Patch2:		efl-1.27.0-compile.patch
+
 BuildRequires: meson
 BuildRequires: doxygen
 BuildRequires: gstreamer%{gstapi}-tools
@@ -69,7 +69,6 @@ BuildRequires: pkgconfig(libudev)
 BuildRequires: pkgconfig(libwebp)
 BuildRequires: pkgconfig(libxine)
 BuildRequires: pkgconfig(libjxl)
-BuildRequires: pkgconfig(lua)
 BuildRequires: pkgconfig(mount)
 BuildRequires: pkgconfig(openssl)
 BuildRequires: pkgconfig(libopenjp2)
@@ -99,7 +98,9 @@ BuildRequires: pkgconfig(xtst)
 BuildRequires: pkgconfig(xkbcommon-x11)
 BuildRequires: pkgconfig(zlib)
 BuildRequires: pkgconfig(luajit)
-BuildRequires: pkgconfig(lua)
+# EFL require lua up to 5.2, while pkgconfig install currently 5.4.7, so lets use older one.
+BuildRequires: lua5.2-devel
+#BuildRequires: pkgconfig(lua)
 BuildRequires: pkgconfig(rlottie)
 BuildRequires: pkgconfig(gbm)
 BuildRequires: pkgconfig(harfbuzz)
@@ -142,6 +143,7 @@ and more.
 %{_bindir}/*
 %{_datadir}/dbus-1
 %{_datadir}/ecore
+%{_datadir}/ecore_con/checkme
 %{_datadir}/ecore_imf
 %{_datadir}/ecore_x
 %{_datadir}/edje
