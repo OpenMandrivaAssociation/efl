@@ -143,6 +143,7 @@ and more.
 %{_bindir}/*
 %{_datadir}/dbus-1
 %{_datadir}/ecore
+%{_datadir}/ecore_con/checkme
 %{_datadir}/ecore_imf
 %{_datadir}/ecore_x
 %{_datadir}/edje
