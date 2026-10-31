@@ -22,8 +22,8 @@
 
 Summary:	Enlightenment Foundation Libraries
 Name:		efl
-Version:	1.28.1
-Release:	7
+Version:	1.29.0
+Release:	1
 License:	BSD
 Group:		Graphical desktop/Enlightenment
 Url:		https://www.enlightenment.org/
@@ -62,6 +62,7 @@ BuildRequires: pkgconfig(libcares)
 BuildRequires: pkgconfig(libcurl)
 BuildRequires: pkgconfig(libpng)
 BuildRequires: pkgconfig(libpulse)
+BuildRequires: pkgconfig(libpipewire-0.3)
 BuildRequires: pkgconfig(libsystemd)
 BuildRequires: pkgconfig(libtiff-4)
 BuildRequires: pkgconfig(libudev)
@@ -89,6 +90,7 @@ BuildRequires: pkgconfig(xfixes)
 BuildRequires: pkgconfig(xi)
 BuildRequires: pkgconfig(xinerama)
 BuildRequires: pkgconfig(xp)
+BuildRequires: pkgconfig(xpresent)
 BuildRequires: pkgconfig(xrandr)
 BuildRequires: pkgconfig(xrender)
 BuildRequires: pkgconfig(xpm)
@@ -235,6 +237,7 @@ Provides:  %{name}-devel = %{EVRD}
        -Ddrm=true \
        -Dopengl=es-egl \
        -Dinstall-eo-files=true \
+       -Dxpresent=true \
        -Dx11=true \
        -Dbindings=cxx \
 %ifarch %{aarch64}
